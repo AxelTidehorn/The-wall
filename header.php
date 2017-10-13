@@ -11,7 +11,10 @@
     <header>
       <nav class="navbar">
         <div class="icon"><a href="#"><i class="fa fa-home fa-4x"></i></a></div>
-        <div class="icon"><a href="#"><i class="fa fa-search fa-4x"></i></a></div>
+        <div class="icon" id="searchbtn"><a href="#"><i class="fa fa-search fa-4x"></i></a></div>
+        <div class="searchbar">
+          <input class="search" type="text" name="Search" placeholder="Search, pls">
+        </div>
         <div class="icon"><a href="#"><i class="fa fa-upload fa-4x"></i></a></div>
         <div class="icon"><a href="#"><i class="fa fa-user fa-4x"></i></a></div>
         <div class="icon"><a href="#"><i class="fa fa-question-circle-o fa-4x"></i></a></div>
