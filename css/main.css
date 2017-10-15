@@ -85,7 +85,7 @@ p{
 }
 .contentcont{
   width: 100%;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 45px;
 }
 img{
@@ -103,7 +103,7 @@ img{
 }
 .profilename{
   color: rgb(61, 61, 61);
-  font-size: 20px;
+  font-size: 22px;
 }
 .likebtn{
   background-color: rgb(68, 142, 129);
