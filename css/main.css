@@ -21,7 +21,7 @@ html{
   position: fixed;
   align-items: center;
   width: 100%;
-  background-color: rgb(247, 247, 247,);
+  background-color: rgb(247, 247, 247);
   margin: 0 auto;
   padding: 15px 0;
   -webkit-box-shadow: 0px -3px 23px 9px rgba(68, 142, 129, .4);
@@ -36,7 +36,7 @@ html{
   margin: 0 auto;
 }
 .icon > a > i{
-  color: #272727;
+  color: rgb(61, 61, 61);
   margin: 0;
   padding: 0;
   transition: ease-in .3s;
@@ -45,9 +45,9 @@ html{
   color: rgb(68, 142, 129);
 }
 .searchbar{
-  display: flex;
+  display: none;
   position: absolute;
-  bottom: -54px;
+  bottom: -52px;
   width: 100%;
   background-color: rgba(68, 142, 129, .2);
 }
@@ -57,21 +57,23 @@ html{
 }
 
 .search{
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   width: 100%;
   line-height: 30px;
-  border-radius: 30px;
-  border:#272727 1px solid;
-  text-align: center;
-  font-size: 24px;
+  border-radius: 5px;
+  border: rgb(145, 145, 145) 1px solid;
+  text-align: left;
+  padding: 0 0 0 6px;
+  font-size: 22px;
   flex: 1;
   margin: 10px;
+  font-family: 'Roboto', sans-serif;
+
 }
         /*END HEADER*/
 
         /*FOOTER*/
 footer{
-    background-color: black;
-    height: 300px;
+
 }
         /*END FOOTER*/
