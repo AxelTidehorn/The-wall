@@ -51,11 +51,14 @@ h2 > a{
   position: absolute;
   bottom: -52px;
   width: 100%;
-  background-color: rgba(68, 142, 129, .2);
+  background-color: rgba(255, 255, 255, 1);
 }
 
-.searchbar.clicked{
+#searchpls.clicked{
   display: flex;
+
+
+
 }
 
 .search{
