@@ -24,5 +24,29 @@
       </div>
     </div>
   </div>
+  <h2><a href="#">Editor's Choice</a></h2>
+  <p>The very best content from our eyes to your brain.</p>
+  <div class="contentcont">
+    <a href="#"><img src="imgs/An_Excellent_JPEG2.jpg" alt="an excellent picture"></a>
+    <div class="actioncont">
+      <div class="profilecont">
+        <a class="profilename" href="LINK-TO-PROFILE">Chef Excellence</a>
+      </div>
+      <div class="buttoncont">
+        <a class="likebtn" href="#">LIKE</a>
+      </div>
+    </div>
+  </div>
+  <div class="contentcont">
+    <a href="#"><img src="imgs/kebabpizza.jpg" alt="an excellent picture"></a>
+    <div class="actioncont">
+      <div class="profilecont">
+        <a class="profilename" href="LINK-TO-PROFILE">A. Whitedude</a>
+      </div>
+      <div class="buttoncont">
+        <a class="likebtn" href="#">LIKE</a>
+      </div>
+    </div>
+  </div>
 </div>
 <?php include 'footer.php'; ?>
