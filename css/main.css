@@ -111,9 +111,19 @@ img{
   color: rgb(61, 61, 61);
   font-size: 22px;
   transition: ease-in .3s;
+  vertical-align: middle;
 }
 .profilename:hover{
   color: rgb(91, 91, 91);
+}
+.profilepic{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .likebtn{
   background-color: rgb(68, 142, 129);

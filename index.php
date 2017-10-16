@@ -10,6 +10,7 @@
     <a href="#"><img src="imgs/An_Excellent_JPEG2.jpg" alt="an excellent picture"></a>
     <div class="actioncont">
       <div class="profilecont">
+        <a href="#" class="profilepic"><img src="imgs/axel.jpg" alt="profilepic"></a>
         <a class="profilename" href="LINK-TO-PROFILE">Chef Excellence</a>
       </div>
       <div class="buttoncont">
@@ -21,6 +22,7 @@
     <a href="#"><img src="imgs/kebabpizza.jpg" alt="an excellent picture"></a>
     <div class="actioncont">
       <div class="profilecont">
+        <a href="#" class="profilepic"><img src="imgs/axel.jpg" alt="profilepic"></a>
         <a class="profilename" href="LINK-TO-PROFILE">A. Whitedude</a>
       </div>
       <div class="buttoncont">
@@ -36,6 +38,7 @@
     <a href="#"><img src="imgs/An_Excellent_JPEG2.jpg" alt="an excellent picture"></a>
     <div class="actioncont">
       <div class="profilecont">
+        <a href="#" class="profilepic"><img src="imgs/axel.jpg" alt="profilepic"></a>
         <a class="profilename" href="LINK-TO-PROFILE">Chef Excellence</a>
       </div>
       <div class="buttoncont">
@@ -47,6 +50,7 @@
     <a href="#"><img src="imgs/kebabpizza.jpg" alt="an excellent picture"></a>
     <div class="actioncont">
       <div class="profilecont">
+        <a href="#" class="profilepic"><img src="imgs/axel.jpg" alt="profilepic"></a>
         <a class="profilename" href="LINK-TO-PROFILE">A. Whitedude</a>
       </div>
       <div class="buttoncont">
