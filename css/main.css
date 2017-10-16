@@ -61,6 +61,9 @@ h2 > a{
 #searchpls.clicked{
   display: flex;
 
+  -webkit-box-shadow: 0px -3px 5px 5px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px -3px 5px 5px rgba(0,0,0,0.75);
+box-shadow: 0px -3px 5px 5px rgba(0,0,0,0.75);
 
 
 }
@@ -118,6 +121,22 @@ img{
 .profilename:hover{
   color: rgb(91, 91, 91);
 }
+<<<<<<< HEAD
+=======
+.profilepic{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: ease-in .3s;
+}
+.profilepic:hover{
+  opacity: .5;
+}
+>>>>>>> bd0bb52a86298a55554d8466f406aa5a75123835
 .likebtn{
   background-color: rgb(68, 142, 129);
   color: white;
