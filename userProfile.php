@@ -7,6 +7,8 @@
       <div class="subHeadItem"><a href="#">Whatever</a></div>
       <div class="subHeadItem"><a href="#">Log Out</a></div>
     </div>
-    <p>CONTENT!</p>
+    <div class="profPicCont">
+      <img src="imgs/axel.jpg" alt="profilepic">
+    </div>
   </div>
 <?php include 'footer.php'; ?>
