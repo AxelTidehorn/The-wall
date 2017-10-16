@@ -16,6 +16,9 @@ h2 > a{
 .light-text {
   color: rgb(247, 247, 247);
 }
+.center-text{
+  text-align: center;
+}
         /*END GENERAL*/
 
         /*HEADER*/
@@ -24,7 +27,7 @@ h2 > a{
   position: fixed;
   align-items: center;
   width: 100%;
-  background-color: rgb(247, 247, 247);
+  background-color: rgba(247, 247, 247, 1);
   margin: 0 auto;
   padding: 10px 0;
   border-bottom: 2px rgb(61, 61, 61) solid;
@@ -83,11 +86,18 @@ h2 > a{
   align-items: center;
   width: 100%;
   text-align: center;
-  padding: 10px;
+  padding: 10px 0;
   box-sizing: border-box;
+  background-color: rgb(68, 142, 129);
+  border-bottom: solid rgb(61, 61, 61) 2px;
 }
 .subHeadItem{
   flex: 1;
+}
+.subHeadItem > a{
+  text-decoration: none;
+  font-size: 18px;
+  color: rgb(247, 247, 247);
 }
         /*MAIN PAGE*/
 .pagecont{
@@ -102,19 +112,23 @@ p{
 .contentcont{
   width: 100%;
   margin-top: 10px;
-  margin-bottom: 45px;
+  margin-bottom: 35px;
+  position: relative;
 }
 img{
   width: 100%;
 }
 .actioncont{
   display: flex;
+  background-color: rgba(247, 247, 247, .4);
   align-items: center;
-  padding: 0 5px;
+  padding: 5px 5px;
   margin-top: 8px;
-  margin-bottom: 10px;
+  /*margin-bottom: 10px;*/
   width: 100%;
   box-sizing: border-box;
+  position: absolute;
+  bottom: 3px;
 }
 .profilecont{
   flex: 1;
@@ -122,6 +136,7 @@ img{
 .profilename{
   color: rgb(61, 61, 61);
   font-size: 22px;
+  vertical-align: middle;
   transition: ease-in .3s;
 }
 .profilename:hover{

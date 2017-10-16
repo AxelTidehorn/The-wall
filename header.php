@@ -11,7 +11,7 @@
   <body>
     <header>
       <nav class="navbar">
-        <div class="icon"><a href="#"><i class="fa fa-home fa-3x"></i></a></div>
+        <div class="icon"><a href="index.php"><i class="fa fa-home fa-3x"></i></a></div>
         <div class="icon" id="searchbtn"><a href="#"><i class="fa fa-search fa-3x"></i></a></div>
         <div class="searchbar" id="searchpls">
           <input class="search" type="text" name="Search" placeholder="Search...">

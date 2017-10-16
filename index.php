@@ -1,9 +1,7 @@
 <?php include 'header.php'; ?>
 <div class="pagecont">
-  <div class="txtCont">
-    <p>Welcome to this very awesome page where you can share all your creations.</p>
-  </div>
-  <div class="txtCont">
+  <p>Welcome to this very awesome page where you can share all your creations.</p>
+  <div class="center-text">
     <h2><a href="#">Top Rated Content</a></h2>
   </div>
   <div class="contentcont">
@@ -30,10 +28,10 @@
       </div>
     </div>
   </div>
-  <div class="txtCont">
+  <div class="center-text">
     <h2><a href="#">Editor's Choice</a></h2>
-    <p>The very best content from our eyes to your brain.</p>
   </div>
+  <p>The very best content from our eyes to your brain.</p>
   <div class="contentcont">
     <a href="#"><img src="imgs/An_Excellent_JPEG2.jpg" alt="an excellent picture"></a>
     <div class="actioncont">
