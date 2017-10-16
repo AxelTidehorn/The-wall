@@ -150,7 +150,37 @@ img{
         /*FOOTER*/
 footer{
   background-color: rgb(61, 61, 61);
+  padding-top: 10px; 
+  padding-bottom: 5px;
+}
+.fb{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 35px;
+  height: 35px;
+  
+}
+.twitter{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden; 
 
+}
+.display-center{
+  text-align: center;
+}
+
+.display-center>img{
+  display: inline-block;
+}
+#copyright{
+  text-align: center;
+  font-size: 12px;
 }
 
         /*END FOOTER*/
