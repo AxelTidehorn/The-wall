@@ -76,7 +76,7 @@ h2 > a{
 
         /*MAIN PAGE*/
 .pagecont{
-  padding: 78px 5px 0 5px;
+  padding: 78px 0 0 0;
   color: black;
 }
 p{
@@ -94,9 +94,11 @@ img{
 .actioncont{
   display: flex;
   align-items: center;
+  padding: 0 5px;
+  margin-top: 8px;
   margin-bottom: 10px;
-  margin-top: 12px;
   width: 100%;
+  box-sizing: border-box;
 }
 .profilecont{
   flex: 1;
@@ -104,6 +106,10 @@ img{
 .profilename{
   color: rgb(61, 61, 61);
   font-size: 22px;
+  transition: ease-in .3s;
+}
+.profilename:hover{
+  color: rgb(91, 91, 91);
 }
 .likebtn{
   background-color: rgb(68, 142, 129);
@@ -123,6 +129,6 @@ img{
 
         /*FOOTER*/
 footer{
-
+  background-color: rgb(61, 61, 61);
 }
         /*END FOOTER*/
