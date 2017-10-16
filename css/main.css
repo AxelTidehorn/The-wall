@@ -56,7 +56,9 @@ h2 > a{
 
 #searchpls.clicked{
   display: flex;
-
+  -webkit-box-shadow: 0px -3px 5px 5px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px -3px 5px 5px rgba(0,0,0,0.75);
+box-shadow: 0px -3px 5px 5px rgba(0,0,0,0.75);
 
 
 }
@@ -127,6 +129,10 @@ img{
   height: 35px;
   border-radius: 50%;
   overflow: hidden;
+  transition: ease-in .3s;
+}
+.profilepic:hover{
+  opacity: .5;
 }
 .likebtn{
   background-color: rgb(68, 142, 129);
