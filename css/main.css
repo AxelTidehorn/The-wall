@@ -121,8 +121,7 @@ img{
 .profilename:hover{
   color: rgb(91, 91, 91);
 }
-<<<<<<< HEAD
-=======
+
 .profilepic{
   display: inline-block;
   vertical-align: middle;
@@ -136,7 +135,7 @@ img{
 .profilepic:hover{
   opacity: .5;
 }
->>>>>>> bd0bb52a86298a55554d8466f406aa5a75123835
+
 .likebtn{
   background-color: rgb(68, 142, 129);
   color: white;
@@ -156,7 +155,37 @@ img{
         /*FOOTER*/
 footer{
   background-color: rgb(61, 61, 61);
+  padding-top: 10px; 
+  padding-bottom: 5px;
+}
+.fb{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 35px;
+  height: 35px;
+  
+}
+.twitter{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden; 
 
+}
+.display-center{
+  text-align: center;
+}
+
+.display-center>img{
+  display: inline-block;
+}
+#copyright{
+  text-align: center;
+  font-size: 12px;
 }
 
         /*END FOOTER*/
