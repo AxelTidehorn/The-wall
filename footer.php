@@ -1,5 +1,7 @@
 <footer>
-  <p>s nostrud exercitationreariatur.i officia deserunt mollit anim id est laborum.</p>
+  <p class="light-text">
+  	Please dont sue 
+  </p>
 </footer>
 
     </body>

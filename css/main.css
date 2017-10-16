@@ -13,6 +13,9 @@ html{
 h2 > a{
   color: rgb(68, 142, 129);
 }
+.light-text {
+  color: rgb(247, 247, 247);
+}
         /*END GENERAL*/
 
         /*HEADER*/
@@ -50,6 +53,7 @@ h2 > a{
   display: none;
   position: absolute;
   bottom: -52px;
+
   width: 100%;
   background-color: rgba(255, 255, 255, 1);
 }
@@ -82,10 +86,6 @@ h2 > a{
   padding: 78px 0 0 0;
   color: black;
 }
-.txtCont{
-  padding: 5px;
-  text-align: center;
-}
 p{
   color: black;
   margin-top: 10px;
@@ -114,19 +114,9 @@ img{
   color: rgb(61, 61, 61);
   font-size: 22px;
   transition: ease-in .3s;
-  vertical-align: middle;
 }
 .profilename:hover{
   color: rgb(91, 91, 91);
-}
-.profilepic{
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 5px;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  overflow: hidden;
 }
 .likebtn{
   background-color: rgb(68, 142, 129);
@@ -136,7 +126,6 @@ img{
   padding: 8px 15px;
   border-radius: 5px;
   transition: ease-in .3s;
-  box-sizing: border-box;
 }
 .likebtn:hover{
   background-color: rgb(247, 247, 247);
@@ -148,5 +137,7 @@ img{
         /*FOOTER*/
 footer{
   background-color: rgb(61, 61, 61);
+
 }
+
         /*END FOOTER*/
