@@ -78,11 +78,22 @@ h2 > a{
 
 }
         /*END HEADER*/
-
+.subHeader{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.subHeadItem{
+  flex: 1;
+}
         /*MAIN PAGE*/
 .pagecont{
-  padding: 78px 0 0 0;
+  padding: 70px 0 0 0;
   color: black;
+  width: 100%;
 }
 p{
   color: black;
@@ -147,10 +158,12 @@ img{
 }
         /*END MAIN PAGE*/
 
+        /*PROFILE PAGE*/
+
         /*FOOTER*/
 footer{
   background-color: rgb(61, 61, 61);
-  padding-top: 10px; 
+  padding-top: 10px;
   padding-bottom: 5px;
 }
 .fb{
@@ -159,7 +172,7 @@ footer{
   margin-right: 5px;
   width: 35px;
   height: 35px;
-  
+
 }
 .twitter{
   display: inline-block;
@@ -168,7 +181,6 @@ footer{
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  overflow: hidden; 
 
 }
 .display-center{

@@ -17,7 +17,7 @@
           <input class="search" type="text" name="Search" placeholder="Search...">
         </div>
         <div class="icon"><a href="#"><i class="fa fa-upload fa-3x"></i></a></div>
-        <div class="icon"><a href="#"><i class="fa fa-user fa-3x"></i></a></div>
+        <div class="icon"><a href="userProfile.php"><i class="fa fa-user fa-3x"></i></a></div>
         <!--<div class="icon"><a href="#"><i class="fa fa-question-circle-o fa-3x"></i></a></div>-->
       </nav>
     </header>
