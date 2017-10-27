@@ -21,8 +21,8 @@ function sec_session_start() {
 }
 function login($email, $password, $mysqli) {
     // Using prepared statements means that SQL injection is not possible.
-    if ($stmt = $mysqli->prepare("SELECT id, username, password 
-        FROM members
+    if ($stmt = $mysqli->prepare("SELECT id, username, password
+        FROM Users
        WHERE email = ?
         LIMIT 1")) {
         $stmt->bind_param('s', $email);  // Bind "$email" to parameter.
@@ -83,9 +83,9 @@ function checkbrute($user_id, $mysqli) {
     // All login attempts are counted from the past 2 hours.
     $valid_attempts = $now - (2 * 60 * 60);
 
-    if ($stmt = $mysqli->prepare("SELECT time 
-                             FROM login_attempts 
-                             WHERE user_id = ? 
+    if ($stmt = $mysqli->prepare("SELECT time
+                             FROM login_attempts
+                             WHERE user_id = ?
                             AND time > '$valid_attempts'")) {
         $stmt->bind_param('i', $user_id);
 
@@ -114,8 +114,8 @@ function login_check($mysqli) {
         // Get the user-agent string of the user.
         $user_browser = $_SERVER['HTTP_USER_AGENT'];
 
-        if ($stmt = $mysqli->prepare("SELECT password 
-                                      FROM members 
+        if ($stmt = $mysqli->prepare("SELECT password
+                                      FROM Users
                                       WHERE id = ? LIMIT 1")) {
             // Bind "$user_id" to parameter.
             $stmt->bind_param('i', $user_id);
