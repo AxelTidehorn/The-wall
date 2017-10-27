@@ -12,9 +12,3 @@ define("DEFAULT_ROLE", "member");
 
 define("SECURE", FALSE);    // FOR DEVELOPMENT ONLY!!!!
 ?>
-/**
- * Created by PhpStorm.
- * User: Linus
- * Date: 17-10-16
- * Time: 13:47
- */
