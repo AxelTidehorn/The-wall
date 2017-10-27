@@ -8,11 +8,10 @@
 
             <main>
                 <div class="subHeader">
-                  <div class="subHeadItem"><a href="#">Friends</a></div>
-                  <div class="subHeadItem"><a href="#">Liked</a></div>
-                  <div class="subHeadItem"><a href="#">Upload</a></div>
-                  <div class="subHeadItem"><a href="#">Whatever</a></div>
-                  <div class="subHeadItem"><a href="#">Log Out</a></div>
+                  <div class="subHeadItem"><a href="userProfile.php">Profile</a></div>
+                  <div class="subHeadItem"><a href="friends.php">Friends</a></div>
+                  <div class="subHeadItem"><a href="liked.php">Liked</a></div>
+                  <div class="subHeadItem"><a href="logOut.php">Log Out</a></div>
                 </div>
                 <div class="profPicCont">
                   <img src="imgs/axel.jpg" alt="profilepic">
