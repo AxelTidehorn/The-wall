@@ -1,8 +1,9 @@
 // Toggle the searchbar
 
-function displaySearchBar() {
+window.onload = function() {
+    function displaySearchBar() {
+        document.getElementById('searchpls').classList.toggle('clicked');
+    }
 
-	document.getElementById('searchpls').classList.toggle('clicked')
+    document.getElementById('searchbtn').addEventListener('click', displaySearchBar);
 }
-
-document.getElementById('searchbtn').addEventListener('click', displaySearchBar);
