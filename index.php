@@ -1,3 +1,5 @@
+<?php include "config.php" ?>
+
 <!DOCTYPE html>
 <html>
     <?php include "head.php" ?>
@@ -7,13 +9,21 @@
           <?php include 'header.php'; ?>
 
           <main>
-              <section class="welcome">
-                <p>Welcome to The Wall. Here you can share your creations and view the creations of others. By using this site you agree to our usage of cookies.</p>
-                <div class="hide">
-                    <a href="#">Hide</a>
-                </div>
-              </section>
-
+            <?php
+                if (isset($_GET["remove"])) {
+                    setcookie("welcomed", true, time() + 60*60*24*30);
+                    echo '<script src="js/hide.js"></script>';
+                } else if (!isset($_COOKIE["welcomed"])) {
+                    echo '
+                        <section id="welcome">
+                            <p>Welcome to The Wall. Here you can share your creations and view the creations of others. By using this site you agree to our usage of cookies.</p>
+                            <div class="hide">
+                                <a href="' . $currentPage . '?remove=true">Hide</a>
+                            </div>
+                        </section>
+                    ';
+                }
+            ?>
                 <div id="topRated">
                   <div class="center-text">
                     <h2><a href="#">Top Rated Content</a></h2>

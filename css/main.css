@@ -188,7 +188,7 @@ img{
 }
 
 /* WELCOME */
-.welcome{
+#welcome{
     background-color: #f0f0f0;
 }
 .hide{
@@ -202,6 +202,9 @@ img{
     border-radius: 6px;
     padding: 8px;
     margin: 12px auto 0px;
+}
+#welcome.clicked{
+    display: none;
 }
 
 /* PROFILE */
