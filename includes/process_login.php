@@ -19,9 +19,3 @@ if (isset($_POST['email'], $_POST['p'])) {
     // The correct POST variables were not sent to this page.
     echo 'Invalid Request';
 }
-/**
- * Created by PhpStorm.
- * User: Linus
- * Date: 17-10-25
- * Time: 07:46
- */
