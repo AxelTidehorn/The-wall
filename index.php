@@ -13,17 +13,16 @@
 
           <main>
             <?php
-                if (isset($_GET["remove"])) {
-                    setcookie("welcomed", true, time() + 60*60*24*30);
-                    echo '<script src="js/hide.js"></script>';
-                } else if (!isset($_COOKIE["welcomed"])) {
+                if (!isset($_COOKIE["welcomed"])) { //Display the welcome message if the user has not been welcomed, and include a script to determine if it has been clicked.
                     echo '
                         <section id="welcome">
                             <p>Welcome to The Wall. Here you can share your creations and view the creations of others. By using this site you agree to our usage of cookies.</p>
                             <div class="hide">
-                                <a href="' . $currentPage . '?remove=true">Hide</a>
+                                <a href="#">Hide</a>
                             </div>
                         </section>
+
+                        <script src="js/hide.js"></script>
                     ';
                 }
             ?>
