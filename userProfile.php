@@ -1,6 +1,6 @@
 <?php
-    if (!isset($_SESSION["username"])) {
-        header("location:login.php");
+    if (!isset($_COOKIE["sec_session_id"])) {
+        header("location:login.php?pls=0");
     }
 ?>
 
