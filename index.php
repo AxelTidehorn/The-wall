@@ -2,7 +2,10 @@
 
 <!DOCTYPE html>
 <html>
-    <?php include "head.php" ?>
+    <?php
+    include "head.php" ;
+    include_once "backend/connect.php";
+    ?>
 
     <body>
         <div id="pageContainer">
