@@ -263,6 +263,12 @@ a.img{
     color: #ffffff;
 }
 
+/* FORMS */
+input, label{
+    display: block;
+    margin: 8px 0px;
+}
+
 /* PROFILE */
 .profilecont{
   flex: 1;

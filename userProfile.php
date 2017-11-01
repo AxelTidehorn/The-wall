@@ -1,6 +1,8 @@
 <?php
-    if (!isset($_COOKIE["sec_session_id"])) {
-        header("location:login.php?pls=0");
+    session_start();
+
+    if (!isset($_SESSION["username"])) {
+        header("location:login.php");
     }
 ?>
 
@@ -17,13 +19,30 @@
                   <div class="subHeadItem"><a href="userProfile.php">Profile</a></div>
                   <div class="subHeadItem"><a href="friends.php">Friends</a></div>
                   <div class="subHeadItem"><a href="liked.php">Liked</a></div>
-                  <div class="subHeadItem"><a href="logOut.php">Log Out</a></div>
+                  <div class="subHeadItem"><a href="logout.php">Log Out</a></div>
                 </div>
                 <div class="profPicCont">
                   <img src="imgs/axel.jpg" alt="profilepic">
                 </div>
 
                 <section class="profileDescription">
+                    <?php //Connect to DB, fetch saved username value from session cookie, fetch information through SQL query and display information.
+                        include("backend/connect.php");
+                        $username = $_SESSION["username"];
+                        $query = $conn->prepare("SELECT joinDate FROM Users WHERE username = '{$username}'");
+                        $query->bind_result($joinDate);
+                        $query->execute();
+
+                        while ($query->fetch()) {
+                            echo '
+                                <h1>' . $username . '</h1>
+                                <span>Joined ' . $joinDate . '</span>
+                            ';
+                        }
+
+                        $query->close();
+                    ?>
+
                     <div class="infoBox">
                         <span>Name: Axel</span>
                         <span>Gender: Axel</span>
