@@ -5,6 +5,7 @@
     <?php
     include "head.php" ;
     include_once "backend/connect.php";
+    include_once "backend/DB-functions.php";
     ?>
 
     <body>
@@ -26,6 +27,10 @@
                         </section>
                     ';
                 }
+
+            $result = getAllContent();
+            var_dump($result);
+
             ?>
 
                 <div id="newest">
