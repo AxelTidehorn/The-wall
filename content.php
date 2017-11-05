@@ -56,6 +56,7 @@
                                 <a href="#" class="profilename">' . $publisher . '</a>
                                 <p>' . $comment . '</p>
                                 <span>' . $date . '</span>
+                                <a class="likebtn">Like</a>
                             </div>
                         ';
                     }
@@ -66,16 +67,22 @@
                     <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
                     <a href="#" class="profilename">Axel</a>
                     <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+                    <p>2017-05-11</p>
+                    <a href="#" class="likebtn">Like</a>
                 </div>
                 <div class="comment">
                     <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
                     <a href="#" class="profilename">Axel</a>
                     <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+                    <p>2017-05-11</p>
+                    <a href="#" class="likebtn">Like</a>
                 </div>
                 <div class="comment">
                     <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
                     <a href="#" class="profilename">Axel</a>
                     <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+                    <p>2017-05-11</p>
+                    <a href="#" class="likebtn">Like</a>
                 </div>
             </section>
           </div>
