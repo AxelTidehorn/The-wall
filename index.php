@@ -5,7 +5,6 @@
     <?php
     include "head.php" ;
     include_once "backend/connect.php";
-    include_once "backend/DB-functions.php";
     ?>
 
     <body>
@@ -26,9 +25,6 @@
                         <script src="js/hide.js"></script>
                     ';
                 }
-
-            $result = getAllContent();
-            var_dump($result);
 
             ?>
 

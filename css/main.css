@@ -344,6 +344,14 @@ input, label{
 }
         /*END MAIN PAGE*/
 
+        /*UPLOAD PAGE*/
+
+        #uploadForm {
+            display: none;
+        }
+
+        /*END UPLOAD PAGE*/
+
         /*PROFILE PAGE*/
 .profPicCont{
   width: 90px;
