@@ -1,8 +1,26 @@
 <?php
+<<<<<<< HEAD
 #Gjorde databas connectionen Objekt Orienterad. Kan vara svårt att förstå till en början, men skitbra när man väl förstår!
 #Kolla på första functionen "getAllContent" Så förstår ni nog hur det funkar.
 #Det är bara att skapa egna functioner här så kommer dem alltid vara tillgängliga.
 function connect()
+=======
+$servername = "berzanappen.se";
+$username = "berzanap_linus";
+$password = "ab92orre1";
+$database = "berzanap_linus";
+
+try {
+    /*$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);*/
+
+    //Currently using mysqli connection instead, did not quite work before, may be changed back later
+    $conn = new mysqli($servername, $username, $password, $database);
+//    echo "Connected successfully";
+}
+catch(PDOException $e)
+>>>>>>> master
 {
     define("DB_SERVER", "berzanappen.se");
     define("DB_USER", "berzanap_linus");
@@ -67,3 +85,7 @@ function getContentByPublisherID($id){
     return $result;
 
 }
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> master

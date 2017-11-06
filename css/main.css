@@ -255,12 +255,22 @@ a.img{
 .comment{
     border-top: 2px solid #c0c0c0;
     padding: 16px 0px;
+    overflow: hidden;
 }
 .commentBox{
     width: 100%;
 }
 .contentPage .profilecont .profilename{
     color: #ffffff;
+}
+.comment .likebtn, .comment .unlikebtn{
+    float: right;
+}
+
+/* FORMS */
+input, label{
+    display: block;
+    margin: 8px 0px;
 }
 
 /* PROFILE */
@@ -309,19 +319,28 @@ a.img{
     padding: 6px;
 }
 
-.likebtn{
-  background-color: rgb(68, 182, 129);
-  color: white;
+.likebtn, .unlikebtn{
   text-decoration: none;
   font-weight: bold;
   padding: 8px 15px;
   border-radius: 5px;
   transition: ease-in .15s;
 }
+.likebtn{
+  background-color: rgb(68, 182, 129);
+  color: white;
+}
 .likebtn:hover{
   background-color: rgb(247, 247, 247);
   color: black;
-
+}
+.unlikebtn{
+  background-color: rgb(247, 247, 247);
+  color: black;
+}
+.unlikebtn:hover{
+  background-color: rgb(182, 68, 68);
+  color: white;
 }
         /*END MAIN PAGE*/
 
