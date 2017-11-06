@@ -134,8 +134,16 @@ p{
   color: black;
   margin-top: 10px;
 }
-#topRated, #editorsChoice{
+#newest, #topRated, #editorsChoice{
     margin-bottom: 64px;
+}
+#newest .center-text h2:before, #newest .center-text h2:after, #newest .contentcont:after{
+    display: block;
+    content: "";
+    height: 8px;
+    width: 100%;
+    background-color: #ccccff;
+    margin: 0px;
 }
 #topRated .center-text h2:before, #topRated .center-text h2:after, #topRated .contentcont:after{
     display: block;
@@ -187,8 +195,12 @@ img{
     padding: 16px 0px;
 }
 
+a.img{
+    display: block;
+}
+
 /* WELCOME */
-.welcome{
+#welcome{
     background-color: #f0f0f0;
 }
 .hide{
@@ -202,6 +214,53 @@ img{
     border-radius: 6px;
     padding: 8px;
     margin: 12px auto 0px;
+}
+#welcome.clicked{
+    display: none;
+}
+
+/* CONTENT */
+.backButton{
+    position: fixed;
+    width: 96px;
+    height: 96px;
+    bottom: 32px;
+    right: 32px;
+    background-color: #101010;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+.backButton a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 96px;
+    /*position: absolute;
+    top: 50%;
+    transform: translateY(-50%);*/
+    color: #ffffff;
+    font-size: 24px;
+    text-decoration: none;
+}
+.contentInfo{
+    position: static;
+    margin-top: 0px;
+    background-color: rgb(34, 71, 65);
+}
+.comments label{
+    font-weight: bold;
+    font-size: 18px;
+}
+.comment{
+    border-top: 2px solid #c0c0c0;
+    padding: 16px 0px;
+}
+.commentBox{
+    width: 100%;
+}
+.contentPage .profilecont .profilename{
+    color: #ffffff;
 }
 
 /* PROFILE */

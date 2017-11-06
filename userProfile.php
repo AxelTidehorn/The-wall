@@ -1,3 +1,9 @@
+<?php
+    if (!isset($_SESSION["username"])) {
+        header("location:login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <?php include "head.php" ?>
