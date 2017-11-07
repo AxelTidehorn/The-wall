@@ -401,3 +401,11 @@ footer{
 }
 
         /*END FOOTER*/
+
+        /*DESKTOP VERSION*/
+@media (min-width: 700px) {
+  body{
+    background-color: red;
+  }
+  
+}
