@@ -405,13 +405,16 @@ footer{
         /*DESKTOP VERSION*/
 @media (min-width: 700px) {
   body{
-    
+
+  }
+  .navBar{
+    padding: 2px;
   }
   #searchbtn{
     display: none;
   }
   .searchBar{
-    display: flex;
+    display: block;
     background-color: rgba(247, 247, 247, 1);
     position: relative;
     bottom: 0;
