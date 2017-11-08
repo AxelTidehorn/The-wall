@@ -39,6 +39,7 @@
                     $query = $conn->prepare("SELECT username, password FROM Users WHERE username = '{$usernameInput}' AND password = '{$passwordInput}'");
                     $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                     $query->store_result();
+                    //We need to pull down the ID of the logged in user as well! I need this for the upload function /Linus
 
                     if ($query->num_rows()) { //If there are more than 0 numbers of rows (a match), the user should exist
                         $query = $conn->prepare("SELECT id FROM Users WHERE username = '{$usernameInput}'");
