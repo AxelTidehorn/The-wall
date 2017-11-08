@@ -407,6 +407,9 @@ footer{
   body{
 
   }
+  main{
+    margin-top: 57px;
+  }
   .navBar{
     padding: 2px;
   }
