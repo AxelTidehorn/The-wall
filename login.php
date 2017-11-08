@@ -41,8 +41,14 @@
                     $query->store_result();
 
                     if ($query->num_rows()) { //If there are more than 0 numbers of rows (a match), the user should exist
+                        $query = $conn->prepare("SELECT id FROM Users WHERE username = '{$usernameInput}'");
+                        $query->bind_result($id);
+                        $query->execute();
+                        $query->fetch();
+
                         session_start();
                         $_SESSION["username"] = $usernameInput;
+                        $_SESSION["user_id"] = $id;
                         header("location:userProfile.php");
                     }
 
