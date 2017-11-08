@@ -37,7 +37,7 @@ include_once "backend/connect.php";
             </form>
         </div>
         <div id="uploadForm">
-            <form action="backend/handler.php" class="imageform" method="get">
+            <form action="backend/handler.php" class="imageform" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="uploadType" value="">
                 <input type="text"  name="contentName" placeholder="Title" required>
                 <input type="file" name="uploadedImage" placeholder="image" >
@@ -52,7 +52,7 @@ include_once "backend/connect.php";
                 <input type="radio" name="PublicDomain" value="0">NO
                 <input type="text" name="contentDescription" placeholder="Write a description of your content!">
                 <span class="termsOfUse">By uploading you agree to our none-existing terms of use! (We own this now)</span>
-                <input type="submit" name="submit">
+                <input type="submit">
             </form>
         </div>
         <script src="js/typeSelection.js"></script>
