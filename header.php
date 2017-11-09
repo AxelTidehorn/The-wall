@@ -1,4 +1,4 @@
-﻿<header>
+<header>
   <nav class="navBar">
     <div class="icon"><a href="index.php"><i class="fa fa-home fa-3x"></i></a></div>
     <div class="icon" id="searchbtn"><a href="#"><i class="fa fa-search fa-3x"></i></a></div>
