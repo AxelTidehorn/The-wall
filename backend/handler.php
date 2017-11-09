@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-﻿<?php
-=======
 <?php
 session_start();
->>>>>>> master
 print'I will come to this stage, probably tomorrow! </br> Here is also where I will handle image compression. </br>';
 include_once "connect.php";
 $uploadedForm = $_POST;

@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-﻿<?php include "config.php" ?>
-
-=======
 <?php include "config.php" ?>
->>>>>>> master
 <!DOCTYPE html>
 <html>
 <?php
@@ -16,7 +11,7 @@ include_once "backend/connect.php";
     <?php include 'header.php'; ?>
     <main>
         <?php
-        session_start();
+        @ session_start();
         if (!isset($_COOKIE["welcomed"])) { //Display the welcome message if the user has not been welcomed, and include a script to determine if it has been clicked.
             echo '
                         <section id="welcome">
