@@ -15,12 +15,22 @@
 
                     session_start();
 
-                    $sessionUser = $_SESSION["username"];
 
-                    $query = $conn->prepare("SELECT friends FROM Users WHERE username = '{$sessionUser}'"); //Fetching the logged in users friend list
-                    $query->bind_result($friends);
-                    $query->execute();
-                    $query->fetch();
+                    if (isset($_SESSION["username"])) {
+                        $sessionUser = $_SESSION["username"];
+                    } else {
+                        $sessionUser = false;
+                    }
+
+                    include "config.php";
+                    include("backend/connect.php");
+
+                    if ($sessionUser) {
+                        $query = $conn->prepare("SELECT friends FROM Users WHERE username = '{$sessionUser}'"); //Fetching the logged in users friend list
+                        $query->bind_result($friends);
+                        $query->execute();
+                        $query->fetch();
+                    }
 
                     if (isset($_GET["addContact"])) { //Adds a contact to the logged in user's friend list.
                         $contact = $_GET["addContact"];
@@ -72,64 +82,65 @@
                     }
 
                     include("backend/connect.php"); //I'm not sure why it seems like we have to reconnect to the db here...
-
                     $search = $_GET["search"]; //Gets the search term and retrieves matches similar to the search term. (may want to add more things than users in the future)
                     $query = $conn->prepare("SELECT username FROM Users WHERE username LIKE '%" . $search . "%'");
                     $query->bind_result($username);
                     $query->execute();
 
                     while ($query->fetch()) {
-                        $link = explode("&", $currentURI); //Prepares the link that will be used on the add/remove contact buttons and preventing the URI from ending up in an endless sequence of GETs in the link.
+                        if ($sessionUser !== false && $username != $sessionUser) { //Basically if the session user exists (that someone is logged in) and if the user we are looking at is not the user that is currently logged in. (why would he want to add himself?)
+                            $link = explode("&", $currentURI); //Prepares the link that will be used on the add/remove contact buttons and preventing the URI from ending up in an endless sequence of GETs in the link.
 
-                        if ($link === array($currentURI)) { //Explode makes it into an array, so compare with the URI as array, handle the link differently if there is no addContact or whatever GET in the link already.
-                            $noChange = true;
-                        } else {
-                            $noChange = false;
-                        }
-
-                        if ($friends) {
-                            $friendArray = explode("/", $friends);
-                            $alreadyFriends = false;
-                            foreach($friendArray as $friend) {
-                                if ($friend === $username) {
-                                    $alreadyFriends = true;
-                                }
+                            if ($link === array($currentURI)) { //Explode makes it into an array, so compare with the URI as array, handle the link differently if there is no addContact or whatever GET in the link already.
+                                $noChange = true;
+                            } else {
+                                $noChange = false;
                             }
 
-                            if ($alreadyFriends) { //Display it as remove contact if they are already friends and vice versa.
-                                $end = "&removeContact=" . $username;
-                                $contactString = "Remove contact";
-                                $class = "unlikebtn";
-                            } else {
+                            if ($friends) {
+                                $friendArray = explode("/", $friends);
+                                $alreadyFriends = false;
+                                foreach($friendArray as $friend) {
+                                    if ($friend === $username) {
+                                        $alreadyFriends = true;
+                                    }
+                                }
+
+                                if ($alreadyFriends) { //Display it as remove contact if they are already friends and vice versa.
+                                    $end = "&removeContact=" . $username;
+                                    $contactString = "Remove contact";
+                                    $class = "unlikebtn";
+                                } else {
+                                    $end = "&addContact=" . $username;
+                                    $contactString = "Add contact";
+                                    $class = "likebtn";
+                                }
+                            } else { //Kind of comes in if the current user ends up having no friends
                                 $end = "&addContact=" . $username;
                                 $contactString = "Add contact";
                                 $class = "likebtn";
                             }
-                        } else { //Kind of comes in if the current user ends up having no friends
-                            $end = "&addContact=" . $username;
-                            $contactString = "Add contact";
-                            $class = "likebtn";
-                        }
 
-                        if ($noChange) { //Basically in this context, if there is no addContact or removeContact GET in the URI, add it, otherwise replace the old one.
-                            $link[] = $end;
-                        } else {
-                            $link[sizeof($link) - 1] = $end; //Replaces the last part of the array.
-                        }
+                            if ($noChange) { //Basically in this context, if there is no addContact or removeContact GET in the URI, add it, otherwise replace the old one.
+                                $link[] = $end;
+                            } else {
+                                $link[sizeof($link) - 1] = $end; //Replaces the last part of the array.
+                            }
 
-                        $link = implode($link); //Make it a string again
+                            $link = implode($link); //Make it a string again
+                        }
 
                         //Actually adding the friends and buttons, etc. to the page.
                         echo '
                             <div class="comment">
                                 <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                <a href="#" class="profilename">' . $username . '</a>
-                                <a href="' . $link . '" class="' . $class . '">' . $contactString . '</a>
-                            </div>
+                                <a href="#" class="profilename">' . $username . '</a>';
+                                if ($sessionUser !== false && $username != $sessionUser) {
+                                    echo '<a href="' . $link . '" class="' . $class . '">' . $contactString . '</a>';
+                                }
+                            echo '</div>
                         ';
                     }
-
-                    $query->close();
                 ?>
             </section>
           </div>
