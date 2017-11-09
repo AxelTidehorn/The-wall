@@ -51,11 +51,18 @@
                             $date = date("Y-m-d"); //Year, month, day, different capitalization can display the date differently
                             $query->bind_param("sssss", $username, $password, $_POST["email"], $date, $date);
                             $query->execute();
+
+                            $query = $conn->prepare("SELECT id FROM Users WHERE username = '{$username}'");
+                            $query->bind_result($id);
+                            $query->execute();
+                            $query->fetch();
+
                             $query->close();
 
                             //Start session engine, store the username as a session cookie and redirect to profile page (currently)
                             session_start();
                             $_SESSION["username"] = $username;
+                            $_SESSION["user_id"] = $id;
                             header("location:userProfile.php");
                         }
                     ?>

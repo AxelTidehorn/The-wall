@@ -25,6 +25,7 @@
                         <script src="js/hide.js"></script>
                     ';
                 }
+
             ?>
 
                 <div id="newest">
