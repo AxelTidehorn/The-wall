@@ -1,4 +1,4 @@
-<?php include "config.php" ?>
+<?php include "config.php" //Fix the question marks for § for example when choosing user name if possible, AND REMOVE BOMs FROM ALL FILES ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,14 +29,24 @@
                         }
 
                         function evaluateInformation() { //Making sure that the information is "valid", may want to add more exceptions for usernames and possibly passwords.
+                            include "backend/connect.php";
+
                             $usernameInput = $_POST["username"];
                             $passwordInput = $_POST["password"];
 
                             $allowedUsernameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
-                            $allowedPasswordCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!\"#¤%&/()=?@£\$€{[]}\',.-\\";
+                            $allowedPasswordCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!\"#¤%&/()=?@£\$€{[]}\',.-\\ ";
                             $usernameErrors = array();
                             $passwordErrors = array();
                             $otherErrors = array();
+
+                            $query = $conn->prepare("SELECT username FROM Users WHERE username = '{$usernameInput}'");
+                            $query->execute();
+                            $query->store_result();
+
+                            if ($query->num_rows()) {
+                                $otherErrors[] = "There is already a user with this username. Please choose a different username.";
+                            }
 
                             for ($iu = 0; $iu < strlen($usernameInput); $iu++) {
                                 $validCharacter = false;
@@ -59,7 +69,7 @@
                                     }
                                 }
 
-                                if (!$validCharacter && !in_array($passwordInput[$iu], $passwordErrors)) {
+                                if (!$validCharacter && !in_array($passwordInput[$ip], $passwordErrors)) {
                                     $passwordErrors[] = $passwordInput[$ip];
                                 }
                             }
@@ -86,7 +96,11 @@
                                 if ($usernameErrors) {
                                     echo '<p>Invalid characters for the username:</p>';
                                     foreach ($usernameErrors as $usernameError) {
-                                        echo '<span>' . $usernameError . '</span><br>';
+                                        if ($usernameError === " ") {
+                                            echo '<span><em>space</em></span><br>';
+                                        } else {
+                                            echo '<span>' . $usernameError . '</span><br>';
+                                        }
                                     }
                                 }
 
@@ -109,7 +123,12 @@
                         }
 
                         function registerUser() { //Connects to DB, prepares and inserts information along with the date
-                            include_once "backend/connect.php";
+                            include("backend/connect.php");
+
+                            $usernameInput = mysqli_real_escape_string($conn, $usernameInput);
+                            $usernameInput = htmlentities($usernameInput); //Making it into htmlentities and such in order to not confuse the character comparison/login information evaluation.
+                            $passwordInput = mysqli_real_escape_string($conn, $passwordInput);
+                            $passwordInput = htmlentities($passwordInput);
 
                             $query = $conn->prepare("INSERT INTO Users (Username, Password, Email, JoinDate, LastActive) VALUES(?, ?, ?, ?, ?)");
                             $username = $_POST["username"];
@@ -123,10 +142,19 @@
                             $query->execute();
                             $query->fetch();
 
-                            $query->close();
-
-                            //Start session engine, store the username as a session cookie and redirect to profile page (currently)
+                            ini_set("session.cookie_httponly", true);
                             session_start();
+
+                            if (isset($_SESSION["userIP"]) === false) {
+                                $_SESSION["userIP"] = $_SERVER["REMOTE_ADDR"];
+                            }
+
+                            if ($_SESSION["userIP"] !== $_SERVER["REMOTE_ADDR"]) {
+                                session_unset();
+                                session_destroy();
+                            }
+
+                            //Store the username as a session cookie and redirect to profile page (currently)
                             $_SESSION["username"] = $username;
                             $_SESSION["user_id"] = $id;
                             header("location:userProfile.php");
