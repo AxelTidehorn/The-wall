@@ -13,8 +13,7 @@
                 <?php //Some kind of search functionality based on the comment structure currently.
                     include("backend/connect.php");
 
-                    session_start();
-
+                    @ session_start();
 
                     if (isset($_SESSION["username"])) {
                         $sessionUser = $_SESSION["username"];

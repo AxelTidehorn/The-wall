@@ -74,6 +74,9 @@ header{
   padding: 0;
   transition: ease-in .3s;
 }
+.icon > a > i.loggedIn{
+  color: rgb(80, 150, 80);
+}
 .icon > a > i:hover{
   color: rgb(68, 142, 129);
 }
