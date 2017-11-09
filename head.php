@@ -1,4 +1,4 @@
-﻿<head>
+<head>
     <meta charset="UTF-8">
     <title>The Wall</title>
     <link rel="stylesheet" href="css/main.css">
