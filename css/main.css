@@ -409,28 +409,27 @@ footer{
 }
 
         /*END FOOTER*/
+        @media (min-width: 700px) {
+          body{
 
-        /*DESKTOP VERSION*/
-@media (min-width: 700px) {
-  body{
+          }
+          main{
+            margin-top: 57px;
+          }
+          .navBar{
+            padding: 2px;
+          }
+          #searchbtn{
+            display: none;
+          }
+          .searchBar{
+            display: block;
+            background-color: rgba(247, 247, 247, 1);
+            position: relative;
+            bottom: 0;
+            justify-content: center;
+            width: 100%;
+            flex: 1;
+          }
 
-  }
-  main{
-    margin-top: 57px;
-  }
-  .navBar{
-    padding: 2px;
-  }
-  #searchbtn{
-    display: none;
-  }
-  .searchBar{
-    display: block;
-    background-color: rgba(247, 247, 247, 1);
-    position: relative;
-    bottom: 0;
-    justify-content: center;
-    width: 100%;
-    flex: 1;
-  }
-}
+        }
