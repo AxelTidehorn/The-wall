@@ -7,9 +7,9 @@
     <body>
         <div id="pageContainer" class="contentPage">
             <?php include "header.php" ?>
-          <div class="contentcont">
-            <section class="comments">
-                <h2>Comments</h2>
+          <main>
+            <section>
+                <h2>User results</h2>
                 <?php //Some kind of search functionality based on the comment structure currently.
                     include("backend/connect.php");
 
@@ -142,7 +142,7 @@
                     }
                 ?>
             </section>
-          </div>
+          </main>
         </div>
     </body>
 </html>
