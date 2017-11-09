@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $servername = "berzanappen.se";
 $username = "berzanap_linus";
 $password = "ab92orre1";
