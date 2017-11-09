@@ -82,6 +82,7 @@
 
                     include("backend/connect.php"); //I'm not sure why it seems like we have to reconnect to the db here...
                     $search = $_GET["search"]; //Gets the search term and retrieves matches similar to the search term. (may want to add more things than users in the future)
+                    $search = mysqli_real_escape_string($conn, $search); //Not using htmlentities here as we are just searching and retrieving content here, not adding html.
                     $query = $conn->prepare("SELECT username FROM Users WHERE username LIKE '%" . $search . "%'");
                     $query->bind_result($username);
                     $query->execute();
