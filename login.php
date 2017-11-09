@@ -1,5 +1,5 @@
-<?php
-    if (isset($_SESSION["username"])) {
+﻿<?php
+    if (isset($_SESSION["user_id"])) {
         header("location:index.php");
     }
 ?>
@@ -29,33 +29,49 @@
                     </form>
 
                     <a href="register.php">Do you not have an account? Register here!</a>
+
+                    <?php
+                        if (isset($_POST) && !empty($_POST)) { //If something has been sent through the form basically
+                            $usernameInput = $_POST["username"];
+                            $usernameInput = mysqli_real_escape_string($conn, $usernameInput);
+                            $usernameInput = htmlentities($usernameInput);
+
+                            $passwordInput = sha1($_POST["password"]); //Hash inputted password to later compare it in the SQL query
+                            $passwordInput = mysqli_real_escape_string($conn, $passwordInput);
+                            $passwordInput = htmlentities($passwordInput);
+
+                            $query = $conn->prepare("SELECT username, password FROM Users WHERE username = '{$usernameInput}' AND password = '{$passwordInput}'");
+                            $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
+                            $query->store_result();
+
+                            if ($query->num_rows()) { //If there are more than 0 numbers of rows (a match), the user should exist
+                                $query = $conn->prepare("SELECT id FROM Users WHERE username = '{$usernameInput}'");
+                                $query->bind_result($id);
+                                $query->execute();
+                                $query->fetch();
+
+                                ini_set("session.cookie_httponly", true);
+                                session_start();
+
+                                if (isset($_SESSION["userIP"]) === false) {
+                                    $_SESSION["userIP"] = $_SERVER["REMOTE_ADDR"];
+                                }
+
+                                if ($_SESSION["userIP"] !== $_SERVER["REMOTE_ADDR"]) {
+                                    session_unset();
+                                    session_destroy();
+                                }
+
+                                $_SESSION["username"] = $usernameInput;
+                                $_SESSION["user_id"] = $id;
+                                header("location:userProfile.php");
+                            } else {
+                                echo "<p>The entered username and password does not match a user in the database.";
+                            }
+                        }
+                    ?>
                 </section>
             </main>
-
-            <?php
-                if (isset($_POST) && !empty($_POST)) { //If something has been sent through the form basically
-                    $usernameInput = $_POST["username"];
-                    $passwordInput = sha1($_POST["password"]); //Hash inputted password to later compare it in the SQL query
-                    $query = $conn->prepare("SELECT username, password FROM Users WHERE username = '{$usernameInput}' AND password = '{$passwordInput}'");
-                    $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
-                    $query->store_result();
-                    //We need to pull down the ID of the logged in user as well! I need this for the upload function /Linus
-
-                    if ($query->num_rows()) { //If there are more than 0 numbers of rows (a match), the user should exist
-                        $query = $conn->prepare("SELECT id FROM Users WHERE username = '{$usernameInput}'");
-                        $query->bind_result($id);
-                        $query->execute();
-                        $query->fetch();
-
-                        session_start();
-                        $_SESSION["username"] = $usernameInput;
-                        $_SESSION["user_id"] = $id;
-                        header("location:userProfile.php");
-                    }
-
-                    $query->close(); //Close the connection/disconnect (to DB)
-                }
-            ?>
 
             <?php include 'footer.php'; ?>
         </div>

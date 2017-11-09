@@ -6,7 +6,7 @@
       <input class="search" type="text" name="search" placeholder="Search...">
     </form>
     <div class="icon"><a href="upload.php"><i class="fa fa-upload fa-3x"></i></a></div>
-    <div class="icon"><a href="userProfile.php"><i class="fa fa-user fa-3x"></i></a></div>
+    <div class="icon"><a href="userProfile.php"><i class="fa fa-user fa-3x <?php session_start(); echo (isset($_SESSION['username'])) ? "loggedIn" : NULL ?>"></i></a></div>
     <!--<div class="icon"><a href="#"><i class="fa fa-question-circle-o fa-3x"></i></a></div>-->
   </nav>
 </header>

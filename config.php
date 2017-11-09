@@ -4,4 +4,5 @@
     $currentPage = end($currentPage);
     $currentPage = explode("?", $currentPage);
     $currentPage = reset($currentPage);
+    //Test
 ?>

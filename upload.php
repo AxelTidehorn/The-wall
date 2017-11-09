@@ -154,7 +154,6 @@ if (isset($_FILES['upload'])){
 </html>
 =======
 <?php include "config.php" ?>
-
 <!DOCTYPE html>
 <html>
 <?php
@@ -165,9 +164,9 @@ include_once "backend/connect.php";
 <body>
 <div id="pageContainer">
     <?php include 'header.php'; ?>
-
     <main>
         <?php
+        @ session_start();
         if (!isset($_COOKIE["welcomed"])) { //Display the welcome message if the user has not been welcomed, and include a script to determine if it has been clicked.
             echo '
                         <section id="welcome">
@@ -180,9 +179,12 @@ include_once "backend/connect.php";
                         <script src="js/hide.js"></script>
                     ';
         }
+//        var_dump($_SESSION);
+        if (!isset($_SESSION['user_id'])){
+            header("location:login.php");
 
+        }
         ?>
-
         <div class="upload">
             Please select the type of content you wish to upload!
             <form class="typeSelector">
@@ -192,12 +194,12 @@ include_once "backend/connect.php";
             </form>
         </div>
         <div id="uploadForm">
-            <form action="backend/handler.php" class="imageform" method="post" enctype="multipart/form-data">
+            <form action="backend/handler.php" id="imageform" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="uploadType" value="">
                 <input type="text"  name="contentName" placeholder="Title" required>
                 <input type="file" name="uploadedImage" placeholder="image" >
                 <input type="file" name="uploadedWebsite" placeholder="webbsite" >
-                <textarea name="uploadedText" id="" cols="30" rows="10" placeholder="Write your text-based content here" ></textarea>
+                <textarea name="uploadedText" id="" cols="30" rows="10" placeholder="Write your text-based content here" form="imageform"></textarea>
                 <input type="text" name="URL" placeholder="URL of your website">
                 Does the content contain anything NSFW?
                 <input type="radio" name="NSFW" value="1">YES
@@ -206,11 +208,20 @@ include_once "backend/connect.php";
                 <input type="radio" name="publicDomain" value="1">YES
                 <input type="radio" name="PublicDomain" value="0">NO
                 <input type="text" name="contentDescription" placeholder="Write a description of your content!">
+
+<!--                Tag system-->
+                <span class="tags">Tags:</span>
+                <textarea name="tagData"  id="tagData" form="imageform" style="display:none;"></textarea>
+                <div id="tagShowing"></div>
+                <input type="text" id="tagInput" class="tag_part" placeholder="Tags, one at the time"/>
+                <input type="button" class="tagSubmit" value="enter" onclick="createTag()"/>
+
+
                 <span class="termsOfUse">By uploading you agree to our none-existing terms of use! (We own this now)</span>
                 <input type="submit">
             </form>
         </div>
-        <script src="js/typeSelection.js"></script>
+        <script src="js/uploadFormHandler.js"></script>
 
     </main>
 
@@ -218,4 +229,7 @@ include_once "backend/connect.php";
 </div>
 </body>
 </html>
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
