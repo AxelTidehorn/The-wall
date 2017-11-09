@@ -46,3 +46,23 @@ function showWeb() {
     document.getElementsByName('uploadedWebsite')[0].required = true;
     document.getElementsByName('URL')[0].style.display="block";
 }
+//Done handling the form part, moving on to the tagging system!
+
+var tagField = document.getElementById('tagInput');
+var shownTags = document.getElementById('tagShowing');
+var tagData = document.getElementById('tagData');
+function createTag() {
+    event.preventDefault();
+    if (tagInput.value != '') {
+        // alert('hey?');
+        // console.log(tagData.value);
+        shownTags.innerHTML += (tagField.value + '</br>');
+        if (tagData.value == '') {
+            console.log('first');
+            tagData.value = tagField.value;
+        }else if (tagData.value != '') {
+            console.log('second');
+            tagData.value += ('?' + tagField.value);
+        }
+    }
+}
