@@ -14,7 +14,6 @@ switch ($uploadedForm['uploadType']) {
         $url = "destination .jpg";
         compress_image($imageLocation, $url);
 
-        $fileContent = base64_encode(file_get_contents($url));
 
 
 //        var_dump($compressedImage);
@@ -28,12 +27,12 @@ switch ($uploadedForm['uploadType']) {
         $date = date("Y-m-d"); //Year, month, day, different capitalization can display the date differently
         $uploadType = $uploadedForm['uploadType'];
         $tags = $uploadedForm['tagData'];
-        $test = base64_encode((file_get_contents($_FILES['uploadedImage']['tmp_name'])));
+        $imageToUpload = addslashes((file_get_contents($url)));
 //        var_dump("sssiddsss". $uploadType. $_SESSION["user_id"] . $name. $compressedImage. $nsfw. $publicDomain. $date. $description. $tags);
         $query = $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name`, `ContentImage`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?)");
 
 
-        $query->bind_param("ssssddsss", $uploadType, $_SESSION["user_id"] , $name, $test, $nsfw, $publicDomain, $date, $description, $tags);
+        $query->bind_param("ssssddsss", $uploadType, $_SESSION["user_id"] , $name, $imageToUpload, $nsfw, $publicDomain, $date, $description, $tags);
         $query->execute();
         $query->close();
 
@@ -67,7 +66,7 @@ switch ($uploadedForm['uploadType']) {
         $imageLocation = $_FILES['uploadedWebsite']['tmp_name'];
         $url = "destination .jpg";
         $compressedImage = compress_image($imageLocation, $url);
-        $fileContent = file_get_contents($url);
+        $fileContent = addslashes(file_get_contents($url));
 //        var_dump($compressedImage);
 
         //uploading everything to the database
