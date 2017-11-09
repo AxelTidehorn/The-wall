@@ -1,10 +1,8 @@
-<?php include "config.php" ?>
+﻿<?php include "config.php" ?>
 
 <!DOCTYPE html>
-<html>
-    <?php
-    include "head.php" ;
-    ?>
+<html lang="en">
+    <?php include "head.php"; ?>
 
     <body>
         <div id="pageContainer">
@@ -31,14 +29,82 @@
                         }
 
                         function evaluateInformation() { //Making sure that the information is "valid", may want to add more exceptions for usernames and possibly passwords.
-                            if ($_POST["username"] != ""
-                                && $_POST["password"] != ""
-                                && $_POST["email"] != ""
-                                && $_POST["password"] === $_POST["confirmPassword"]) {
+                            $usernameInput = $_POST["username"];
+                            $passwordInput = $_POST["password"];
 
-                                registerUser();
+                            $allowedUsernameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
+                            $allowedPasswordCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!\"#¤%&/()=?@£\$€{[]}\',.-\\";
+                            $usernameErrors = array();
+                            $passwordErrors = array();
+                            $otherErrors = array();
+
+                            for ($iu = 0; $iu < strlen($usernameInput); $iu++) {
+                                $validCharacter = false;
+                                for ($ia = 0; $ia < strlen($allowedUsernameCharacters); $ia++) {
+                                    if ($usernameInput[$iu] === $allowedUsernameCharacters[$ia]) {
+                                        $validCharacter = true;
+                                    }
+                                }
+
+                                if (!$validCharacter && !in_array($usernameInput[$iu], $usernameErrors)) {
+                                    $usernameErrors[] = $usernameInput[$iu];
+                                }
+                            }
+
+                            for ($ip = 0; $ip < strlen($passwordInput); $ip++) {
+                                $validCharacter = false;
+                                for ($ia = 0; $ia < strlen($allowedPasswordCharacters); $ia++) {
+                                    if ($passwordInput[$ip] === $allowedPasswordCharacters[$ia]) {
+                                        $validCharacter = true;
+                                    }
+                                }
+
+                                if (!$validCharacter && !in_array($passwordInput[$iu], $passwordErrors)) {
+                                    $passwordErrors[] = $passwordInput[$ip];
+                                }
+                            }
+
+                            if ($_POST["username"] == "") {
+                                $otherErrors[] = "Please enter a username.";
+                            }
+
+                            if ($_POST["password"] == "") {
+                                $otherErrors[] = "Please enter a password.";
+                            }
+
+                            if ($_POST["email"] == "") {
+                                $otherErrors[] = "Please enter an email.";
+                            }
+
+                            if ($_POST["password"] !== $_POST["confirmPassword"]) {
+                                $otherErrors[] = "Your password and confirmed password does not match.";
+                            }
+
+                            if ($usernameErrors || $passwordErrors || $otherErrors) {
+                                echo '<h2>Errors</h2>';
+
+                                if ($usernameErrors) {
+                                    echo '<p>Invalid characters for the username:</p>';
+                                    foreach ($usernameErrors as $usernameError) {
+                                        echo '<span>' . $usernameError . '</span><br>';
+                                    }
+                                }
+
+                                if ($passwordErrors) {
+                                    echo '<p>Invalid characters for the password:</p>';
+                                    foreach ($passwordErrors as $passwordError) {
+                                        echo '<span>' . $passwordError . '</span><br>';
+                                    }
+                                }
+
+                                if ($otherErrors) {
+                                    echo '<p>Other errors:</p>';
+                                    foreach ($otherErrors as $otherError) {
+                                        echo '<span>' . $otherError . '</span><br>';
+                                    }
+                                }
                             } else {
-                                echo "<p>Invalid user information. Ensure that the correct information has been entered.</p>";
+                                registerUser();
                             }
                         }
 

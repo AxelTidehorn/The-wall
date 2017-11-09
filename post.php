@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //This will be used both to show ALL posts, and to show an induvidual posts!
 //You will get the user id by a form input in the url. something like www.thewall.com/post?postID=2
 //This will then be used so get the correct content.

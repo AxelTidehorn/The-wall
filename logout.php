@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     session_start();
 
     if (isset($_SESSION["username"])) { //If you are logged in, free all session variables, destroy data associated with session and redirect to login page

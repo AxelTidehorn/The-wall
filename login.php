@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     if (isset($_SESSION["username"])) {
         header("location:index.php");
     }
@@ -36,10 +36,10 @@
                 if (isset($_POST) && !empty($_POST)) { //If something has been sent through the form basically
                     $usernameInput = $_POST["username"];
                     $passwordInput = sha1($_POST["password"]); //Hash inputted password to later compare it in the SQL query
+
                     $query = $conn->prepare("SELECT username, password FROM Users WHERE username = '{$usernameInput}' AND password = '{$passwordInput}'");
                     $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                     $query->store_result();
-                    //We need to pull down the ID of the logged in user as well! I need this for the upload function /Linus
 
                     if ($query->num_rows()) { //If there are more than 0 numbers of rows (a match), the user should exist
                         $query = $conn->prepare("SELECT id FROM Users WHERE username = '{$usernameInput}'");
@@ -53,7 +53,7 @@
                         header("location:userProfile.php");
                     }
 
-                    $query->close(); //Close the connection/disconnect (to DB)
+                    $query->close(); //Close the connection/disconnect (to DB). How can this even be what it does if it is used on $query rather than $conn?
                 }
             ?>
 

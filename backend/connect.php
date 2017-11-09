@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $servername = "berzanappen.se";
 $username = "berzanap_linus";
 $password = "ab92orre1";
@@ -11,7 +11,6 @@ try {
 
     //Currently using mysqli connection instead, did not quite work before, may be changed back later
     $conn = new mysqli($servername, $username, $password, $database);
-//    echo "Connected successfully";
 }
 catch(PDOException $e)
 {

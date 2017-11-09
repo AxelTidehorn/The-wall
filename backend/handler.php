@@ -1,11 +1,11 @@
-<?php
+﻿<?php
 print'I will come to this stage, probably tomorrow! </br> Here is also where I will handle image compression. </br>';
 include_once "connect.php";
 $uploadedForm = $_POST;
 var_dump($uploadedForm);
 //var_dump($_FILES['uploadedImage']['tmp_name']);
 //Checking what type of upload the user posted.
-switch ($uploadedForm['uploadType']) {
+switch ($uploadedForm['uploadType']) { //test
 
     case 'image':
 //        imageCompression($uploadedForm['uploadedImage']);
