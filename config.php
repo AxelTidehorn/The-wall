@@ -1,4 +1,4 @@
-﻿<?php
+<?php
     $currentURI = $_SERVER["REQUEST_URI"];
     $currentPage = explode("/", $currentURI);
     $currentPage = end($currentPage);
