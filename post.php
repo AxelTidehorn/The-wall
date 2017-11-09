@@ -4,6 +4,8 @@
 //This will then be used so get the correct content.
 if (isset($_GET['POST'])){
 
+    $userID = $_GET;
+
     //here is where the posts page will be created if there is a $_GET post AND if it matches any post in the DB!
     //We need to check if they exist and return an error if they don't!
 
