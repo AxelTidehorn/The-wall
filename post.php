@@ -40,13 +40,12 @@ else{
         $count++;
         $contentArray[$count] = array('ID'=>$id, 'type'=>$contentType,'publisherID'=>$publisher,'name'=>$name,'url'=>$url,'image'=>$image,'webbsite'=>$webbsite,'text'=>$text,'nsfw'=>$nsfw,'publicDomain'=>$publicDomain,'rating'=>$rating,'date'=>$date,'views'=>$views,'description'=>$description,'tags'=>$tags);
 //        print"<img class=\'picture\' src=\'data:image/jpeg;base64,".$image."\'/>";
-        print'test';
     }                                                                                                               //'image'=>$image,'webbsite'=>$webbsite,'text'=>$text,
 //    print"<img class=\'picture\' src=\'data:image/jpeg;base64,".$contentArray[3]['image']."\'/>";
 
     foreach ($contentArray as $content){
-        var_dump($content);
-        print"<img class=\'picture\' src=\'data:image/jpeg;base64,".base64_encode($content['image'])."\'/>";
+        $image = base64_encode(stripslashes($content['image']));
+        print"<img class='picture' src='data:image/jpeg;base64,".$image."'/>";
     }
     //Here is where we will display ALL the posts! We could use $_POST here to make you able to search among the users.
 

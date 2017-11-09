@@ -27,6 +27,7 @@ include_once "backend/connect.php";
 //        var_dump($_SESSION);
         if (!isset($_SESSION['user_id'])){
             header("location:login.php");
+
         }
         ?>
         <div class="upload">
