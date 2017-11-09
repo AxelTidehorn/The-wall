@@ -1,4 +1,4 @@
-﻿<footer>
+<footer>
     <div id="footerContainer">
         <div class="display-center">
           <img class="fb" src="imgs/facebook.png">
