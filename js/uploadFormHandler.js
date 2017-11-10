@@ -63,6 +63,9 @@ function createTag() {
         }else if (tagData.value != '') {
             console.log('second');
             tagData.value += ('?' + tagField.value);
+
         }
+        tagInput.value = '';
+        tagInput.focus();
     }
 }
