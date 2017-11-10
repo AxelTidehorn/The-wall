@@ -164,13 +164,13 @@
                             $image = base64_encode(stripslashes($content['image']));
                             $id = $content['ID'];
                             print"
-                <form action='post.php' method='get' class='form' style='outline: solid red 1px; margin-top:15px;'>
+                <form action='post.php' method='get' class='form'>
                     <input type='hidden' value='" . $id . "' name='post'/>
                         <div class='inpost' onclick='this.parentNode.submit();'>
-                            <img class='linkImg' src='data:image/jpeg;base64," . $image . "' style='height:150px; width:150px;'/>
+                            <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
                         </div>
                     </form>
-               
+
             ";
 
 

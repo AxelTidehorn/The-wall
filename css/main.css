@@ -435,6 +435,14 @@ footer{
   text-align: center;
   font-size: 12px;
 }
+.inpost{
+  border: solid 1px black;
+}
+.inpost > img{
+  width: 100%;
+  height: 50%;
+
+}
 
         /*END FOOTER*/
         @media (min-width: 700px) {
