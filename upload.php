@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php
 
 /*
@@ -106,7 +106,7 @@ if (isset($_FILES['upload'])){
            </head>
 
            <body>
-               <div>
+               <div class="pageContainer">
                    <?php
 
                    #Now we want to either upload the file or type an error
@@ -152,7 +152,7 @@ if (isset($_FILES['upload'])){
 
 
 </html>
-=======
+
 <?php include "config.php" ?>
 <!DOCTYPE html>
 <html>
@@ -229,7 +229,3 @@ include_once "backend/connect.php";
 </div>
 </body>
 </html>
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
