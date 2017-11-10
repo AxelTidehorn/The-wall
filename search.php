@@ -19,7 +19,7 @@
                         $sessionUser = $_SESSION["username"];
                     } else {
                         $sessionUser = false;
-=======
+/*=======
 <?php include "head.php" ?>
 
 <body>
@@ -44,7 +44,7 @@
                 $sessionUser = $_SESSION["username"];
             } else {
                 $sessionUser = false;
-            }
+            }*/
 
             include "config.php";
             include("backend/connect.php");
@@ -66,7 +66,7 @@
                         if ($friend === $contact) {
                             $alreadyFriends = true;
                         }
->>>>>>> 020de4b8eee1ce7bca6cb5bfbaa9cf820825df69
+//>>>>>>> 020de4b8eee1ce7bca6cb5bfbaa9cf820825df69
                     }
 
                     if (!$alreadyFriends) { //Adds a slash and the friend name if they already have friends and if they aren't friends.
@@ -149,7 +149,7 @@
                             $contactString = "Add contact";
                             $class = "likebtn";
                         }
-<<<<<<< HEAD
+//<<<<<<< HEAD
                     }
 
                     //Seeing if this is a general search from the searchfield, or a more andvanced search! (will be added later)
@@ -208,7 +208,7 @@
 
                                 $link = implode($link); //Make it a string again
                             }
-=======
+/*=======
 
                         if ($noChange) { //Basically in this context, if there is no addContact or removeContact GET in the URI, add it, otherwise replace the old one.
                             $link[] = $end;
@@ -218,7 +218,7 @@
 
                         $link = implode($link); //Make it a string again
                     }
->>>>>>> 020de4b8eee1ce7bca6cb5bfbaa9cf820825df69
+>>>>>>> 020de4b8eee1ce7bca6cb5bfbaa9cf820825df69*/
 
                     //Actually adding the friends and buttons, etc. to the page.
                     echo '
@@ -226,7 +226,7 @@
                             <div class="comment">
                                 <a href="user.php?user_ID=' . $userID . '" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
                                 <a href="user.php?user_ID=' . $userID . '" class="profilename">' . $username . '</a>';
-<<<<<<< HEAD
+//<<<<<<< HEAD
                             if ($sessionUser !== false && $username != $sessionUser) {
                                 echo '<a href="' . $link . '" class="' . $class . '">' . $contactString . '</a>';
                             }
@@ -241,7 +241,7 @@
                     $query->store_result();
                     $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags);
 
-=======
+//=======
                     if ($sessionUser !== false && $username != $sessionUser) {
                         echo '<a href="' . $link . '" class="' . $class . '">' . $contactString . '</a>';
                     }
@@ -262,7 +262,7 @@
                 }
 
 
-                foreach ($contentArray as $content) {
+                /*foreach ($contentArray as $content) {
                     $image = base64_encode(stripslashes($content['image']));
                     $id = $content['ID'];
                     print"
@@ -272,7 +272,7 @@
                             <img class='linkImg' src='data:image/jpeg;base64," . $image . "' style='height:150px; width:150px;'/>
                         </div>
                     </form>
-               
+
             ";
 >>>>>>> 020de4b8eee1ce7bca6cb5bfbaa9cf820825df69
 
@@ -282,7 +282,7 @@
                         $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags);
                     }
 
-<<<<<<< HEAD
+<<<<<<< HEAD*/
                     foreach ($contentArray as $content) {
                         $image = base64_encode(stripslashes($content['image']));
                         $id = $content['ID'];
@@ -307,7 +307,7 @@
                     echo "</div>";
                 }
             ?>
-          </main>
+          <!--</main>
         </div>
     </body>
 =======
@@ -320,10 +320,10 @@
             if (isset($_GET['userSearch'])) {
                 print'you searched for users';
             }
-            ?>
+            ?> -->
         </section>
     </main>
 </div>
 </body>
->>>>>>> 020de4b8eee1ce7bca6cb5bfbaa9cf820825df69
+<!-->>>>>>> 020de4b8eee1ce7bca6cb5bfbaa9cf820825df69 -->
 </html>

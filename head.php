@@ -4,7 +4,7 @@
         include("config.php");
         $page = explode(".", $currentPage);
         $page = reset($page); //Take the first piece of the string (without .php)
-        $page[0] = strtoupper($page[0]); //Make the first character uppercase
+        if ($page != "") $page[0] = strtoupper($page[0]); //Make the first character uppercase
 
         for ($i = 1; $i < strlen($page); $i++) { //Loop through the string, skipping the first character since it should be uppercase and redundant in the loop.
             if ($page[$i] == strtoupper($page[$i])) { //Check if the character is uppercase
@@ -13,7 +13,7 @@
             }
         }
 
-        if ($page == "Index") {
+        if ($page == "Index" || $page == "") {
             $page = "Home";
         }
     ?>
