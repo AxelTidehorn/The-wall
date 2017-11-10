@@ -2,10 +2,17 @@
 
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 <?php
 include "head.php";
 include_once "backend/connect.php";
 ?>
+=======
+    <?php
+        include "head.php" ;
+        include_once "backend/connect.php";
+    ?>
+>>>>>>> Samuels-Branch
 
 <body>
 <div id="pageContainer">
