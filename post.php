@@ -38,8 +38,8 @@ if (!isset($_SESSION)) {
 
             $image = base64_encode(stripslashes($contentArray[0]['image']));
             print"
-    
-    <div class='contentcont'>
+
+            <div class='contentcont'>
                 <a href='content.php'><img src='data:image/jpeg;base64," . $image . "' alt='an excellent picture'></a>
                 <div class='actioncont'>
                     <div class='profilecont'>
@@ -50,7 +50,7 @@ if (!isset($_SESSION)) {
                         <a class='likebtn' href='#'>LIKE</a>
                     </div>
                 </div>
-            </div>        
+            </div>
     ";
             //If the query was empty:
         } else {
@@ -83,7 +83,7 @@ if (!isset($_SESSION)) {
                             <img class='linkImg' src='data:image/jpeg;base64," . $image . "' style='height:150px; width:150px;'/>
                         </div>
                     </form>
-               
+
             ";
 
 

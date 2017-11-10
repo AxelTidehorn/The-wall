@@ -241,7 +241,7 @@ a.img{
   float: left;
   width: 23.65%;
   padding: 4px;
-  
+
 }
 .column img{
   margin-top: 12px;
@@ -252,16 +252,20 @@ a.img{
   display: table;
   clear: both;
 }
-@media (max-width: 800px) {
+/*@media (max-width: 800px) {
   .column {
     width: 48%;
+  }
+  .contentcont{
+    width: 256px;
   }
 }
 @media (max-width: 600px){
   .column {
     width: 100%;
+    padding: 0px;
   }
-}
+}*/
 
 /* WELCOME */
 #welcome{
@@ -475,3 +479,10 @@ footer{
 }
 
         /*END FOOTER*/
+
+@media (min-width: 600px){
+    .contentcont{
+        width: 256px;
+        float: left;
+    }
+}
