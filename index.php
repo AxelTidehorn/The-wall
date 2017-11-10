@@ -4,7 +4,7 @@
 <html>
     <?php
         include "head.php" ;
-        include_once "backend/connect.php";
+        //include_once "backend/connect.php";
     ?>
 
     <body>
@@ -25,6 +25,9 @@
                                 <script src="js/hide.js"></script>
                             ';
                 }
+
+                function loadContent($type) {
+                include_once "backend/connect.php";
 
                 if (!isset($_SESSION)) {
                     session_start();
@@ -74,7 +77,17 @@
                     } else {
                         $contentArray = array();
                         $count = 0;
-                        $query = $conn->prepare("SELECT * FROM `Content`");
+
+                        $where = "";
+                        if ($type == "Latest") {
+                            $where = " WHERE date = '" . date("Y-m-d") . "'";
+
+                            for ($i = 1; $i < 7; $i++) {
+                                $where = $where . " OR date = '" . date("Y-m-d", strtotime("-" . $i . " Days")) . "'";
+                            }
+                        }
+
+                        $query = $conn->prepare("SELECT * FROM `Content`" . $where);
                         $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                         $query->store_result();
                         $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags);
@@ -88,7 +101,7 @@
 
                         echo '<div id="newest">
                             <div class="center-text">
-                                <h2><a href="#">Newest Content</a></h2>
+                                <h2><a href="#">' . $type . ' Content</a></h2>
                             </div>
                         ';
 
@@ -118,6 +131,9 @@
                         //Here is where we will display ALL the posts! We could use $_POST here to make you able to search among the users.
 
                     };
+                    }
+
+                    loadContent("Latest");
 
                 ?>
 
