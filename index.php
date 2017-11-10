@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
     <?php
-    include "head.php" ;
-    include_once "backend/connect.php";
+        include "head.php" ;
+        include_once "backend/connect.php";
     ?>
 
     <body>
