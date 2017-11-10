@@ -9,7 +9,7 @@ include_once "backend/connect.php";
 <body>
 <div id="pageContainer">
     <?php include 'testHead.php'; ?>
-    <main>
+        <main>
         <?php
         if (!isset($_SESSION)) {
             session_start();
@@ -54,8 +54,30 @@ include_once "backend/connect.php";
                     //Determening if the currently viewed page is your own, and adding "admin" features if so!
                     if ($userID == $_SESSION['user_id']) {
                         print'This is your page';
-                    }
 
+
+                        $query = $conn->prepare("UPDATE Users SET friends = ? WHERE username = '.$userID.' LIMIT 5"); //Update the friend list.
+                        $query->bind_param("s", $friends);
+                        $query->execute();
+
+                        if ($friends) {
+                            $friendArray = explode("/", $friends);
+
+
+                            foreach ($friendArray as $friend) {
+
+                                //Actually adding the friends and buttons, etc. to the page.
+                                echo '
+                                    <div class="comment">
+                                        <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                        <a href="#" class="profilename">' . $friend . '</a>
+                                        <a href="friends.php?removeContact=' . $friend . '" class="unlikebtn">Remove friend</a>
+                                    </div>
+                                ';
+                            }
+
+                        }
+                    }
 
                     $image = base64_encode(stripslashes($contentArray[0]['profileImage']));
                     $username = $contentArray[0]['userName'];
@@ -68,7 +90,6 @@ include_once "backend/connect.php";
                     <h1 class='center-text profile'>" . $username . "</h1>
                     <span class='block center-text'>Joined " . $joinDate . "</span>
                     <h2>Profile</h2>
-                    <h3>Change profile picture</h3>
                     <span>
                         Here can we list some of the users conent
                     </span>
