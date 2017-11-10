@@ -119,27 +119,33 @@
                                 //Simply reversing the array assuming they are added in chronological order to get the latest instead of making lots of sql queries to check different time frames.
 
                                 foreach ($contentArray as $content) {
+                                    $query = $conn->prepare("SELECT username FROM Users WHERE id = '" . $content['publisherID'] . "'");
+                                    $query->bind_result($publisherName);
+                                    $query->execute();
+                                    $query->fetch();
+
                                     $image = base64_encode(stripslashes($content['image']));
                                     //$image = base64_encode(stripslashes($image));
                                     $id = $content['ID'];
                                     print"
-                                    <form action='post.php' method='get' class='form contentcont'>
-                                        <input type='hidden' value='" . $id . "' name='post'/>
-                                        <div onclick='this.parentNode.submit();'>
-                                            <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
-                                        </div>
-                                        <div class='actioncont'>
-                                            <div class='profilecont'>
-                                                <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
-                                                <a class='profilename' href='LINK-TO-PROFILE'>Chef Excellence</a>
+                                        <form action='post.php' method='get' class='form contentcont'>
+                                            <input type='hidden' value='" . $id . "' name='post'/>
+                                            <div onclick='this.parentNode.submit();'>
+                                                <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
                                             </div>
-                                            <div class='buttoncont'>
-                                                <a class='likebtn' href='#'>LIKE</a>
+                                            <div class='actioncont'>
+                                                <div class='profilecont'>
+                                                    <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
+                                                    <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
+                                                </div>
+                                                <div class='buttoncont'>
+                                                    <a class='likebtn' href='#'>LIKE</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                ";
+                                        </form>
+                                    ";
 
+                                    $query->close(); //This seems to fix it, not sure why. Maybe it doesn't like leftover stored information or something?
 
                                 }
 

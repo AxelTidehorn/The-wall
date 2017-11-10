@@ -64,6 +64,9 @@ h2 > a{
 .center{
     margin: auto;
 }
+img{
+    image-rendering: pixelated;
+}
         /*END GENERAL*/
 
         /*HEADER*/
