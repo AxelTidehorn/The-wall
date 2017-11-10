@@ -45,6 +45,9 @@ h3{
 h2 > a{
   color: rgb(68, 142, 129);
 }
+.specialHeading{
+    text-decoration: underline;
+}
 .settingsLink{
     text-decoration: none;
     color: #808080;

@@ -16,12 +16,7 @@
         <div id="pageContainer" class="contentPage">
             <?php include "header.php" ?>
             <main>
-              <div class="subHeader">
-                  <div class="subHeadItem"><a href="userProfile.php">Profile</a></div>
-                  <div class="subHeadItem"><a href="friends.php">Friends</a></div>
-                  <div class="subHeadItem"><a href="liked.php">Liked</a></div>
-                  <div class="subHeadItem"><a href="logout.php">Log Out</a></div>
-                </div>
+                <?php include("subHeader.php"); ?>
 
                 <section>
                     <h2>Friends</h2>
