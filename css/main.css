@@ -237,6 +237,31 @@ img{
 a.img{
     display: block;
 }
+.column {
+  float: left;
+  width: 23.65%;
+  padding: 4px;
+  
+}
+.column img{
+  margin-top: 12px;
+  width: 100%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+@media (max-width: 800px) {
+  .column {
+    width: 48%;
+  }
+}
+@media (max-width: 600px){
+  .column {
+    width: 100%;
+  }
+}
 
 /* WELCOME */
 #welcome{

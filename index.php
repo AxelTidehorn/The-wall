@@ -32,31 +32,114 @@
                     <div class="center-text">
                         <h2><a href="#">Newest Content</a></h2>
                     </div>
-
-                    <div class="contentcont">
-                        <a href="content.php"><img src="imgs/An_Excellent_JPEG2.jpg" alt="an excellent picture"></a>
-                        <div class="actioncont">
-                            <div class="profilecont">
-                                <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                <a class="profilename" href="LINK-TO-PROFILE">Chef Excellence</a>
-                            </div>
-                            <div class="buttoncont">
-                                <a class="likebtn" href="#">LIKE</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="contentcont">
-                        <a href="#"><img src="imgs/kebabpizza.jpg" alt="an excellent picture"></a>
-                        <div class="actioncont">
-                            <div class="profilecont">
-                                <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                <a class="profilename" href="LINK-TO-PROFILE">A. Whitedude</a>
-                            </div>
-                            <div class="buttoncont">
-                                <a class="likebtn" href="#">LIKE</a>
+                    <div class="row">
+                      <div class="column">
+                        <div class="contentcont">
+                            <a href="content.php"><img src="imgs/An_Excellent_JPEG2.jpg" alt="an excellent picture"></a>
+                            <div class="actioncont">
+                                <div class="profilecont">
+                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                    <a class="profilename" href="LINK-TO-PROFILE">Chef Excellence</a>
+                                </div>
+                                <div class="buttoncont">
+                                    <a class="likebtn" href="#">LIKE</a>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="contentcont">
+                            <a href="#"><img src="imgs/kebabpizza.jpg" alt="an excellent picture"></a>
+                            <div class="actioncont">
+                                <div class="profilecont">
+                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                    <a class="profilename" href="LINK-TO-PROFILE">A. Whitedude</a>
+                                </div>
+                                <div class="buttoncont">
+                                    <a class="likebtn" href="#">LIKE</a>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="column">
+                        <div class="contentcont">
+                            <a href="content.php"><img src="imgs/An_Excellent_JPEG2.jpg" alt="an excellent picture"></a>
+                            <div class="actioncont">
+                                <div class="profilecont">
+                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                    <a class="profilename" href="LINK-TO-PROFILE">Chef Excellence</a>
+                                </div>
+                                <div class="buttoncont">
+                                    <a class="likebtn" href="#">LIKE</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contentcont">
+                            <a href="#"><img src="imgs/kebabpizza.jpg" alt="an excellent picture"></a>
+                            <div class="actioncont">
+                                <div class="profilecont">
+                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                    <a class="profilename" href="LINK-TO-PROFILE">A. Whitedude</a>
+                                </div>
+                                <div class="buttoncont">
+                                    <a class="likebtn" href="#">LIKE</a>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="column">
+                        <div class="contentcont">
+                            <a href="#"><img src="imgs/kebabpizza.jpg" alt="an excellent picture"></a>
+                            <div class="actioncont">
+                                <div class="profilecont">
+                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                    <a class="profilename" href="LINK-TO-PROFILE">A. Whitedude</a>
+                                </div>
+                                <div class="buttoncont">
+                                    <a class="likebtn" href="#">LIKE</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contentcont">
+                            <a href="content.php"><img src="imgs/An_Excellent_JPEG2.jpg" alt="an excellent picture"></a>
+                            <div class="actioncont">
+                                <div class="profilecont">
+                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                    <a class="profilename" href="LINK-TO-PROFILE">Chef Excellence</a>
+                                </div>
+                                <div class="buttoncont">
+                                    <a class="likebtn" href="#">LIKE</a>
+                                </div>
+                            </div>
+                        </div>                     
+                      </div>
+                      <div class="column">
+                        <div class="contentcont">
+                            <a href="content.php"><img src="imgs/An_Excellent_JPEG2.jpg" alt="an excellent picture"></a>
+                            <div class="actioncont">
+                                <div class="profilecont">
+                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                    <a class="profilename" href="LINK-TO-PROFILE">Chef Excellence</a>
+                                </div>
+                                <div class="buttoncont">
+                                    <a class="likebtn" href="#">LIKE</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contentcont">
+                            <a href="#"><img src="imgs/kebabpizza.jpg" alt="an excellent picture"></a>
+                            <div class="actioncont">
+                                <div class="profilecont">
+                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                    <a class="profilename" href="LINK-TO-PROFILE">A. Whitedude</a>
+                                </div>
+                                <div class="buttoncont">
+                                    <a class="likebtn" href="#">LIKE</a>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
                     </div>
                 </div>
 
