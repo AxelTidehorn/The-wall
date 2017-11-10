@@ -177,6 +177,7 @@ p{
     height: 8px;
     width: 100%;
     background-color: #ffcccc;
+    margin: 0px;
 }
 #editorsChoice .center-text h2:before, #editorsChoice .center-text h2:after, #editorsChoice .contentcont:after{
     display: block;
@@ -186,10 +187,22 @@ p{
     background-color: #ccffcc;
     margin: 0px;
 }
+#searchPage .center-text h2:before, #searchPage .center-text h2:after, #searchPage .contentcont:after{
+    display: block;
+    content: "";
+    height: 8px;
+    width: 100%;
+    background-color: #707070;
+    margin: 0px;
+}
 .contentcont{
   width: 100%;
   position: relative;
   padding-bottom: 24px;
+}
+.searchImage{
+    height: 150px;
+    width: auto;
 }
 img{
   display: block;

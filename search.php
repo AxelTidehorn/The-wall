@@ -5,11 +5,10 @@
     <?php include "head.php" ?>
 
     <body>
-        <div id="pageContainer" class="contentPage">
+        <div id="pageContainer">
             <?php include "testHead.php" ?>
           <main>
             <section>
-                <h2>User results</h2>
                 <?php //Some kind of search functionality based on the comment structure currently.
                     include("backend/connect.php");
 
@@ -82,14 +81,17 @@
 
                     //Seeing if this is a general search from the searchfield, or a more andvanced search! (will be added later)
                     if(isset($_GET['generalSearch'])) {
-
-
                         include("backend/connect.php"); //I'm not sure why it seems like we have to reconnect to the db here...
                         $search = $_GET["generalSearch"]; //Gets the search term and retrieves matches similar to the search term. (may want to add more things than users in the future)
                         $search = mysqli_real_escape_string($conn, $search); //Not using htmlentities here as we are just searching and retrieving content here, not adding html.
                         $query = $conn->prepare("SELECT username, id FROM Users WHERE username LIKE '%" . $search . "%' LIMIT 5");
                         $query->bind_result($username, $userID);
                         $query->execute();
+                        $query->store_result();
+
+                        if ($query->num_rows()) {
+                            echo '<h2>User results</h2>';
+                        }
 
                         while ($query->fetch()) {
                             if ($sessionUser !== false && $username != $sessionUser) { //Basically if the session user exists (that someone is logged in) and if the user we are looking at is not the user that is currently logged in. (why would he want to add himself?)
@@ -145,40 +147,46 @@
                             }
                             echo '</div></a>';
                         }
-                        print'<h2>Post results</h2>';
-                        $count = 0;
-                        $query = $conn->prepare("SELECT * FROM `Content` LIMIT 5");
-                        $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
-                        $query->store_result();
-                        $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags);
+                        echo "<h2>Post results</h2>";
+
+                    print'<div id="searchPage">';
+                    $count = 0;
+                    $query = $conn->prepare("SELECT * FROM `Content` LIMIT 5");
+                    $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
+                    $query->store_result();
+                    $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags);
 
 
-                        //    trying to create a associative array with all the content. This is how im used to working.
-                        while ($query->fetch()) {
-                            $count++;
-                            $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags);
-                        }
-
-
-                        foreach ($contentArray as $content) {
-                            $image = base64_encode(stripslashes($content['image']));
-                            $id = $content['ID'];
-                            print"
-                <form action='post.php' method='get' class='form' style='outline: solid red 1px; margin-top:15px;'>
-                    <input type='hidden' value='" . $id . "' name='post'/>
-                        <div class='inpost' onclick='this.parentNode.submit();'>
-                            <img class='linkImg' src='data:image/jpeg;base64," . $image . "' style='height:150px; width:150px;'/>
-                        </div>
-                    </form>
-               
-            ";
-
-
-                        }
-
+                    //    trying to create a associative array with all the content. This is how im used to working.
+                    while ($query->fetch()) {
+                        $count++;
+                        $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags);
                     }
-                ?>
-            </section>
+
+                    foreach ($contentArray as $content) {
+                        $image = base64_encode(stripslashes($content['image']));
+                        $id = $content['ID'];
+                        print"
+                            <form action='post.php' method='get' class='form contentcont'>
+                                <input type='hidden' value='" . $id . "' name='post'/>
+                                <div onclick='this.parentNode.submit();'>
+                                    <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
+                                </div>
+                                <div class='actioncont'>
+                                    <div class='profilecont'>
+                                        <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
+                                        <a class='profilename' href='LINK-TO-PROFILE'>Chef Excellence</a>
+                                    </div>
+                                    <div class='buttoncont'>
+                                        <a class='likebtn' href='#'>LIKE</a>
+                                    </div>
+                                </div>
+                            </form>
+                        ";
+                    }
+                    echo "</div>";
+                }
+            ?>
           </main>
         </div>
     </body>
