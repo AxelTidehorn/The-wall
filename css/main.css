@@ -162,6 +162,7 @@ p{
 }
 #newest, #topRated, #editorsChoice{
     margin-bottom: 64px;
+    overflow: hidden;
 }
 #newest .center-text h2:before, #newest .center-text h2:after, #newest .contentcont:after{
     display: block;
