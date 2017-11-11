@@ -61,7 +61,7 @@
                                 <div class='actioncont'>
                                     <div class='profilecont'>
                                         <a href='#' class='profilethumb'><img src='data:image/jpeg;base64," . $image . "' alt='profilethumb'></a>
-                                        <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
+                                        <a class='profilename' href='LINK-TO-PROFILE'>Might not be used actually in index</a>
                                     </div>
                                     <div class='buttoncont'>
                                         <a class='likebtn' href='#'>LIKE</a>
@@ -128,18 +128,22 @@
                                     //$image = base64_encode(stripslashes($image));
                                     $id = $content['ID'];
                                     print"
-                                        <form action='post.php' method='get' class='form contentcont'>
+                                        <form action='post.php' method='get' class='form contentcont' id='" . $content["ID"] . "'>
                                             <input type='hidden' value='" . $id . "' name='post'/>
                                             <div onclick='this.parentNode.submit();'>
                                                 <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
                                             </div>
                                             <div class='actioncont'>
-                                                <div class='profilecont'>
-                                                    <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
-                                                    <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
-                                                </div>
-                                                <div class='buttoncont'>
-                                                    <a class='likebtn' href='#'>LIKE</a>
+                                                <div class='contentName'>" . $content["name"] . "</div>
+
+                                                <div class='contentBox'>
+                                                    <div class='profilecont'>
+                                                        <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
+                                                        <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
+                                                    </div>
+                                                    <div class='buttoncont'>
+                                                        <a class='likebtn' href='#'>LIKE (" . $content["rating"] . ")</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </form>

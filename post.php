@@ -41,15 +41,19 @@
                             $image = base64_encode(stripslashes($contentArray[0]['image']));
                             print"
                                 <div class='contentcont'>
-                                    <a href='content.php'><img src='data:image/jpeg;base64," . $image . "' alt='an excellent picture'></a>
-                                    <div class='backButton'><a href='index.php'>Back</a></div> <!-- Realized we might not need this here, but could possibly use it elsewhere if needed. -->
+                                    <a href='index.php#" . $contentArray[0]["ID"] . "'><img src='data:image/jpeg;base64," . $image . "' alt='an excellent picture'></a>
+                                    <div class='backButton'><a href='index.php#" . $contentArray[0]["ID"] . "'>Back</a></div> <!-- Realized we might not need this here, but could possibly use it elsewhere if needed. -->
                                     <div class='actioncont contentInfo'>
-                                        <div class='profilecont'>
-                                            <a href='#' class='profilethumb'><img src='data:image/jpeg;base64," . $image . "' alt='profilethumb'></a>
-                                            <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
-                                        </div>
-                                        <div class='buttoncont'>
-                                            <a class='likebtn' href='#'>LIKE</a>
+                                        <div class='contentName'>" . $contentArray[0]["name"] . "</div>
+
+                                        <div class='contentBox'>
+                                            <div class='profilecont'>
+                                                <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
+                                                <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
+                                            </div>
+                                            <div class='buttoncont'>
+                                                <a class='likebtn' href='#'>LIKE (" . $contentArray[0]["rating"] . ")</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
