@@ -18,14 +18,17 @@
                         $sessionUser = $_SESSION["username"];
                     } else {
                         $sessionUser = false;
-
                     }
+
+                    $GLOBALS["updatedRating"] = false; //Using a global variable to make it apply to the functions above correctly.
+
                     include "config.php";
                     include("backend/connect.php");
 
                     //Seeing if this is a general search from the searchfield, or a more andvanced search! (will be added later)
 
                     //print'<div id="searchPage">';
+
                     $query = $conn->prepare("SELECT likedContent FROM Users WHERE id = " . $_SESSION["user_id"]);
                     $query->bind_result($likedContent);
                     $query->execute();
@@ -54,29 +57,55 @@
                         $count++;
                         $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags);
                     }
+
+                    $query->close();
+
                     if($contentArray != null){
                         print'<h2>Liked content</h2>';
                     }
+
+                    if ($sessionUser) {
+                        $query = $conn->prepare("SELECT likedContent FROM Users WHERE username = '{$sessionUser}'");
+                        $query->bind_result($liked);
+                        $query->execute();
+                        $query->fetch();
+                        $query->close();
+                    }
+
                     foreach ($contentArray as $content) {
+                        $query = $conn->prepare("SELECT username FROM Users WHERE id = '" . $content['publisherID'] . "'");
+                        $query->bind_result($publisherName);
+                        $query->execute();
+                        $query->fetch();
+
                         $image = base64_encode(stripslashes($content['image']));
                         $id = $content['ID'];
+
+                        include("likeHandler.php");
+
                         print"
-                            <form action='post.php' method='get' class='form contentcont'>
+                            <form action='post.php' method='get' class='form contentcont' id='" . $content["ID"] . "'>
                                 <input type='hidden' value='" . $id . "' name='post'/>
                                 <div onclick='this.parentNode.submit();'>
                                     <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
                                 </div>
                                 <div class='actioncont'>
-                                    <div class='profilecont'>
-                                        <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
-                                        <a class='profilename' href='LINK-TO-PROFILE'>Chef Excellence</a>
-                                    </div>
-                                    <div class='buttoncont'>
-                                        <a class='likebtn' href='#'>LIKE</a>
+                                    <div class='contentName'>" . $content["name"] . "</div>
+
+                                    <div class='contentBox'>
+                                        <div class='profilecont'>
+                                            <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
+                                            <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
+                                        </div>
+                                        <div class='buttoncont'>
+                                            <a class='" . $class . "' href='" . $link . "'>" . $likeString . " (" . $content["rating"] . ")</a>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
                         ";
+
+                        //$query->close();
                         }
                         //echo "</div>";
                     //}

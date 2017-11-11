@@ -75,7 +75,33 @@
                         }
 
                     } else {
-                        $contentArray = array();
+                        $query = $conn->prepare("SELECT likedContent FROM Users WHERE id = " . $_SESSION["user_id"]);
+                        $query->bind_result($likedContent);
+                        $query->execute();
+                        $query->fetch();
+                        $where = "";
+
+                        if ($likedContent) {
+                            $likedArray = explode("/", $likedContent);
+                            $where = " WHERE id = " . reset($likedArray);
+
+                            for ($i = 1; $i < sizeof($likedArray); $i++) {
+                                $where = $where . " OR id = " . $likedArray[$i];
+                            }
+                        }
+
+                        $query->close();
+
+                        if ($likedContent) {
+                            $likedArray = explode("/", $likedContent);
+                            $where = " WHERE id = " . reset($likedArray);
+
+                            for ($i = 1; $i < sizeof($likedArray); $i++) {
+                                $where = $where . " OR id = " . $likedArray[$i];
+                            }
+                        }
+
+                        //$contentArray = array();
                         $count = 0;
 
                         if ($type == "Latest") {
@@ -98,7 +124,7 @@
                                 $query = $conn->prepare("SELECT * FROM `Content`");
                             }
                             $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
-                            //$query->store_result();
+                            $query->store_result();
                             $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags, $editorsChoice);
 
 
@@ -107,6 +133,8 @@
                                 $count++;
                                 $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags, 'editorsChoice' => $editorsChoice);
                             }
+
+                            $query->close();
 
                             if ($type == "Latest") $contentArray = array_reverse($contentArray, true); //true to keep the keys of the array, seems to work without it though.
                             //Simply reversing the array assuming they are added in chronological order to get the latest instead of making lots of sql queries to check different time frames.
@@ -142,7 +170,9 @@
                                     $query->fetch();
                                 }
 
-                                if (isset($_GET["like"])) {
+                                include("likeHandler.php");
+
+                                /*if (isset($_GET["like"])) {
                                     $contentRequest = $_GET["like"];
 
                                     if ($liked) {
@@ -167,12 +197,6 @@
                                     $query->execute();
                                     $query->close();
 
-                                    /*$query = $conn->prepare("SELECT likedContent FROM Users WHERE username = '{$sessionUser}'");
-                                    $query->bind_result($liked);
-                                    $query->execute();
-                                    $query->fetch();
-                                    $query->close();*/
-
                                     if (!$GLOBALS["updatedRating"] && $contentRequest == $content["ID"]) {
                                         $query = $conn->prepare("UPDATE Content SET rating = ? WHERE ID = '{$contentRequest}'");
                                         $ratingParam = $content["rating"] + 1;
@@ -194,31 +218,6 @@
                                     $contentRequest = $_GET["unlike"];
 
                                     if ($liked) {
-                                        /*$likedArray = explode("/", $liked);
-                                        $searchId = array_search($contentRequest, $likedArray);
-                                        unset($likedArray[$searchId]); //Removes that part of the array.
-
-                                        $newLikedArray = array();
-
-                                        foreach ($likedArray as $likedContent) { //Uses the old array parts to create a new array with slashes inbetween names.
-                                            $newLikedArray[] = $likedContent . "/";
-                                        }
-
-                                        $liked = implode($newLikedArray); //Makes it into a string again.
-                                        $liked = substr($liked, 0, strlen($liked) - 1); //Starts the string and takes all of it except the last character to skip the last "/"
-
-                                        include("backend/connect.php"); //I'm not sure why it seems like we have to reconnect to the db here...
-                                        $query = $conn->prepare("UPDATE Users SET likedContent = ? WHERE username = '{$sessionUser}'");
-                                        $query->bind_param("s", $liked);
-                                        $query->execute();
-                                        $query->close();*/
-
-                                        /*$query = $conn->prepare("SELECT likedContent FROM Users WHERE username = '{$sessionUser}'");
-                                        $query->bind_result($liked);
-                                        $query->execute();
-                                        $query->fetch();
-                                        $query->close();*/
-
                                         if (!$GLOBALS["updatedRating"] && $contentRequest == $content["ID"]) {
                                             $likedArray = explode("/", $liked);
                                             $searchId = array_search($contentRequest, $likedArray);
@@ -254,9 +253,9 @@
                                             $GLOBALS["updatedRating"] = true;
                                         }
                                     }
-                                }
+                                }*/
 
-                                //if (isset($_GET['generalSearch'])) {
+                                /*//if (isset($_GET['generalSearch'])) {
                                     include("backend/connect.php"); //I'm not sure why it seems like we have to reconnect to the db here...
                                     //$search = $_GET["generalSearch"]; //Gets the search term and retrieves matches similar to the search term. (may want to add more things than users in the future)
 
@@ -301,7 +300,7 @@
                                     }
 
                                     $link = implode($link); //Make it a string again
-                                }
+                                }*/
 
 
                                 print"
@@ -336,7 +335,7 @@
                     //};
                     }
 
-                    $GLOBALS["updatedRating"] = false;
+                    $GLOBALS["updatedRating"] = false; //Using a global variable to make it apply to the functions above correctly.
                     loadContent("Latest");
                     loadContent("Top Rated"); //This does not work currently, can be good if you can actually rate content first
                     loadContent("Editor's Choice");
