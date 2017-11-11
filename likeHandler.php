@@ -86,7 +86,14 @@
 
     if ($sessionUser !== false) {
         include("config.php");
-        $link = explode("?", $currentURI); //Prepares the link that will be used on the add/remove contact buttons and preventing the URI from ending up in an endless sequence of GETs in the link.
+
+        if (!(strpos($currentURI, "?") === false || !isset($_GET["like"]) || !isset($_GET["unlike"]))) {
+            $symbol = "&";
+        } else {
+            $symbol = "?";
+        }
+
+        $link = explode($symbol, $currentURI); //Prepares the link that will be used on the add/remove contact buttons and preventing the URI from ending up in an endless sequence of GETs in the link.
 
         if ($link === array($currentURI)) { //Explode makes it into an array, so compare with the URI as array, handle the link differently if there is no addContact or whatever GET in the link already.
             $noChange = true;
@@ -104,21 +111,21 @@
             }
 
             if ($alreadyLiked) {
-                $end = "?unlike=" . $id;
+                $end = $symbol . "unlike=" . $id;
                 $likeString = "Unlike";
                 $class = "unlikebtn";
             } else {
-                $end = "?like=" . $id;
+                $end = $symbol . "like=" . $id;
                 $likeString = "Like";
                 $class = "likebtn";
             }
         } else {
-            $end = "?like=" . $id;
+            $end = $symbol . "like=" . $id;
             $likeString = "Like";
             $class = "likebtn";
         }
 
-        if ($noChange) { //Basically in this context, if there is no addContact or removeContact GET in the URI, add it, otherwise replace the old one.
+        if ($noChange) {
             $link[] = $end;
         } else {
             $link[sizeof($link) - 1] = $end; //Replaces the last part of the array.
