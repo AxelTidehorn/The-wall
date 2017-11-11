@@ -15,15 +15,15 @@
                 <?php
                 if (!isset($_COOKIE["welcomed"])) { //Display the welcome message if the user has not been welcomed, and include a script to determine if it has been clicked.
                     echo '
-                                <section id="welcome">
-                                    <p>Welcome to The Wall. Here you can share your creations and view the creations of others. By using this site you agree to our usage of cookies.</p>
-                                    <div class="hide">
-                                        <a href="#">Hide</a>
-                                    </div>
-                                </section>
+                            <section id="welcome">
+                                <p>Welcome to The Wall. Here you can share your creations and view the creations of others. By using this site you agree to our usage of cookies.</p>
+                                <div class="hide">
+                                    <a href="#">Hide</a>
+                                </div>
+                            </section>
 
-                                <script src="js/hide.js"></script>
-                            ';
+                            <script src="js/hide.js"></script>
+                        ';
                 }
 
                 function loadContent($type) {
@@ -61,7 +61,7 @@
                                 <div class='actioncont'>
                                     <div class='profilecont'>
                                         <a href='#' class='profilethumb'><img src='data:image/jpeg;base64," . $image . "' alt='profilethumb'></a>
-                                        <a class='profilename' href='LINK-TO-PROFILE'>Chef Excellence</a>
+                                        <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
                                     </div>
                                     <div class='buttoncont'>
                                         <a class='likebtn' href='#'>LIKE</a>
