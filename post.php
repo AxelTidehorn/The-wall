@@ -134,10 +134,13 @@
                                                     } else {
                                                         echo '<p>' . $comment["comment"] . '</p>';
                                                     }
-                                                    echo '<span>' . $comment["date"] . '</span>
-                                                    <input type="submit" name="edit-' . $comment["id"] . '" value="Edit" class="actionLink" />
-                                                    <input type="submit" name="remove" value="Remove" class="actionLink" />
-                                                </form>
+                                                    echo '<span>' . $comment["date"] . '</span>';
+
+                                                    if ($comment["publisher"] == $_SESSION["user_id"]) {
+                                                        echo '<input type="submit" name="edit-' . $comment["id"] . '" value="Edit" class="actionLink" />
+                                                            <input type="submit" name="remove" value="Remove" class="actionLink" />';
+                                                    }
+                                                echo '</form>
                                                 <a class="likebtn">Like</a>
                                             </div>
                                         ';
