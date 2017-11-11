@@ -431,10 +431,81 @@ input, label{
         /*END MAIN PAGE*/
 
         /*UPLOAD PAGE*/
-
-        #uploadForm {
-            display: none;
-        }
+.upload{
+  background-color: rgb(61, 61, 61);
+  border-radius: 5px;
+  text-align:center;
+  padding: 15px;
+  margin: 8px auto;
+}
+.upload > h2{
+color: white;
+margin: 16px 0;
+}
+.typeSelector{
+  width: 50%;
+  margin: 0 auto;
+  text-align: left;
+}
+.typeSelector > label{
+  display: block;
+}
+.uploadStyle{
+  color: white;
+  display: block;
+  position: relative;
+  margin: 8px auto;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: linear .2s;
+}
+.uploadStyle:hover{
+  color: rgb(80, 150, 80);
+}
+.input {
+    position: absolute;
+    opacity: 0;
+}
+.checkmark {
+    position: absolute;
+    margin-left: 16px;
+    top: 1%;;
+    right: 10%;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+    transition: linear .2s;
+}
+.uploadStyle:hover .input ~ .checkmark {
+    background-color: #ccc;
+}
+.uploadStyle .input:checked ~ .checkmark {
+    background-color: rgb(80, 150, 80);
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.uploadStyle .input:checked ~ .checkmark:after {
+    display: block;
+}
+.uploadStyle .checkmark:after {
+ 	top: 5px;
+	left: 5px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: white;
+}
+#uploadForm {
+  display: none
+}
 
         /*END UPLOAD PAGE*/
         /*LOGIN PAGE*/

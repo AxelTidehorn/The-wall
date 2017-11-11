@@ -30,12 +30,25 @@ include_once "backend/connect.php";
 
         }
         ?>
+        <section>
         <div class="upload">
-            Please select the type of content you wish to upload!
+            <h2>Please select the type of content you wish to upload!</h2>
             <form class="typeSelector">
-                <input type="radio" name="typeSelection" value="Image" id="selectedImage" onclick="showImg()"><label for="selectedImage">Image</label>
-                <input type="radio" name="typeSelection" value="Webbsite" id="selectedWebsite" onclick="showWeb()"><label for="selectedWebbsite">Webbsite</label>
-                <input type="radio" name="typeSelection" value="Text" id="selectedText" onclick="showTxt()"><label for="selectedText">Text</label>
+
+                <label class="uploadStyle" for="selectedImage"> Image
+                  <input class="input" type="radio" name="typeSelection" value="Image" id="selectedImage" onclick="showImg()">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="uploadStyle" for="selectedText"> Text
+                  <input class="input" type="radio" name="typeSelection" value="Text" id="selectedText" onclick="showTxt()">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="uploadStyle" for="selectedWebsite"> Website
+                  <input class="input" type="radio" name="typeSelection" value="Website" id="selectedWebsite" onclick="showWeb()">
+                  <span class="checkmark"></span>
+                </label>
             </form>
         </div>
         <div id="uploadForm">
@@ -67,7 +80,7 @@ include_once "backend/connect.php";
             </form>
         </div>
         <script src="js/uploadFormHandler.js"></script>
-
+      </section>
     </main>
 
     <?php include 'footer.php'; ?>
