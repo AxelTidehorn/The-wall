@@ -66,7 +66,7 @@ switch ($uploadedForm['uploadType']) { //test
 
         break;
 
-    case 'webbsite':
+    case 'website':
 
         //        imageCompression($uploadedForm['uploadedImage']);
         $imageLocation = $_FILES['uploadedWebsite']['tmp_name'];
@@ -84,11 +84,15 @@ switch ($uploadedForm['uploadType']) { //test
         $date = date("Y-m-d"); //Year, month, day, different capitalization can display the date differently
         $uploadType = $uploadedForm['uploadType'];
         $tags = $uploadedForm['tagData'];
-        $url = $uploadedForm['url'];
+        $url = $uploadedForm['URL'];
 
         $query = $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name`, `URL` ,`ContentWebbsite`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?,?)");
 
         $query->bind_param("sssssddsss", $uploadType, $_SESSION["user_id"] , $name , $url ,$fileContent, $nsfw, $publicDomain, $date, $description, $tags);
+
+        /*$query = $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name`, `URL` ,`ContentWebbsite`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?,?)");
+
+        $query->bind_param("sssssddsss", $uploadType, $_SESSION["user_id"] , $name , $url ,$fileContent, $nsfw, $publicDomain, $date, $description, $tags);*/
         $query->execute();
         $query->close();
 

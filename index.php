@@ -146,6 +146,7 @@
                                 $query->fetch();
 
                                 $image = base64_encode(stripslashes($content['image']));
+                                $webbsite = base64_encode(stripslashes($content['webbsite']));
                                 $id = $content['ID'];
 
                                 //Likes
@@ -178,6 +179,8 @@
                                         <div onclick='this.parentNode.submit();'>";
                                             if ($content["type"] == "text") {
                                                 echo "<img class='linkImg' src='imgs/text.png'/>";
+                                            } else if ($content["type"] == "website") {
+                                                echo "<img class='linkImg' src='data:image/jpeg;base64," . $webbsite . "'/>";
                                             } else {
                                                 echo "<img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>";
                                             }
