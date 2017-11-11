@@ -57,7 +57,7 @@ include_once "backend/connect.php";
                 <input id="titleInput" type="text"  name="contentName" placeholder="Title" required>
                 <input class="uploadBtn" type="file" name="uploadedImage" placeholder="image" >
                 <input class="uploadBtn" type="file" name="uploadedWebsite" placeholder="webbsite" >
-                <textarea name="uploadedText" id="" cols="30" rows="10" placeholder="Write your text-based content here" form="imageform"></textarea>
+                <textarea name="uploadedText" id="textArea" placeholder="Write your text-based content here" form="imageform"></textarea>
 
                 <input id="uploadUrl" type="text" name="URL" placeholder="URL of your website">
 
@@ -84,19 +84,17 @@ include_once "backend/connect.php";
                     <span class="checkmark"></span>
                   </label>
                 </div>
-
-                  <input type="text" name="contentDescription" placeholder="Write a description of your content!">
+                <h3>Description</h3>
+                  <input class="singleRow" type="text" name="contentDescription" placeholder="Write a description of your content!">
 
 <!--                Tag system-->
                 <span class="tags">Tags:</span>
                 <textarea name="tagData"  id="tagData" form="imageform" style="display:none;"></textarea>
                 <div id="tagShowing"></div>
-                <input type="text" id="tagInput" class="tag_part" placeholder="Tags, one at the time"/>
+                <input type="text" id="tagInput" class="singleRow" class="tag_part" placeholder="Tags, one at the time"/>
                 <input type="button" class="tagSubmit" value="enter" onclick="createTag()"/>
-
-
+                <input id="bigRedButton" type="submit">
                 <span class="termsOfUse">By uploading you agree to our none-existing terms of use! (We own this now)</span>
-                <input type="submit">
             </form>
         </div>
         <script src="js/uploadFormHandler.js"></script>
