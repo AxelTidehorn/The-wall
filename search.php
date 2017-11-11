@@ -199,6 +199,92 @@
                             <div class="comment">
                                 <a href="user.php?user_ID=' . $userID . '" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
                                 <a href="user.php?user_ID=' . $userID . '" class="profilename">' . $username . '</a>';
+<<<<<<< HEAD
+=======
+//<<<<<<< HEAD
+                            if ($sessionUser !== false && $username != $sessionUser) {
+                                echo '<a href="' . $link . '" class="' . $class . '">' . $contactString . '</a>';
+                            }
+                            echo '</div></a>';
+                        }
+<<<<<<< HEAD
+                        print'<h2>Post results</h2>';
+                        $count = 0;
+                        $query = $conn->prepare("SELECT * FROM `Content` LIMIT 5");
+                        $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
+                        $query->store_result();
+                        $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags);
+
+
+                        //    trying to create a associative array with all the content. This is how im used to working.
+                        while ($query->fetch()) {
+                            $count++;
+                            $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags);
+                        }
+
+
+                        foreach ($contentArray as $content) {
+                            $image = base64_encode(stripslashes($content['image']));
+                            $id = $content['ID'];
+                            print"
+                <form action='post.php' method='get' class='form'>
+=======
+                        echo "<h2>Post results</h2>";
+
+                    print'<div id="searchPage">';
+                    $count = 0;
+                    $query = $conn->prepare("SELECT * FROM `Content` LIMIT 5");
+                    $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
+                    $query->store_result();
+                    $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags);
+
+//=======
+                    if ($sessionUser !== false && $username != $sessionUser) {
+                        echo '<a href="' . $link . '" class="' . $class . '">' . $contactString . '</a>';
+                    }
+                    echo '</div></a>';
+                }
+                print'<h2>Post results</h2>';
+                $count = 0;
+                $query = $conn->prepare("SELECT * FROM `Content` WHERE `Name` LIKE '%" . $search . "%' OR `tags` LIKE '%" . $search . "%' LIMIT 5");
+                $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
+                $query->store_result();
+                $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags);
+
+
+                //    trying to create a associative array with all the content. This is how im used to working.
+                while ($query->fetch()) {
+                    $count++;
+                    $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags);
+                }
+
+
+                /*foreach ($contentArray as $content) {
+                    $image = base64_encode(stripslashes($content['image']));
+                    $id = $content['ID'];
+                    print"
+                <form action='post.php' method='get' class='comment'>
+>>>>>>> master
+                    <input type='hidden' value='" . $id . "' name='post'/>
+                        <div class='inpost' onclick='this.parentNode.submit();'>
+                            <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
+                        </div>
+                    </form>
+<<<<<<< HEAD
+
+            ";
+=======
+>>>>>>> master
+
+            ";
+>>>>>>> 020de4b8eee1ce7bca6cb5bfbaa9cf820825df69
+
+                    //    trying to create a associative array with all the content. This is how im used to working.
+                    while ($query->fetch()) {
+                        $count++;
+                        $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags);
+                    }
+>>>>>>> Axels-Branch
 
                                         if ($sessionUser !== false && $username != $sessionUser) {
                                             echo '<a href="' . $link . '" class="' . $class . '">' . $contactString . '</a>';
