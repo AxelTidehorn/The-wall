@@ -73,7 +73,7 @@
                                             @ session_start();
 
                                             //If you are trying to post a comment and if you are logged in, post a comment to the database basically. (unfinished)
-                                            if (isset($_SESSION["username"]) && isset($_POST["comment"]) && !empty($_POST["comment"])) {
+                                            if (isset($_SESSION["username"]) && isset($_POST["comment"]) && !empty($_POST["comment"] && !isset($_POST["save"]))) {
                                                 $username = $_SESSION["username"];
                                                 $query = $conn->prepare("INSERT INTO Comments (publisher, content, date, comment) VALUES(?, ?, ?, ?)"); //Lack of content foreign key might be the cause of it not working currently.
                                                 $date = date("Y-m-d");
@@ -91,6 +91,12 @@
                                         $query = $conn->prepare("UPDATE Comments SET comment = ? WHERE id = '" . $_POST["commentId"] . "'");
                                         $comment = $_POST["comment"];
                                         $query->bind_param("s", $comment);
+                                        $query->execute();
+                                        $query->close();
+                                    } else if (isset($_POST["remove"])){
+                                        $query = $conn->prepare("DELETE FROM Comments WHERE id = ?");
+                                        $commentId = $_POST["commentId"];
+                                        $query->bind_param("i", $commentId);
                                         $query->execute();
                                         $query->close();
                                     }
@@ -120,16 +126,17 @@
                                                 <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
                                                 <a href="#" class="profilename">' . $publisherName . '</a>
                                                 <form method="POST">';
+                                                    echo '<input type="hidden" name="commentId" value = "' . $comment["id"] . '" class="actionLink" />';
+
                                                     if (isset($_POST["edit-" . $comment["id"]])){
                                                         echo '<textarea name="comment">' . $comment["comment"] . '</textarea>';
                                                         echo '<input type="submit" name="save" value="Save changes" class="actionLink" />';
-                                                        echo '<input type="hidden" name="commentId" value = "' . $comment["id"] . '" value="Save changes" class="actionLink" />';
                                                     } else {
                                                         echo '<p>' . $comment["comment"] . '</p>';
                                                     }
                                                     echo '<span>' . $comment["date"] . '</span>
                                                     <input type="submit" name="edit-' . $comment["id"] . '" value="Edit" class="actionLink" />
-                                                    <input type="submit" name="remove-' . $comment["id"] . '" value="Remove" class="actionLink" />
+                                                    <input type="submit" name="remove" value="Remove" class="actionLink" />
                                                 </form>
                                                 <a class="likebtn">Like</a>
                                             </div>
