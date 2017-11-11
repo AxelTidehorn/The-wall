@@ -437,45 +437,6 @@ input, label{
         }
 
         /*END UPLOAD PAGE*/
-        /*LOGIN PAGE*/
-.loginCont{
-  border-radius: 5px;
-  text-align:center;
-  padding: 15px;
-}
-.loginCont > a{
-font-size: 16px;
-color: black;
-}
-.loginTxt{
-font-size: 22px;
-line-height: 30px;
-margin: 8px auto;
-width: 80%;
-text-align: center;
-border: solid 1px black;
-border-radius: 5px;
-}
-#loginBtn{
-  background-color: rgb(68, 182, 129);
-  font-size: 20px;
-  color: white;
-  margin: 16px auto 8px auto;
-  text-decoration: none;
-  width: 40%;
-  font-weight: bold;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  transition: ease-in .15s;
-}
-#loginBtn:hover{
-  background-color: rgb(247, 247, 247);
-  color: black;
-}
-
-
-        /*END LOGIN PAGE*/
 
         /*PROFILE PAGE*/
 .profPicCont{
@@ -534,42 +495,8 @@ footer{
   text-align: center;
   font-size: 12px;
 }
-.inpost{
-  border: solid 1px black;
-}
-.inpost > img{
-  width: 100%;
-  height: 50%;
-
-}
 
         /*END FOOTER*/
-<<<<<<< HEAD
-        @media (min-width: 700px) {
-          body{
-
-          }
-          main{
-            margin-top: 57px;
-          }
-          .navBar{
-            padding: 2px;
-          }
-          #searchbtn{
-            display: none;
-          }
-          .searchBar{
-            display: block;
-            background-color: rgba(247, 247, 247, 1);
-            position: relative;
-            bottom: 0;
-            justify-content: center;
-            width: 100%;
-            flex: 1;
-          }
-
-        }
-=======
 
 @media (min-width: 600px){
     .contentcont{
@@ -577,4 +504,3 @@ footer{
         float: left;
     }
 }
->>>>>>> master
