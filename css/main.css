@@ -64,6 +64,9 @@ h2 > a{
 .center{
     margin: auto;
 }
+img{
+    image-rendering: pixelated;
+}
         /*END GENERAL*/
 
         /*HEADER*/
@@ -162,6 +165,7 @@ p{
 }
 #newest, #topRated, #editorsChoice{
     margin-bottom: 64px;
+    overflow: hidden;
 }
 #newest .center-text h2:before, #newest .center-text h2:after, #newest .contentcont:after{
     display: block;
@@ -177,6 +181,7 @@ p{
     height: 8px;
     width: 100%;
     background-color: #ffcccc;
+    margin: 0px;
 }
 #editorsChoice .center-text h2:before, #editorsChoice .center-text h2:after, #editorsChoice .contentcont:after{
     display: block;
@@ -186,10 +191,22 @@ p{
     background-color: #ccffcc;
     margin: 0px;
 }
+#searchPage .center-text h2:before, #searchPage .center-text h2:after, #searchPage .contentcont:after{
+    display: block;
+    content: "";
+    height: 8px;
+    width: 100%;
+    background-color: #707070;
+    margin: 0px;
+}
 .contentcont{
   width: 100%;
   position: relative;
   padding-bottom: 24px;
+}
+.searchImage{
+    height: 150px;
+    width: auto;
 }
 img{
   display: block;
@@ -224,6 +241,35 @@ img{
 a.img{
     display: block;
 }
+.column {
+  float: left;
+  width: 23.65%;
+  padding: 4px;
+
+}
+.column img{
+  margin-top: 12px;
+  width: 100%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/*@media (max-width: 800px) {
+  .column {
+    width: 48%;
+  }
+  .contentcont{
+    width: 256px;
+  }
+}
+@media (max-width: 600px){
+  .column {
+    width: 100%;
+    padding: 0px;
+  }
+}*/
 
 /* WELCOME */
 #welcome{
@@ -484,6 +530,7 @@ footer{
 }
 
         /*END FOOTER*/
+<<<<<<< HEAD
         @media (min-width: 700px) {
           body{
 
@@ -508,3 +555,12 @@ footer{
           }
 
         }
+=======
+
+@media (min-width: 600px){
+    .contentcont{
+        width: 256px;
+        float: left;
+    }
+}
+>>>>>>> master
