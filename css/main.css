@@ -67,6 +67,9 @@ h2 > a{
 img{
     image-rendering: pixelated;
 }
+.insignificant{
+    color: #808080;
+}
         /*END GENERAL*/
 
         /*HEADER*/
@@ -336,6 +339,9 @@ a.img{
 .contentPage .profilename, .contentPage .contentName{
     color: #ffffff;
 }
+.contentPage .comment .profilename{
+    color: #000000;
+}
 .comment .likebtn, .comment .unlikebtn{
     float: right;
 }
@@ -352,6 +358,11 @@ a.img{
 input, label{
     display: block;
     margin: 8px 0px;
+}
+input.actionLink{
+    color: #808080;
+    background-color: transparent;
+    border: none;
 }
 
 /* PROFILE */
