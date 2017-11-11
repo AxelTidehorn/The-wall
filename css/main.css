@@ -442,19 +442,20 @@ input, label{
   border-radius: 5px;
   text-align:center;
   padding: 15px;
+  margin: 16px auto;
 }
 .loginCont > a{
-font-size: 16px;
-color: black;
+  font-size: 16px;
+  color: black;
 }
 .loginTxt{
-font-size: 22px;
-line-height: 30px;
-margin: 8px auto;
-width: 80%;
-text-align: center;
-border: solid 1px black;
-border-radius: 5px;
+  font-size: 22px;
+  line-height: 30px;
+  margin: 8px auto;
+  width: 100%;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 5px;
 }
 #loginBtn{
   background-color: rgb(68, 182, 129);
@@ -566,6 +567,10 @@ footer{
             justify-content: center;
             width: 100%;
             flex: 1;
+          }
+          .loginCont{
+            width: 40%;
+            margin: 16px auto;
           }
 
         }
