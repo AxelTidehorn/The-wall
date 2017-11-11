@@ -75,9 +75,9 @@
                                             //If you are trying to post a comment and if you are logged in, post a comment to the database basically. (unfinished)
                                             if (isset($_SESSION["username"]) && isset($_POST["comment"]) && !empty($_POST["comment"])) {
                                                 $username = $_SESSION["username"];
-                                                $query = $conn->prepare("INSERT INTO Comments (publisher, date, comment) VALUES(?, ?, ?)"); //Lack of content foreign key might be the cause of it not working currently.
+                                                $query = $conn->prepare("INSERT INTO Comments (publisher, content, date, comment) VALUES(?, ?, ?, ?)"); //Lack of content foreign key might be the cause of it not working currently.
                                                 $date = date("Y-m-d");
-                                                $query->bind_param("sss", $username, $date, $_POST["comment"]);
+                                                $query->bind_param("ssss", $username, $contentArray[0]["ID"], $date, $_POST["comment"]);
                                                 $query->execute();
                                             } else if (!isset($_SESSION["username"])) {
                                                 echo 'Log in to comment on content.';
@@ -87,7 +87,7 @@
                                 </form>
                                 <h2>Comments</h2>';
                                  //Loop through the comments and add them (might not work yet either)
-                                    $query = $conn->prepare("SELECT publisher, date, comment FROM Comments"); //Where it is for the right content or something perhaps in the future.
+                                    $query = $conn->prepare("SELECT publisher, date, comment FROM Comments WHERE content = '" . $contentArray[0]["ID"] . "'"); //Where it is for the right content or something perhaps in the future.
                                     $query->bind_result($publisher, $date, $comment);
                                     $query->execute();
 
