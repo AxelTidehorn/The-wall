@@ -74,11 +74,17 @@
 
                                             //If you are trying to post a comment and if you are logged in, post a comment to the database basically. (unfinished)
                                             if (isset($_SESSION["username"]) && isset($_POST["comment"]) && !empty($_POST["comment"] && !isset($_POST["save"]))) {
-                                                $username = $_SESSION["username"];
-                                                $query = $conn->prepare("INSERT INTO Comments (publisher, content, date, comment) VALUES(?, ?, ?, ?)"); //Lack of content foreign key might be the cause of it not working currently.
-                                                $date = date("Y-m-d");
-                                                $query->bind_param("ssss", $_SESSION["user_id"], $contentArray[0]["ID"], $date, $_POST["comment"]);
+                                                $query = $conn->prepare("SELECT comment FROM Comments WHERE content = '" . $contentArray[0]["ID"] . "' AND publisher = '" . $_SESSION["user_id"] . "' AND comment = '" . $_POST["comment"] . "'");
                                                 $query->execute();
+                                                $query->store_result();
+
+                                                if (!$query->num_rows()) { //Basically a test so when the user refreshes the page and resends forms, it doesn't send the same message over and over. It kind of takes care of spam as well so you can't send the same exact message multiple times.
+                                                    $username = $_SESSION["username"];
+                                                    $query = $conn->prepare("INSERT INTO Comments (publisher, content, date, comment) VALUES(?, ?, ?, ?)"); //Lack of content foreign key might be the cause of it not working currently.
+                                                    $date = date("Y-m-d");
+                                                    $query->bind_param("ssss", $_SESSION["user_id"], $contentArray[0]["ID"], $date, $_POST["comment"]);
+                                                    $query->execute();
+                                                }
                                             } else if (!isset($_SESSION["username"])) {
                                                 echo 'Log in to comment on content.';
                                             }
@@ -134,7 +140,7 @@
                                                     } else {
                                                         echo '<p>' . $comment["comment"] . '</p>';
                                                     }
-                                                    echo '<span>' . $comment["date"] . '</span>';
+                                                    echo '<span class="insignificant">' . $comment["date"] . '</span>';
 
                                                     if ($comment["publisher"] == $_SESSION["user_id"]) {
                                                         echo '<input type="submit" name="edit-' . $comment["id"] . '" value="Edit" class="actionLink" />

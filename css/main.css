@@ -67,6 +67,9 @@ h2 > a{
 img{
     image-rendering: pixelated;
 }
+.insignificant{
+    color: #808080;
+}
         /*END GENERAL*/
 
         /*HEADER*/
