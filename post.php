@@ -83,19 +83,28 @@
                                                 echo 'Log in to comment on content.';
                                             }
                                      echo '</textarea>
-                                    <input type="submit" value="Publish comment"></input>
-                                </form>
-                                <h2>Comments</h2>';
+                                        <input type="submit" value="Publish comment"></input>
+                                    </form>
+                                    <h2>Comments</h2>';
+
+                                    if (isset($_POST["save"])){
+                                        $query = $conn->prepare("UPDATE Comments SET comment = ? WHERE id = '" . $_POST["commentId"] . "'");
+                                        $comment = $_POST["comment"];
+                                        $query->bind_param("s", $comment);
+                                        $query->execute();
+                                        $query->close();
+                                    }
+
                                  //Loop through the comments and add them (might not work yet either)
-                                    $query = $conn->prepare("SELECT publisher, date, comment FROM Comments WHERE content = '" . $contentArray[0]["ID"] . "'");
-                                    $query->bind_result($publisher, $date, $comment);
+                                    $query = $conn->prepare("SELECT id, publisher, date, comment FROM Comments WHERE content = '" . $contentArray[0]["ID"] . "'");
+                                    $query->bind_result($id, $publisher, $date, $comment);
                                     $query->execute();
                                     //$query->close();
 
                                     $commentsArray = array();
 
                                     while ($query->fetch()) {
-                                        $commentsArray[] = array("publisher" => $publisher, "date" => $date, "comment" => $comment);
+                                        $commentsArray[] = array("id" => $id, "publisher" => $publisher, "date" => $date, "comment" => $comment);
                                     }
 
                                     $query->close();
@@ -110,39 +119,24 @@
                                             <div class="comment">
                                                 <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
                                                 <a href="#" class="profilename">' . $publisherName . '</a>
-                                                <p>' . $comment["comment"] . '</p>
-                                                <span>' . $comment["date"] . '</span>
+                                                <form method="POST">';
+                                                    if (isset($_POST["edit-" . $comment["id"]])){
+                                                        echo '<textarea name="comment">' . $comment["comment"] . '</textarea>';
+                                                        echo '<input type="submit" name="save" value="Save changes" class="actionLink" />';
+                                                        echo '<input type="hidden" name="commentId" value = "' . $comment["id"] . '" value="Save changes" class="actionLink" />';
+                                                    } else {
+                                                        echo '<p>' . $comment["comment"] . '</p>';
+                                                    }
+                                                    echo '<span>' . $comment["date"] . '</span>
+                                                    <input type="submit" name="edit-' . $comment["id"] . '" value="Edit" class="actionLink" />
+                                                    <input type="submit" name="remove-' . $comment["id"] . '" value="Remove" class="actionLink" />
+                                                </form>
                                                 <a class="likebtn">Like</a>
                                             </div>
                                         ';
 
                                         $query->close();
                                     }
-
-                                echo '
-                                <div class="comment">
-                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                    <a href="#" class="profilename">Axel</a>
-                                    <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                                    <p>2017-05-11</p>
-                                    <a href="#" class="likebtn">Like</a>
-                                </div>
-                                <div class="comment">
-                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                    <a href="#" class="profilename">Axel</a>
-                                    <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                                    <p>2017-05-11</p>
-                                    <a href="#" class="likebtn">Like</a>
-                                </div>
-                                <div class="comment">
-                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                    <a href="#" class="profilename">Axel</a>
-                                    <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                                    <p>2017-05-11</p>
-                                    <a href="#" class="likebtn">Like</a>
-                                </div>
-                            </section>
-                            ';
 
                             //$query->close();
                             //If the query was empty:

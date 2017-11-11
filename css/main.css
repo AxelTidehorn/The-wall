@@ -356,6 +356,11 @@ input, label{
     display: block;
     margin: 8px 0px;
 }
+input.actionLink{
+    color: #808080;
+    background-color: transparent;
+    border: none;
+}
 
 /* PROFILE */
 .profilecont{
