@@ -40,7 +40,10 @@ switch ($uploadedForm['uploadType']) { //test
 
     case 'text':
 
-        //uploading everything to the database
+        //uploading everything to the database)
+        $imageLocation = parse_url("../imgs/text.png");
+        $url = "destination .jpg";
+        compress_image($imageLocation, $url);
 
         $name = $uploadedForm['contentName'];
         $description = $uploadedForm['contentDescription'];
@@ -50,11 +53,14 @@ switch ($uploadedForm['uploadType']) { //test
         $date = date("Y-m-d"); //Year, month, day, different capitalization can display the date differently
         $uploadType = $uploadedForm['uploadType'];
         $tags = $uploadedForm['tagData'];
+        /*$imageToUpload = addslashes((file_get_contents($url)));*/
+        //$created_image = imagecreatefrompng("../imgs/text.png");
+        //$imageToUpload = imagejpeg($created_image, "destination .jpg", 85);
+        $imageToUpload = addslashes((file_get_contents($url)));
 
+        $query = $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name` , `ContentImage`, `ContentText`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?)");
 
-        $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name` ,`ContentText`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?)");
-
-        $query->bind_param("sssssddsss", $uploadType, $_SESSION["user_id"] , $name  ,$contentText, $nsfw, $publicDomain, $date, $description, $tags);
+        $query->bind_param("sssssddsss", $uploadType, $_SESSION["user_id"] , $name, $imageToUpload ,$contentText, $nsfw, $publicDomain, $date, $description, $tags);
         $query->execute();
         $query->close();
 
@@ -80,8 +86,7 @@ switch ($uploadedForm['uploadType']) { //test
         $tags = $uploadedForm['tagData'];
         $url = $uploadedForm['url'];
 
-
-        $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name`, `URL` ,`ContentWebbsite`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $query = $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name`, `URL` ,`ContentWebbsite`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?,?)");
 
         $query->bind_param("sssssddsss", $uploadType, $_SESSION["user_id"] , $name , $url ,$fileContent, $nsfw, $publicDomain, $date, $description, $tags);
         $query->execute();

@@ -182,9 +182,13 @@
                             print"
                                 <form action='post.php' method='get' class='form contentcont'>
                                     <input type='hidden' value='" . $id . "' name='post'/>
-                                    <div onclick='this.parentNode.submit();'>
-                                        <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
-                                    </div>
+                                    <div onclick='this.parentNode.submit();'>";
+                                        if ($content["type"] == "text") {
+                                            echo "<img class='linkImg' src='imgs/text.png'/>";
+                                        } else {
+                                            echo "<img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>";
+                                        }
+                                    "</div>
                                     <div class='actioncont'>
                                         <div class='profilecont'>
                                             <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
