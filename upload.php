@@ -54,18 +54,38 @@ include_once "backend/connect.php";
         <div id="uploadForm">
             <form action="backend/handler.php" id="imageform" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="uploadType" value="">
-                <input type="text"  name="contentName" placeholder="Title" required>
-                <input type="file" name="uploadedImage" placeholder="image" >
-                <input type="file" name="uploadedWebsite" placeholder="webbsite" >
+                <input id="titleInput" type="text"  name="contentName" placeholder="Title" required>
+                <input class="uploadBtn" type="file" name="uploadedImage" placeholder="image" >
+                <input class="uploadBtn" type="file" name="uploadedWebsite" placeholder="webbsite" >
                 <textarea name="uploadedText" id="" cols="30" rows="10" placeholder="Write your text-based content here" form="imageform"></textarea>
-                <input type="text" name="URL" placeholder="URL of your website">
-                Does the content contain anything NSFW?
-                <input type="radio" name="NSFW" value="1">YES
-                <input type="radio" name="NSFW" value="0">NO
-                Do you want to publish this content as a Public Domain piece?
-                <input type="radio" name="publicDomain" value="1">YES
-                <input type="radio" name="PublicDomain" value="0">NO
-                <input type="text" name="contentDescription" placeholder="Write a description of your content!">
+
+                <input id="uploadUrl" type="text" name="URL" placeholder="URL of your website">
+
+                <h3>Does the content contain anything NSFW?</h3>
+                <div class="uploadFormCont">
+                  <label class="uploadStyle">Yes
+                    <input class="input" type="radio" name="NSFW" value="1">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="uploadStyle">No
+                    <input class="input" type="radio" name="NSFW" value="0">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+
+                <h3>Do you want to publish this content as a Public Domain piece?</h3>
+                <div class="uploadFormCont">
+                  <label class="uploadStyle">Yes
+                    <input class="input" type="radio" name="publicDomain" value="1">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="uploadStyle">No
+                    <input class="input" type="radio" name="publicDomain" value="0">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+
+                  <input type="text" name="contentDescription" placeholder="Write a description of your content!">
 
 <!--                Tag system-->
                 <span class="tags">Tags:</span>
