@@ -112,7 +112,7 @@ function compress_image($source_url, $return) {
     elseif ($info['mime'] == 'image/png')
         $created_image = imagecreatefrompng($source_url);
 
-    imagepng($created_image, $return, 85);
+    imagepng($created_image, $return, 8);
 
     return $return;
 };
