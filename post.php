@@ -77,7 +77,7 @@
                                                 $username = $_SESSION["username"];
                                                 $query = $conn->prepare("INSERT INTO Comments (publisher, content, date, comment) VALUES(?, ?, ?, ?)"); //Lack of content foreign key might be the cause of it not working currently.
                                                 $date = date("Y-m-d");
-                                                $query->bind_param("ssss", $username, $contentArray[0]["ID"], $date, $_POST["comment"]);
+                                                $query->bind_param("ssss", $_SESSION["user_id"], $contentArray[0]["ID"], $date, $_POST["comment"]);
                                                 $query->execute();
                                             } else if (!isset($_SESSION["username"])) {
                                                 echo 'Log in to comment on content.';
@@ -87,23 +87,38 @@
                                 </form>
                                 <h2>Comments</h2>';
                                  //Loop through the comments and add them (might not work yet either)
-                                    $query = $conn->prepare("SELECT publisher, date, comment FROM Comments WHERE content = '" . $contentArray[0]["ID"] . "'"); //Where it is for the right content or something perhaps in the future.
+                                    $query = $conn->prepare("SELECT publisher, date, comment FROM Comments WHERE content = '" . $contentArray[0]["ID"] . "'");
                                     $query->bind_result($publisher, $date, $comment);
                                     $query->execute();
+                                    //$query->close();
+
+                                    $commentsArray = array();
 
                                     while ($query->fetch()) {
-                                        echo '
-                                            <div class="comment">
-                                                <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                                <a href="#" class="profilename">' . $publisher . '</a>
-                                                <p>' . $comment . '</p>
-                                                <span>' . $date . '</span>
-                                                <a class="likebtn">Like</a>
-                                            </div>
-                                        ';
+                                        $commentsArray[] = array("publisher" => $publisher, "date" => $date, "comment" => $comment);
                                     }
 
                                     $query->close();
+
+                                    foreach($commentsArray as $comment) {
+                                        $query = $conn->prepare("SELECT username FROM Users WHERE ID = '" . $comment["publisher"] . "'");
+                                        $query->execute();
+                                        $query->bind_result($publisherName);
+                                        $query->fetch();
+
+                                        echo '
+                                            <div class="comment">
+                                                <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                                <a href="#" class="profilename">' . $publisherName . '</a>
+                                                <p>' . $comment["comment"] . '</p>
+                                                <span>' . $comment["date"] . '</span>
+                                                <a class="likebtn">Like</a>
+                                            </div>
+                                        ';
+
+                                        $query->close();
+                                    }
+
                                 echo '
                                 <div class="comment">
                                     <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
@@ -129,7 +144,7 @@
                             </section>
                             ';
 
-                            $query->close();
+                            //$query->close();
                             //If the query was empty:
                         } else {
                             print'There were no content matching the URL. It might have been moved or Deleted.';
