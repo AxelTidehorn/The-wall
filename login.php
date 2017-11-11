@@ -19,17 +19,19 @@
 
             <main>
                 <section>
-                    <h2>Log in</h2>
-                    <form method="POST">
-                        <label>Username</label>
-                        <input type="text" name="username" />
-                        <label>Password</label>
-                        <input type="password" name="password" />
-                        <input type="submit" value="Log in" />
-                    </form>
+                  <div class="loginCont">
+                      <h2>Log in</h2>
+                      <form method="POST">
+                          <label>Username</label>
+                          <input class="loginTxt" type="text" name="username" />
+                          <label>Password</label>
+                          <input class="loginTxt" type="password" name="password" />
+                          <input id="loginBtn" type="submit" value="Log in" />
+                      </form>
 
-                    <a href="register.php">Do you not have an account? Register here!</a>
+                      <a href="register.php">Do you not have an account? Register here!</a>
 
+                  </div>
                     <?php
                         if (isset($_POST) && !empty($_POST)) { //If something has been sent through the form basically
                             $usernameInput = $_POST["username"];
