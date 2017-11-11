@@ -73,63 +73,79 @@
                                             @ session_start();
 
                                             //If you are trying to post a comment and if you are logged in, post a comment to the database basically. (unfinished)
-                                            if (isset($_SESSION["username"]) && isset($_POST["comment"]) && !empty($_POST["comment"])) {
+                                            if (isset($_SESSION["username"]) && isset($_POST["comment"]) && !empty($_POST["comment"] && !isset($_POST["save"]))) {
                                                 $username = $_SESSION["username"];
                                                 $query = $conn->prepare("INSERT INTO Comments (publisher, content, date, comment) VALUES(?, ?, ?, ?)"); //Lack of content foreign key might be the cause of it not working currently.
                                                 $date = date("Y-m-d");
-                                                $query->bind_param("ssss", $username, $contentArray[0]["ID"], $date, $_POST["comment"]);
+                                                $query->bind_param("ssss", $_SESSION["user_id"], $contentArray[0]["ID"], $date, $_POST["comment"]);
                                                 $query->execute();
                                             } else if (!isset($_SESSION["username"])) {
                                                 echo 'Log in to comment on content.';
                                             }
                                      echo '</textarea>
-                                    <input type="submit" value="Publish comment"></input>
-                                </form>
-                                <h2>Comments</h2>';
+                                        <input type="submit" value="Publish comment"></input>
+                                    </form>
+                                    <h2>Comments</h2>';
+
+                                    if (isset($_POST["save"])){
+                                        $query = $conn->prepare("UPDATE Comments SET comment = ? WHERE id = '" . $_POST["commentId"] . "'");
+                                        $comment = $_POST["comment"];
+                                        $query->bind_param("s", $comment);
+                                        $query->execute();
+                                        $query->close();
+                                    } else if (isset($_POST["remove"])){
+                                        $query = $conn->prepare("DELETE FROM Comments WHERE id = ?");
+                                        $commentId = $_POST["commentId"];
+                                        $query->bind_param("i", $commentId);
+                                        $query->execute();
+                                        $query->close();
+                                    }
+
                                  //Loop through the comments and add them (might not work yet either)
-                                    $query = $conn->prepare("SELECT publisher, date, comment FROM Comments WHERE content = '" . $contentArray[0]["ID"] . "'"); //Where it is for the right content or something perhaps in the future.
-                                    $query->bind_result($publisher, $date, $comment);
+                                    $query = $conn->prepare("SELECT id, publisher, date, comment FROM Comments WHERE content = '" . $contentArray[0]["ID"] . "'");
+                                    $query->bind_result($id, $publisher, $date, $comment);
                                     $query->execute();
+                                    //$query->close();
+
+                                    $commentsArray = array();
 
                                     while ($query->fetch()) {
-                                        echo '
-                                            <div class="comment">
-                                                <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                                <a href="#" class="profilename">' . $publisher . '</a>
-                                                <p>' . $comment . '</p>
-                                                <span>' . $date . '</span>
-                                                <a class="likebtn">Like</a>
-                                            </div>
-                                        ';
+                                        $commentsArray[] = array("id" => $id, "publisher" => $publisher, "date" => $date, "comment" => $comment);
                                     }
 
                                     $query->close();
-                                echo '
-                                <div class="comment">
-                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                    <a href="#" class="profilename">Axel</a>
-                                    <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                                    <p>2017-05-11</p>
-                                    <a href="#" class="likebtn">Like</a>
-                                </div>
-                                <div class="comment">
-                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                    <a href="#" class="profilename">Axel</a>
-                                    <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                                    <p>2017-05-11</p>
-                                    <a href="#" class="likebtn">Like</a>
-                                </div>
-                                <div class="comment">
-                                    <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
-                                    <a href="#" class="profilename">Axel</a>
-                                    <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                                    <p>2017-05-11</p>
-                                    <a href="#" class="likebtn">Like</a>
-                                </div>
-                            </section>
-                            ';
 
-                            $query->close();
+                                    foreach($commentsArray as $comment) {
+                                        $query = $conn->prepare("SELECT username FROM Users WHERE ID = '" . $comment["publisher"] . "'");
+                                        $query->execute();
+                                        $query->bind_result($publisherName);
+                                        $query->fetch();
+
+                                        echo '
+                                            <div class="comment">
+                                                <a href="#" class="profilethumb"><img src="imgs/axel.jpg" alt="profilethumb"></a>
+                                                <a href="#" class="profilename">' . $publisherName . '</a>
+                                                <form method="POST">';
+                                                    echo '<input type="hidden" name="commentId" value = "' . $comment["id"] . '" class="actionLink" />';
+
+                                                    if (isset($_POST["edit-" . $comment["id"]])){
+                                                        echo '<textarea name="comment">' . $comment["comment"] . '</textarea>';
+                                                        echo '<input type="submit" name="save" value="Save changes" class="actionLink" />';
+                                                    } else {
+                                                        echo '<p>' . $comment["comment"] . '</p>';
+                                                    }
+                                                    echo '<span>' . $comment["date"] . '</span>
+                                                    <input type="submit" name="edit-' . $comment["id"] . '" value="Edit" class="actionLink" />
+                                                    <input type="submit" name="remove" value="Remove" class="actionLink" />
+                                                </form>
+                                                <a class="likebtn">Like</a>
+                                            </div>
+                                        ';
+
+                                        $query->close();
+                                    }
+
+                            //$query->close();
                             //If the query was empty:
                         } else {
                             print'There were no content matching the URL. It might have been moved or Deleted.';
