@@ -797,6 +797,25 @@ footer{
             width: 40%;
             margin: 16px auto;
           }
+          .registerCont{
+            width: 40%;
+            margin: 16px auto;
+          }
+          #titleInput{
+            float: left;
+            text-align: left;
+          }
+          .uploadFloat{
+            float: left;width: 50%;
+          }
+          .tagSubmit{
+            width: 10%;
+            font-size: 20px;
+            padding: 8px;
+          }
+          #bigRedButton{
+            width: 80%;
+          }
 
         }
 

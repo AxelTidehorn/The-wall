@@ -61,28 +61,31 @@ include_once "backend/connect.php";
 
                 <input id="uploadUrl" type="text" name="URL" placeholder="URL of your website">
 
-                <h3>Does the content contain anything NSFW?</h3>
-                <div class="uploadFormCont">
-                  <label class="uploadStyle">Yes
-                    <input class="input" type="radio" name="NSFW" value="1">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="uploadStyle">No
-                    <input class="input" type="radio" name="NSFW" value="0">
-                    <span class="checkmark"></span>
-                  </label>
+                <div class="uploadFloat">
+                  <h3>Does the content contain anything NSFW?</h3>
+                  <div class="uploadFormCont">
+                    <label class="uploadStyle">Yes
+                      <input class="input" type="radio" name="NSFW" value="1">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="uploadStyle">No
+                      <input class="input" type="radio" name="NSFW" value="0">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
                 </div>
-
-                <h3>Do you want to publish this content as a Public Domain piece?</h3>
-                <div class="uploadFormCont">
-                  <label class="uploadStyle">Yes
-                    <input class="input" type="radio" name="publicDomain" value="1">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="uploadStyle">No
-                    <input class="input" type="radio" name="publicDomain" value="0">
-                    <span class="checkmark"></span>
-                  </label>
+                <div class="uploadFloat">
+                  <h3>Do you want to publish this content as a Public Domain piece?</h3>
+                  <div class="uploadFormCont">
+                    <label class="uploadStyle">Yes
+                      <input class="input" type="radio" name="publicDomain" value="1">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="uploadStyle">No
+                      <input class="input" type="radio" name="publicDomain" value="0">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
                 </div>
                 <h3>Description</h3>
                   <input class="singleRow" type="text" name="contentDescription" placeholder="Write a description of your content!">
