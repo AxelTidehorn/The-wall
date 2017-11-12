@@ -75,7 +75,6 @@ img{
         /*HEADER*/
 header{
     overflow: hidden;
-    display: none;
 }
 .navBar{
   display: flex;

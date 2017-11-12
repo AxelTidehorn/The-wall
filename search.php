@@ -1,5 +1,4 @@
 ﻿<?php include "config.php";
-include("includes/contentRenderer.php");
 ?>
 
 
