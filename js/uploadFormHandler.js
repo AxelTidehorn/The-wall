@@ -9,10 +9,12 @@ function showImg() {
     document.getElementsByName('uploadedText')[0].style.display="none";
     document.getElementsByName('uploadedText')[0].required = false;
     document.getElementsByName('URL')[0].style.display="none";
+    document.getElementById('websiteUpload').style.display="none";
 
     //showing and requering the correct fields
     document.getElementsByName('uploadedImage')[0].style.display ='block';
     document.getElementsByName('uploadedImage')[0].required = 'required';
+    document.getElementById('imageUpload').style.display='block';
 }
 function showTxt() {
     uForm.style.display = "block";
@@ -24,6 +26,8 @@ function showTxt() {
     document.getElementsByName('URL')[0].style.display="none";
     document.getElementsByName('uploadedImage')[0].style.display='none';
     document.getElementsByName('uploadedImage')[0].required = false;
+    document.getElementById('websiteUpload').style.display="none";
+    document.getElementById('imageUpload').style.display='none';
 
     //showing and requering the correct fields
     document.getElementsByName('uploadedText')[0].style.display="block";
@@ -40,11 +44,13 @@ function showWeb() {
     document.getElementsByName('URL')[0].style.display="none";
     document.getElementsByName('uploadedImage')[0].style.display= "none";
     document.getElementsByName('uploadedImage')[0].required = false;
+    document.getElementById('imageUpload').style.display='none';
 
     //showing and requering the correct fields
     document.getElementsByName('uploadedWebsite')[0].style.display="block";
     document.getElementsByName('uploadedWebsite')[0].required = true;
     document.getElementsByName('URL')[0].style.display="block";
+    document.getElementById('websiteUpload').style.display="block";
 }
 //Done handling the form part, moving on to the tagging system!
 

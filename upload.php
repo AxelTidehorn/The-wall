@@ -55,8 +55,15 @@ include_once "backend/connect.php";
             <form action="backend/handler.php" id="imageform" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="uploadType" value="">
                 <input id="titleInput" type="text"  name="contentName" placeholder="Title" required>
-                <input class="uploadBtn" type="file" name="uploadedImage" placeholder="image" >
-                <input class="uploadBtn" type="file" name="uploadedWebsite" placeholder="webbsite" >
+                <div id="imageUpload" class="uploadFile">
+                  <input id="uploadImage" class="uploadBtn" type="file" name="uploadedImage" placeholder="image" >
+                  <label class="uploadBtnLabel" for="uploadImage"> Choose a File...</label>
+                </div>
+                <div id="websiteUpload" class="uploadFile">
+                  <input id="uploadWebsite" class="uploadBtn" type="file" name="uploadedWebsite" placeholder="webbsite" >
+                  <label class="uploadBtnLabel" for="uploadWebsite">Choose a File...</label>
+                </div>
+
                 <textarea name="uploadedText" id="textArea" placeholder="Write your text-based content here" form="imageform"></textarea>
 
                 <input id="uploadUrl" type="text" name="URL" placeholder="URL of your website">
