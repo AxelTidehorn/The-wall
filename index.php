@@ -120,11 +120,19 @@
                             </div>
                         ';
 
-                            if ($type == "Editor's Choice") {
-                                $query = $conn->prepare("SELECT * FROM `Content` WHERE editorsChoice = true");
-                            } else {
-                                $query = $conn->prepare("SELECT * FROM `Content`");
+
+                            $order = "";
+                            $where = "";
+
+                            if ($type == "Top Rated") {
+                                $order = " ORDER BY rating, date";
+                            } else if ($type == "Editor's Choice") {
+                                $where = " WHERE editorsChoice = true";
+                                $order = " ORDER BY rating, date";
                             }
+
+                            $query = $conn->prepare("SELECT * FROM `Content`" . $where . $order);
+
                             $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                             $query->store_result();
                             $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags, $editorsChoice);
@@ -138,7 +146,8 @@
 
                             $query->close();
 
-                            if ($type == "Latest") $contentArray = array_reverse($contentArray, true); //true to keep the keys of the array, seems to work without it though.
+                            //Funnily enough, it seems like we want to reverse it no matter the type. Either newest to oldest, or highest rating to lowest.
+                            $contentArray = array_reverse($contentArray, true); //true to keep the keys of the array, seems to work without it though.
                             //Simply reversing the array assuming they are added in chronological order to get the latest instead of making lots of sql queries to check different time frames.
 
                             foreach ($contentArray as $content) {
