@@ -89,14 +89,14 @@ include_once "backend/connect.php";
                         <img src='imgs/axel.jpg' alt='profilepic'>
                     </div>
                     <h1 class='center-text profile'>" . $username . "</h1>
-                    <span class='block center-text'>Joined " . $joinDate . "</span>
-                    <h2>Profile</h2>
-                    <span>
-                        Here can we list some of the users conent
-                    </span>
+                    <span class='joined'>Joined " . $joinDate . "</span>
                     <h3>Description</h3>
                     <span>
                     " . $description . "
+                    </span>
+                    <h2>Profile</h2>
+                    <span>
+                        Here can we list some of the users conent
                     </span>
     ";
                     //If the query was empty:
