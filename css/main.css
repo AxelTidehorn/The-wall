@@ -75,12 +75,9 @@ img{
         /*HEADER*/
 header{
     overflow: hidden;
-<<<<<<< HEAD
 }
 .contentPage header{
     display: none;
-=======
->>>>>>> 7f6a3628a8e00af23f16b2f5228a7faf5dc2e1fa
 }
 .navBar{
   display: flex;
