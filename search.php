@@ -96,12 +96,17 @@
                         //Seeing if this is a general search from the searchfield, or a more andvanced search! (will be added later)
                 if (isset($_GET['advancedSearch'])){
                     $sqlQuery="";
+                    $sqlParams="";
                     $searchTag = $_GET['advancedSearch'];
 
                     //Creating the apropiate search string, depending on what the user searched for.
 
                     if($_GET['imageSearch']=="yes" && $_GET['WebbsiteSearch']=="yes" && $_GET['TextSearch']=="yes"){
-                        $sqlQuery = "SELECT * FROM `Content` LIMIT  WHERE `Name` LIKE '%" . $search . "%' OR tags LIKE '%" . $search . "%'";
+                        $sqlQuery = "SELECT * FROM `Content` LIMIT  WHERE `Name` LIKE '%" . $searchTag . "%' OR tags LIKE '%" . $searchTag . "%'";
+                    }
+                    else{
+
+
                     }
 
 
