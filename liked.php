@@ -70,42 +70,9 @@
             $webbsite = base64_encode(stripslashes($content['webbsite']));
             $id = $content['ID'];
 
-            include("likeHandler.php");
+            include("includes/likeHandler.php");
 
-            print"
-                <div class='contentcont'>
-                    <form action='post.php' method='get' class='form' id='" . $content["ID"] . "'>
-                        <input type='hidden' value='" . $id . "' name='post'/>
-                        <div onclick='this.parentNode.submit();'>";
-                            if ($content["type"] == "text") {
-                                echo "<img class='linkImg' src='imgs/text.png'/>";
-                            } else if ($content["type"] == "website") {
-                                echo "<img class='linkImg' src='data:image/jpeg;base64," . $webbsite . "'/>";
-                            } else {
-                                echo "<img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>";
-                            }
-                        echo "</div>
-                    </form>
-                    <div class='actioncont'>
-                        <div class='contentName'>" . $content["name"] . "</div>
-
-                        <div class='contentBox'>
-                            <div class='profilecont'>
-                                <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
-                                <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
-                            </div>
-                            <form method='GET' class='buttoncont'>";
-                                if ($currentPage == "user.php") {
-                                    echo "<input type='hidden' name='user_ID' value='" . $_GET["user_ID"] . "' />";
-                                    echo "<input type='hidden' name='liked' />";
-                                }
-                                echo "<input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />
-                                <input type='submit' class='" . $class . "' href='" . $link . "' value='" . $likeString . " (" . $content["rating"] . ")' />
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            ";
+            include("includes/contentRenderer.php");
         }
     }
 ?>
