@@ -194,7 +194,7 @@
             if(isset($_GET['advancedSearch'])&& $_GET['advancedSearch'] == ""){
                 print "<h1>Please actually search for something!</h1> ... <sup>smartass</sup>";
             }
-            if (isset($_GET['generalSearch'])) {
+            /*if (isset($_GET['generalSearch'])) {
                 print'<h2>User results</h2>';
                 include("backend/connect.php"); //I'm not sure why it seems like we have to reconnect to the db here...
                 $search = $_GET["generalSearch"]; //Gets the search term and retrieves matches similar to the search term. (may want to add more things than users in the future)
@@ -239,8 +239,9 @@
 
                     }
 
-                    //Seeing if this is a general search from the searchfield, or a more andvanced search! (will be added later)
+                    *///Seeing if this is a general search from the searchfield, or a more andvanced search! (will be added later)
                     if (isset($_GET['generalSearch'])) {
+                        print'<h2>User results</h2>';
                         include("backend/connect.php"); //I'm not sure why it seems like we have to reconnect to the db here...
                         $search = $_GET["generalSearch"]; //Gets the search term and retrieves matches similar to the search term. (may want to add more things than users in the future)
                         $search = mysqli_real_escape_string($conn, $search); //Not using htmlentities here as we are just searching and retrieving content here, not adding html.
@@ -366,9 +367,9 @@
                         }
                         echo "</div>";
                     }
-                }
+                //}
 
-            }
+            //}
             ?>
         </section>
     </main>
