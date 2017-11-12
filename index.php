@@ -219,12 +219,12 @@
                                             echo "</div>
                                         </form>
                                         <div class='actioncont'>
-                                            <div class='contentName'>" . $content["name"] . "</div>
+                                            <div class='contentName'><a href='post.php?post=" . $id . "'>" . $content["name"] . "</a></div>
 
                                             <div class='contentBox'>
                                                 <div class='profilecont'>
                                                     <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
-                                                    <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
+                                                    <a class='profilename' href='user.php?user_ID=" . $content['publisherID'] . "'>" . $publisherName . "</a>
                                                 </div>
                                                 <form method='GET' class='buttoncont'>
                                                     <input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />";

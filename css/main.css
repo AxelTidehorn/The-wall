@@ -250,6 +250,9 @@ p{
 .contentcont.visible:hover{
     opacity: 0.8;
 }
+.contentPage .contentcont{
+    opacity: 1;
+}
 .searchImage{
     height: 150px;
     width: auto;
@@ -392,6 +395,10 @@ a.img{
     font-size: 32px;
     font-style: italic;
     text-align: center;
+}
+.contentName a{
+    color: black;
+    text-decoration: none;
 }
 .contentBox{
     overflow: hidden;
