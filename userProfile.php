@@ -61,6 +61,12 @@
 
                         $query->close();
                     ?>
+
+                    <!-- Maybe skip this <div class="infoBox">
+                        <span>Name: Axel</span>
+                        <span>Gender: Axel</span>
+                        <span>Age: Axel</span>
+                    </div> -->
                 </section>
 
                 <section> <!-- We better make this an include or something if we keep this structure. -->

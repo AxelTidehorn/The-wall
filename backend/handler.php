@@ -43,7 +43,6 @@ switch ($uploadedForm['uploadType']) { //test
         //uploading everything to the database)
         $imageLocation = parse_url("../imgs/text.png");
         $url = "destination .jpg";
-        compress_image($imageLocation, $url);
 
         $name = $uploadedForm['contentName'];
         $description = $uploadedForm['contentDescription'];
@@ -56,8 +55,8 @@ switch ($uploadedForm['uploadType']) { //test
         /*$imageToUpload = addslashes((file_get_contents($url)));*/
         //$created_image = imagecreatefrompng("../imgs/text.png");
         //$imageToUpload = imagejpeg($created_image, "destination .jpg", 85);
-        $imageToUpload = addslashes((file_get_contents($url)));
-
+        $imageToUpload = addslashes(file_get_contents("./test.png"));
+        unset($query);
         $query = $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name` , `ContentImage`, `ContentText`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?)");
 
         $query->bind_param("sssssddsss", $uploadType, $_SESSION["user_id"] , $name, $imageToUpload ,$contentText, $nsfw, $publicDomain, $date, $description, $tags);
