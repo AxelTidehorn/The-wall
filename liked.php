@@ -94,13 +94,13 @@
                                 <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
                                 <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
                             </div>
-                            <form method='GET' class='buttoncont'>
-                                <input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />";
+                            <form method='GET' class='buttoncont'>";
                                 if ($currentPage == "user.php") {
-                                    echo "<input type='hidden' name='liked' />";
                                     echo "<input type='hidden' name='user_ID' value='" . $_GET["user_ID"] . "' />";
+                                    echo "<input type='hidden' name='liked' />";
                                 }
-                                echo "<input type='submit' class='" . $class . "' href='" . $link . "' value='" . $likeString . " (" . $content["rating"] . ")' />
+                                echo "<input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />
+                                <input type='submit' class='" . $class . "' href='" . $link . "' value='" . $likeString . " (" . $content["rating"] . ")' />
                             </form>
                         </div>
                     </div>
