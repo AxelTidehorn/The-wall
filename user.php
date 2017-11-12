@@ -101,35 +101,28 @@ include_once "backend/connect.php";
                     <h1 class='center-text profile'>" . $username . "</h1>
                     <span class='joined'>Joined " . $joinDate . "</span>
                     <h3 class='center-text'>Description</h3>
-                    <div class='descriptionCont'>
-                      <p>
-                      " . $description . "
-                      </p>
-                    </div>
-                    <h2>Profile</h2>
-                    <span>
-                        Here can we list some of the users conent
-                    </span>
-<<<<<<< HEAD
-    ";
-=======
-                    <h3>Description</h3>";
-                    if ($_SESSION["user_id"] == $userID) {
-                        echo '
-                            <form method="POST">
-                                <textarea name="description">' . $description . '</textarea>
-                                <input class="insignificant" type="submit" value="Update description" />
-                            </form>
-                        ';
-                    } else {
-                        echo '
-                            <span>
-                            ' . $description . '
-                            </span>
-                        ';
-                    }
+                    <div class='descriptionCont'>";
+                          if ($_SESSION["user_id"] == $userID) {
+                            echo '
+                                <form method="POST">
+                                    <textarea name="description">' . $description . '</textarea>
+                                    <input class="insignificant" type="submit" value="Update description" />
+                                </form>
+                            ';
+                        } else {
+                            echo '
+                                <span>
+                                ' . $description . '
+                                </span>
+                            ';
+                        }
+                    echo "</div>
+                        <h2>Profile</h2>
+                        <span>
+                            Here can we list some of the users conent
+                        </span>
+                    ";
 
->>>>>>> Samuels-Branch
                     //If the query was empty:
                 } else {
                     print'There were no content matching the URL. It might have been moved or Deleted.';
