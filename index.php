@@ -37,9 +37,8 @@
                     //You will get the user id by a form input in the url. something like www.thewall.com/post?postID=2
                     //This will then be used so get the correct content.
                     if (isset($_GET['post'])) {
-
-                        $userID = $_GET['post'];
-                        $query = $conn->prepare("SELECT * FROM `Content` WHERE `ID` = " . $userID . "");
+                        $contentID = $_GET['post'];
+                        $query = $conn->prepare("SELECT * FROM `Content` WHERE `ID` = " . $contentID . "");
                         $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                         $query->store_result();
                         $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags);
@@ -75,6 +74,18 @@
                         }
 
                     } else {
+                        include("config.php"); //Because apparently it did not know what the $currentURI variable was even if we included it before.
+
+                        if (isset($_GET["like"]) && !isset($_GET["redirected"])) {
+                            header("location:" . $currentURI . "&redirected=true#" . $_GET["like"]);
+                            exit();
+                        }
+
+                        if (isset($_GET["unlike"]) && !isset($_GET["redirected"])) {
+                            header("location:" . $currentURI . "&redirected=true#" . $_GET["unlike"]);
+                            exit();
+                        }
+
                         if (isset($_SESSION["user_id"])) {
                             $query = $conn->prepare("SELECT likedContent FROM Users WHERE id = " . $_SESSION["user_id"]);
                             $query->bind_result($likedContent);
@@ -131,7 +142,7 @@
                                 $order = " ORDER BY rating, date";
                             }
 
-                            $query = $conn->prepare("SELECT * FROM `Content`" . $where . $order);
+                            $query = $conn->prepare("SELECT * FROM `Content`" . $where . $order . " LIMIT 5");
 
                             $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                             $query->store_result();
@@ -214,7 +225,7 @@
                                                 <form method='GET' class='buttoncont'>
                                                     <input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />";
                                                     if (isset($_SESSION["user_id"])) {
-                                                        echo "<input type='submit' class='" . $class . "' href='" . $link . "' value='" . $likeString . " (" . $content["rating"] . ")' />";
+                                                        echo "<input type='submit' class='" . $class . "' value='" . $likeString . " (" . $content["rating"] . ")' />";
                                                     } else {
                                                         echo "<a href='login.php' class='" . $class . "'/>" . $likeString . "</a>";
                                                     }
