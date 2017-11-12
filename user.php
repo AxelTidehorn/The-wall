@@ -100,6 +100,13 @@ include_once "backend/connect.php";
                     <span>
                         Here can we list some of the users conent
                     </span>
+<<<<<<< HEAD
+=======
+                    <h3>Description</h3>
+                    <span>
+                    " . $description . "
+                    </span>
+>>>>>>> parent of 0db2d63... Structure and profile and stuff
     ";
                     //If the query was empty:
                 } else {

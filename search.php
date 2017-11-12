@@ -1,4 +1,7 @@
-﻿<?php include "config.php" ?>
+﻿<?php include "config.php";
+include("includes/contentRenderer.php");
+?>
+
 
 <!DOCTYPE html>
 <html>
