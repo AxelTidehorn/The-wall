@@ -25,4 +25,5 @@
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 </head>
