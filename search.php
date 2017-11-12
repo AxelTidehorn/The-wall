@@ -11,35 +11,37 @@
     <?php include "testHead.php" ?>
     <main>
         <section>
-            <h2 class="insignificant">Advanced search</h2>
-            <p>What type of content do you wish to search for?</p>
+          <div class="advancedCont">
+              <h2 class="insignificant">Advanced search</h2>
+              <p>What type of content do you wish to search for?</p>
 
-            <form action="" class="advancedSearch">
-                <div class="formSides">
-                    <input type="text" name="advancedSearch" >
-                    <input type="submit" value="Search" name="searchRight">
-                </div>
-                <div>
-                    <input type="checkbox" name="imageSearch" checked>
-                    <label>Images</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="WebbsiteSearch" checked>
-                    <label>Websites</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="TextSearch" checked>
-                    <label>Text</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="userSearch" checked>
-                    <label>User</label>
-                </div>
+              <form action="" class="advancedSearch">
+                  <div class="formSides">
+                      <input type="text" name="advancedSearch" >
+                      <input id="advancedBtn" type="submit" value="Search" name="searchRight">
+                  </div>
+                  <div>
+                      <input type="checkbox" name="imageSearch" checked>
+                      <label>Images</label>
+                  </div>
+                  <div>
+                      <input type="checkbox" name="WebbsiteSearch" checked>
+                      <label>Websites</label>
+                  </div>
+                  <div>
+                      <input type="checkbox" name="TextSearch" checked>
+                      <label>Text</label>
+                  </div>
+                  <div>
+                      <input type="checkbox" name="userSearch" checked>
+                      <label>User</label>
+                  </div>
 
                 <!--Users
                 <input type="checkbox" name="UserSearch" checked>
                 <input type="submit">-->
-            </form>
+              </form>
+            </div>
             <?php //Some kind of search functionality based on the comment structure currently.
             include("backend/connect.php");
 

@@ -420,14 +420,47 @@ input.actionLink{
 .comments form{
     clear:both;
 }
+.insignificant{
+  color: white;
+}
 .formSides{
     margin-top: 16px;
     overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+}
+.advancedCont{
+  background-color: rgb(61, 61, 61);
+  border-radius: 5px;
+  text-align: center;
+  padding: 15px;
+  margin: 8px auto;
+}
+.advancedCont > p{
+  color: white;
 }
 input[name="advancedSearch"] {
-    margin: 0px;
+    margin: 0px auto;
+    padding: 4px;
+    width: 100%;
     display: block;
     float: left;
+    border: solid 1px black;
+    border-radius: 5px;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+#advancedBtn{
+  background-color: rgb(68, 182, 129);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 4px;
+  width: 30%;
+  margin: 8px auto;
+  float: right;
 }
 input[name="searchRight"] {
     float: left;
