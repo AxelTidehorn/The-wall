@@ -21,8 +21,32 @@
                         <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
                         <a class='profilename' href='user.php?user_ID=" . $content['publisherID'] . "'>" . $publisherName . "</a>
                     </div>
-                    <form method='GET' class='buttoncont'>
-                        <input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />";
+                    <form method='GET' class='buttoncont'>";
+                        if ($currentPage == "user.php") {
+                            echo "<input type='hidden' name='user_ID' value='" . $_GET["user_ID"] . "' />";
+                            echo "<input type='hidden' name='liked' />";
+                        }
+                        if ($currentPage == "search.php" && isset($_GET["generalSearch"])) {
+                            echo "<input type='hidden' name='generalSearch' value='" . $_GET["generalSearch"] . "' />";
+                            echo "<input type='hidden' name='liked' />";
+                        }
+                        if ($currentPage == "search.php" && isset($_GET["advancedSearch"])) {
+                            echo "<input type='hidden' name='advancedSearch' value='" . $_GET["advancedSearch"] . "' />";
+                            echo "<input type='hidden' name='liked' />";
+
+                            if (isset($_GET["imageSearch"])) {
+                                echo "<input type='hidden' name='imageSearch' value='" . $_GET["imageSearch"] . "' />";
+                            }
+                            if (isset($_GET["TextSearch"])) {
+                                echo "<input type='hidden' name='TextSearch' value='" . $_GET["TextSearch"] . "' />";
+                            }
+                            if (isset($_GET["WebbsiteSearch"])) {
+                                echo "<input type='hidden' name='WebbsiteSearch' value='" . $_GET["WebbsiteSearch"] . "' />";
+                            }
+                        }
+
+                        echo "<input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />";
+
                         if (isset($_SESSION["user_id"])) {
                             echo "<input type='submit' class='" . $class . "' value='" . $likeString . " (" . $content["rating"] . ")' />";
                         } else {
