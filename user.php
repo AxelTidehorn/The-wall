@@ -101,10 +101,7 @@ include_once "backend/connect.php";
                         Here can we list some of the users conent
                     </span>
 
-                    <h3>Description</h3>
-                    <span>
-                    " . $description . "
-                    </span>
+
     ";
                     //If the query was empty:
                 } else {
