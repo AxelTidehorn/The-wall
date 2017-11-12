@@ -1,6 +1,8 @@
 ﻿<?php
+    @ session_start();
+
     if (isset($_SESSION["user_id"])) {
-        header("location:index.php");
+        header("location:user.php?user_ID=".$_SESSION["user_id"]."");
     }
 ?>
 
