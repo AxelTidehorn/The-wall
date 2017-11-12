@@ -34,7 +34,7 @@
 
                     }
 
-                    $GLOBALS["updatedRating"] = false; //Using a global variable to make it apply to the functions above correctly.
+                    if (!isset($_SESSION["updatedRating"])) $_SESSION["updatedRating"] = -1;
 
                     include "config.php";
                     include("backend/connect.php");
@@ -268,26 +268,36 @@
                                     include("likeHandler.php");
 
                                     print"
-                        <form action='post.php' method='get' class='form contentcont' id='" . $content["ID"] . "'>
-                                <input type='hidden' value='" . $id . "' name='post'/>
-                                <div onclick='this.parentNode.submit();'>
-                                    <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
-                                </div>
-                                <div class='actioncont'>
-                                    <div class='contentName'>" . $content["name"] . "</div>
+                                        <div class='contentcont'>
+                                            <form action='post.php' method='get' class='form' id='" . $content["ID"] . "'>
+                                                <input type='hidden' value='" . $id . "' name='post'/>
+                                                <div onclick='this.parentNode.submit();'>";
+                                                    if ($content["type"] == "text") {
+                                                        echo "<img class='linkImg' src='imgs/text.png'/>";
+                                                    } else if ($content["type"] == "website") {
+                                                        echo "<img class='linkImg' src='data:image/jpeg;base64," . $webbsite . "'/>";
+                                                    } else {
+                                                        echo "<img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>";
+                                                    }
+                                                echo "</div>
+                                            </form>
+                                            <div class='actioncont'>
+                                                <div class='contentName'>" . $content["name"] . "</div>
 
-                                    <div class='contentBox'>
-                                        <div class='profilecont'>
-                                            <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
-                                            <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
+                                                <div class='contentBox'>
+                                                    <div class='profilecont'>
+                                                        <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
+                                                        <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
+                                                    </div>
+                                                    <form method='GET' class='buttoncont'>
+                                                        <input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />";
+                                                        if ($currentPage == "search.php") echo "<input type='hidden' name='generalSearch' value='" . $_GET["generalSearch"] . "' />";
+                                                        echo "<input type='submit' class='" . $class . "' href='" . $link . "' value='" . $likeString . " (" . $content["rating"] . ")' />
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class='buttoncont'>
-                                            <a class='" . $class . "' href='" . $link . "'>" . $likeString . " (" . $content["rating"] . ")</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                    ";
+                                    ";
                                 }
                                 echo "</div>";
                             }

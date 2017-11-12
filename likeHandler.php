@@ -91,7 +91,8 @@
     if ($sessionUser !== false) {
         include("config.php");
 
-        if (!(strpos($currentURI, "?") === false || !isset($_GET["like"]) || !isset($_GET["unlike"]))) {
+        //UHH... Forms?
+        if (isset($_GET["search"]) && isset($_GET["like"]) || isset($_GET["search"]) && isset($_GET["unlike"]) || isset($_GET["generalSearch"]) && isset($_GET["like"]) || isset($_GET["generalSearch"]) && isset($_GET["unlike"])) {
             $symbol = "&";
         } else {
             $symbol = "?";
@@ -116,15 +117,18 @@
 
             if ($alreadyLiked) {
                 $end = $symbol . "unlike=" . $id;
+                $name = "unlike";
                 $likeString = "Unlike";
                 $class = "unlikebtn";
             } else {
                 $end = $symbol . "like=" . $id;
+                $name = "like";
                 $likeString = "Like";
                 $class = "likebtn";
             }
         } else {
             $end = $symbol . "like=" . $id;
+            $name = "like";
             $likeString = "Like";
             $class = "likebtn";
         }

@@ -174,17 +174,19 @@
 
 
                                 print"
-                                    <form action='post.php' method='get' class='form contentcont' id='" . $content["ID"] . "'>
-                                        <input type='hidden' value='" . $id . "' name='post'/>
-                                        <div onclick='this.parentNode.submit();'>";
-                                            if ($content["type"] == "text") {
-                                                echo "<img class='linkImg' src='imgs/text.png'/>";
-                                            } else if ($content["type"] == "website") {
-                                                echo "<img class='linkImg' src='data:image/jpeg;base64," . $webbsite . "'/>";
-                                            } else {
-                                                echo "<img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>";
-                                            }
-                                        echo "</div>
+                                    <div class='contentcont'>
+                                        <form action='post.php' method='get' class='form' id='" . $content["ID"] . "'>
+                                            <input type='hidden' value='" . $id . "' name='post'/>
+                                            <div onclick='this.parentNode.submit();'>";
+                                                if ($content["type"] == "text") {
+                                                    echo "<img class='linkImg' src='imgs/text.png'/>";
+                                                } else if ($content["type"] == "website") {
+                                                    echo "<img class='linkImg' src='data:image/jpeg;base64," . $webbsite . "'/>";
+                                                } else {
+                                                    echo "<img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>";
+                                                }
+                                            echo "</div>
+                                        </form>
                                         <div class='actioncont'>
                                             <div class='contentName'>" . $content["name"] . "</div>
 
@@ -193,12 +195,13 @@
                                                     <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
                                                     <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
                                                 </div>
-                                                <div class='buttoncont'>
-                                                    <a class='" . $class . "' href='" . $link . "'>" . $likeString . " (" . $content["rating"] . ")</a>
-                                                </div>
+                                                <form method='GET' class='buttoncont'>
+                                                    <input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />
+                                                    <input type='submit' class='" . $class . "' href='" . $link . "' value='" . $likeString . " (" . $content["rating"] . ")' />
+                                                </form>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 ";
 
                                 //$query->close(); //This seems to fix it, not sure why. Maybe it doesn't like leftover stored information or something?
