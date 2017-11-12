@@ -420,6 +420,34 @@ input.actionLink{
 .comments form{
     clear:both;
 }
+.formSides{
+    margin-top: 16px;
+    overflow: hidden;
+}
+input[name="advancedSearch"] {
+    margin: 0px;
+    display: block;
+    float: left;
+}
+input[name="searchRight"] {
+    float: left;
+    margin: 0px;
+}
+.advancedSearch{
+    overflow: hidden;
+}
+.advancedSearch label{
+    margin: 4px 8px;
+    float: left;
+}
+.advancedSearch input{
+    float: left;
+}
+.advancedSearch div{
+    overflow: hidden;
+    display: block;
+    width: 100%;
+}
 
 /* PROFILE */
 .profilecont{
