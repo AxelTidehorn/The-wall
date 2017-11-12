@@ -22,15 +22,16 @@ include_once "backend/connect.php";
 
             include_once "testSubHeader.php";
 
+            echo "<section>";
+
             //checking the url for "&friends". This makes you able to stay on the same page and load in the users friends.
             //Also you could implement the "admin" features here for the user if it is their own friends list!
             if(isset($_GET['friends'])){
-
-                print'you want to see the friends page!';
+                include("friends.php");
             }
             //same as above, but for "liked"
             else if(isset($_GET['liked'])){
-                print'You want to see the liked page';
+                include("liked.php");
             }
 
             //If there is no _GET at all, simply list all users.
@@ -52,7 +53,7 @@ include_once "backend/connect.php";
                 if (isset($contentArray)) {
 
                     //Determening if the currently viewed page is your own, and adding "admin" features if so!
-                    if ($userID == $_SESSION['user_id']) {
+                    /*if ($userID == $_SESSION['user_id']) {
                         print'This is your page';
 
 
@@ -77,7 +78,7 @@ include_once "backend/connect.php";
                             }
 
                         }
-                    }
+                    }*/
 
                     $image = base64_encode(stripslashes($contentArray[0]['profileImage']));
                     $username = $contentArray[0]['userName'];
@@ -131,7 +132,7 @@ include_once "backend/connect.php";
                     <span class='profilename'>".$userName."</span>
                     </div>
                 </form>
-               
+
             ";
 
 
@@ -139,6 +140,8 @@ include_once "backend/connect.php";
             //Here is where we will display ALL the posts! We could use $_POST here to make you able to search among the users.
 
         };
+
+        echo "</section>";
 
         ?>
     </main>
