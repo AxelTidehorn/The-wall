@@ -12,7 +12,7 @@ html{
 }
 body{
   box-sizing: border-box;
-  min-width: 414px;
+  //min-width: 414px;
   margin: 0 auto;
   padding: 0;
   font-family: 'Roboto', sans-serif;
@@ -26,7 +26,7 @@ body{
   margin-bottom: -96px;
 }
 main{
-    margin-top: 70px;
+    margin-top: 0px;
 }
 section{
     padding: 16px 32px;
@@ -256,6 +256,7 @@ p{
 .contentPage .contentcont{
     opacity: 1;
 }
+
 .searchImage{
     height: 150px;
     width: auto;
@@ -911,9 +912,9 @@ footer p{
           body{
 
           }
-          main{
+          /*main{
             margin-top: 57px;
-          }
+          }*/
           .navBar{
             padding: 2px;
           }
@@ -985,8 +986,17 @@ footer p{
         margin: 24px;
         margin-bottom: 8px;
     }
+    .contentPage .contentcont{
+        margin: 0px;
+    }
     .actioncont{
         bottom: 16px;
+    }
+    main{
+        margin-top: 57.6px;
+    }
+    .contentPage header{
+        display: block;
     }
 }
 
@@ -995,16 +1005,27 @@ footer p{
         width: 960px;
         margin-left: auto;
         margin-right: auto;
+        margin-top: 73.6px;
     }
     .contentPage header{
         display: block;
     }
+    .contentPage .contentcont{
+        width: 400px;
+        float: left;
+    }
+    .contentPage .description{
+        float: right;
+    }
+    section{
+        width: 400px;
+    }
 }
 .postboxen{
   display: block;
-  
 
-  
+
+
 
 }
 
@@ -1015,6 +1036,6 @@ footer p{
   display: block;
 
 }
-section > #getdown {
+/*section > #getdown {
   clear: both;
-}
+}*/
