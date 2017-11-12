@@ -9,7 +9,7 @@ include_once "backend/connect.php";
 <body>
 <div id="pageContainer">
     <?php include 'testHead.php'; ?>
-        <main>
+    <main>
         <?php
         if (!isset($_SESSION)) {
             session_start();
@@ -26,15 +26,12 @@ include_once "backend/connect.php";
 
             //checking the url for "&friends". This makes you able to stay on the same page and load in the users friends.
             //Also you could implement the "admin" features here for the user if it is their own friends list!
-            if(isset($_GET['friends'])){
+            if (isset($_GET['friends'])) {
                 include("friends.php");
-            }
-            //same as above, but for "liked"
-            else if(isset($_GET['liked'])){
+            } //same as above, but for "liked"
+            else if (isset($_GET['liked'])) {
                 include("liked.php");
-            }
-
-            //If there is no _GET at all, simply list all users.
+            } //If there is no _GET at all, simply list all users.
             else {
 
                 $userID = $_GET['user_ID'];
@@ -97,15 +94,53 @@ include_once "backend/connect.php";
                       </p>
                     </div>
                     <h2>Profile</h2>
-                    <span>
-                        Here can we list some of the users conent
-                    </span>
+                    ";
+                    if ($_GET['user_ID'] = $_SESSION['user_id']) {
+                        unset($contentArray);
+                        $query = $conn->prepare("SELECT * FROM `Content` WHERE `Publisher`='" . $_GET['user_ID'] . "'");
+                        $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
+                        $query->store_result();
+                        $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags, $editorsChoice);
+                        $count = 0;
 
+                        //    trying to create a associative array with all the content. This is how im used to working.
+                        while ($query->fetch()) {
+                            $count++;
+                            $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags, 'editorsChoice' => $editorsChoice);
+                        }
+                        $query->close();
+                        //Funnily enough, it seems like we want to reverse it no matter the type. Either newest to oldest, or highest rating to lowest.
+                        //$contentArray = array_reverse($contentArray, true); //true to keep the keys of the array, seems to work without it though.
+                        //Simply reversing the array assuming they are added in chronological order to get the latest instead of making lots of sql queries to check different time frames.
 
-    ";
-                    //If the query was empty:
-                } else {
-                    print'There were no content matching the URL. It might have been moved or Deleted.';
+                        foreach ($contentArray as $content) {
+                            $image = base64_encode(stripslashes($content['image']));
+                            $webbsite = base64_encode(stripslashes($content['webbsite']));
+                            $id = $content['ID'];
+                            print"<div id='profilecont'>
+                                <form action='post.php' method='get' class='form' id='" . $content["ID"] . "'>
+                                    <input type='hidden' value='" . $id . "' name='post'>
+                                    <div onclick='this.parentNode.submit();'>
+                                    <img src='data:image/jpeg;base64," . $image . "' alt='error'>
+                                    </div>
+                                    </form>
+                                    <div id='banner'>
+                                    <span>".$content['name']."$</span>
+                                    <form action='backend/delete.php'>
+                                    <input name ='id' type='hidden' value='".$content['ID']."'>
+                                    <input type='hidden' name='posterID' value='".$_GET['user_ID']."'>
+                                    <span id='delete' onclick='this.parentNode.submit();'>Delite</span>
+                                    </form>
+</div>
+                            </div>";
+
+                        }
+                        include_once 'config.php';
+                        print '<a href="'.$baseURL."&posts".'">Klick here to see all post</a>';
+                        //If the query was empty:
+                    } else {
+                        print'There were no content matching the URL. It might have been moved or Deleted.';
+                    }
                 }
             }
         } else {
@@ -133,7 +168,7 @@ include_once "backend/connect.php";
                     <input type='hidden' value='" . $id . "' name='user_ID'/>
                     <div class='inpost' onclick='this.parentNode.submit();'>
                     <img class='linkImg' src='data:image/jpeg;base64," . $image . "' class='profilethumb'/>
-                    <span class='profilename'>".$userName."</span>
+                    <span class='profilename'>" . $userName . "</span>
                     </div>
                 </form>
 
