@@ -127,11 +127,11 @@ include_once "backend/connect.php";
                                     </div>
                                     </form>
                                     <div id='banner'>
-                                    <span>".$content['name']."$</span>
+                                    <h3 class='userContentTitle'>".$content['name']."</h3>
                                     <form action='backend/delete.php'>
                                     <input name ='id' type='hidden' value='".$content['ID']."'>
                                     <input type='hidden' name='posterID' value='".$_GET['user_ID']."'>
-                                    <span id='delete' onclick='this.parentNode.submit();'>Delite</span>
+                                    <span id='delete' onclick='this.parentNode.submit();'>Delete</span>
                                     </form>
 </div>
                             </div>";
@@ -172,7 +172,7 @@ include_once "backend/connect.php";
                                     </form>
                                     <div id='banner'>
                                     <span>".$content['name']."$</span>
-                                    
+
 </div>
                             </div>";
 

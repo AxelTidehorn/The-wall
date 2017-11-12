@@ -9,7 +9,7 @@
     <body>
         <div id="pageContainer" class="contentPage">
             <?php
-                
+
 
                 if (!isset($_SESSION)) {
                     session_start();
@@ -84,7 +84,7 @@
                             echo '<section class="comments">
                                 <form method="POST">
                                     <label>Make a commment</label>
-                                    <textarea class="commentBox" name="comment">';
+                                    <textarea id="textArea" class="commentBox" name="comment">';
                                             include("backend/connect.php");
 
                                             @ session_start();
