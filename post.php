@@ -9,7 +9,7 @@
     <body>
         <div id="pageContainer" class="contentPage">
             <?php
-                include("testHead.php");
+                
 
                 if (!isset($_SESSION)) {
                     session_start();
@@ -41,14 +41,14 @@
 
                             $image = base64_encode(stripslashes($contentArray[0]['image'])); //<img src='data:image/jpeg;base64," . $image . "' alt='an excellent picture'>
                             print"
-                                <div class='contentcont'>
+                                <div class='co postboxen'>
                                     <a href='index.php#" . $contentArray[0]["ID"] . "'>";
                                     if ($contentArray[0]["type"] == "text") {
-                                        echo "<img class='linkImg' src='imgs/text.png'/>";
+                                        echo "<img class='thepost' src='imgs/text.png'/>";
                                     } else if ($contentArray[0]["type"] == "website") {
-                                        echo "<img class='linkImg' src='data:image/jpeg;base64," . $webbsite . "'/>";
+                                        echo "<img class='thepost' src='data:image/jpeg;base64," . $webbsite . "'/>";
                                     } else {
-                                        echo "<img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>";
+                                        echo "<img class='thepost' src='data:image/jpeg;base64," . $image . "'/>";
                                     }
                                     echo "</a>
                                     <div class='backButton'><a href='index.php#" . $contentArray[0]["ID"] . "'>Back</a></div> <!-- Realized we might not need this here, but could possibly use it elsewhere if needed. -->
@@ -70,7 +70,7 @@
 
                             echo '
                             <section>
-                                <h2>Description</h2>
+                                <h2 id="getdown">Description</h2>
                                 <p>' . $contentArray[0]["description"] . '</p>
                             </section>';
                             if ($contentArray[0]["type"] == "text") {
@@ -201,9 +201,9 @@
                                     <input type='hidden' value='" . $id . "' name='post'/>
                                     <div onclick='this.parentNode.submit();'>";
                                         if ($content["type"] == "text") {
-                                            echo "<img class='linkImg' src='imgs/text.png'/>";
+                                            echo "<img class='thepost' src='imgs/text.png'/>";
                                         } else {
-                                            echo "<img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>";
+                                            echo "<img class='thepost' src='data:image/jpeg;base64," . $image . "'/>";
                                         }
                                     "</div>
                                     <div class='actioncont'>
