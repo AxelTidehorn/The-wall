@@ -75,29 +75,31 @@
                         }
 
                     } else {
-                        $query = $conn->prepare("SELECT likedContent FROM Users WHERE id = " . $_SESSION["user_id"]);
-                        $query->bind_result($likedContent);
-                        $query->execute();
-                        $query->fetch();
-                        $where = "";
+                        if (isset($_SESSION["user_id"])) {
+                            $query = $conn->prepare("SELECT likedContent FROM Users WHERE id = " . $_SESSION["user_id"]);
+                            $query->bind_result($likedContent);
+                            $query->execute();
+                            $query->fetch();
+                            $where = "";
 
-                        if ($likedContent) {
-                            $likedArray = explode("/", $likedContent);
-                            $where = " WHERE id = " . reset($likedArray);
+                            if ($likedContent) {
+                                $likedArray = explode("/", $likedContent);
+                                $where = " WHERE id = " . reset($likedArray);
 
-                            for ($i = 1; $i < sizeof($likedArray); $i++) {
-                                $where = $where . " OR id = " . $likedArray[$i];
+                                for ($i = 1; $i < sizeof($likedArray); $i++) {
+                                    $where = $where . " OR id = " . $likedArray[$i];
+                                }
                             }
-                        }
 
-                        $query->close();
+                            $query->close();
 
-                        if ($likedContent) {
-                            $likedArray = explode("/", $likedContent);
-                            $where = " WHERE id = " . reset($likedArray);
+                            if ($likedContent) {
+                                $likedArray = explode("/", $likedContent);
+                                $where = " WHERE id = " . reset($likedArray);
 
-                            for ($i = 1; $i < sizeof($likedArray); $i++) {
-                                $where = $where . " OR id = " . $likedArray[$i];
+                                for ($i = 1; $i < sizeof($likedArray); $i++) {
+                                    $where = $where . " OR id = " . $likedArray[$i];
+                                }
                             }
                         }
 
@@ -170,8 +172,13 @@
                                     $query->fetch();
                                 }
 
-                                include("likeHandler.php");
-
+                                if (isset($_SESSION["user_id"])) {
+                                    include("likeHandler.php");
+                                } else {
+                                    $name = "like";
+                                    $likeString = "Like";
+                                    $class = "likebtn";
+                                }
 
                                 print"
                                     <div class='contentcont'>
@@ -196,9 +203,13 @@
                                                     <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
                                                 </div>
                                                 <form method='GET' class='buttoncont'>
-                                                    <input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />
-                                                    <input type='submit' class='" . $class . "' href='" . $link . "' value='" . $likeString . " (" . $content["rating"] . ")' />
-                                                </form>
+                                                    <input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />";
+                                                    if (isset($_SESSION["user_id"])) {
+                                                        echo "<input type='submit' class='" . $class . "' href='" . $link . "' value='" . $likeString . " (" . $content["rating"] . ")' />";
+                                                    } else {
+                                                        echo "<a href='login.php' class='" . $class . "'/>" . $likeString . "</a>";
+                                                    }
+                                                echo "</form>
                                             </div>
                                         </div>
                                     </div>
