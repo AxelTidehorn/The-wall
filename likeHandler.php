@@ -24,20 +24,22 @@
         $query->execute();
         $query->close();
 
-        if (!$GLOBALS["updatedRating"] && $contentRequest == $content["ID"]) {
-            $query = $conn->prepare("UPDATE Content SET rating = ? WHERE ID = '{$contentRequest}'");
-            $ratingParam = $content["rating"] + 1;
-            $query->bind_param("i", $ratingParam);
-            $query->execute();
-            $query->close();
+        if (isset($_SESSION["updatedRating"])) {
+            if ($_SESSION["updatedRating"] != $content["ID"] && $contentRequest == $content["ID"]) {
+                $query = $conn->prepare("UPDATE Content SET rating = ? WHERE ID = '{$contentRequest}'");
+                $ratingParam = $content["rating"] + 1;
+                $query->bind_param("i", $ratingParam);
+                $query->execute();
+                $query->close();
 
-            $query = $conn->prepare("SELECT rating FROM Content WHERE ID = '{$contentRequest}'");
-            $query->bind_result($rating);
-            $query->execute();
-            $query->fetch();
+                $query = $conn->prepare("SELECT rating FROM Content WHERE ID = '{$contentRequest}'");
+                $query->bind_result($rating);
+                $query->execute();
+                $query->fetch();
 
-            $content["rating"] = $rating;
-            $GLOBALS["updatedRating"] = true;
+                $content["rating"] = $rating;
+                $_SESSION["updatedRating"] = $content["ID"];
+            }
         }
     }
 
@@ -45,7 +47,7 @@
         $contentRequest = $_GET["unlike"];
 
         if ($liked) {
-            if (!$GLOBALS["updatedRating"] && $contentRequest == $content["ID"]) {
+            if (isset($_SESSION["updatedRating"])) {
                 $likedArray = explode("/", $liked);
                 $searchId = array_search($contentRequest, $likedArray);
                 unset($likedArray[$searchId]); //Removes that part of the array.
@@ -59,25 +61,27 @@
                 $liked = implode($newLikedArray); //Makes it into a string again.
                 $liked = substr($liked, 0, strlen($liked) - 1); //Starts the string and takes all of it except the last character to skip the last "/"
 
-                include("backend/connect.php"); //I'm not sure why it seems like we have to reconnect to the db here...
-                $query = $conn->prepare("UPDATE Users SET likedContent = ? WHERE username = '{$sessionUser}'");
-                $query->bind_param("s", $liked);
-                $query->execute();
-                $query->close();
+                if ($_SESSION["updatedRating"] != $content["ID"] && $contentRequest == $content["ID"]) {
+                    include("backend/connect.php"); //I'm not sure why it seems like we have to reconnect to the db here...
+                    $query = $conn->prepare("UPDATE Users SET likedContent = ? WHERE username = '{$sessionUser}'");
+                    $query->bind_param("s", $liked);
+                    $query->execute();
+                    $query->close();
 
-                $query = $conn->prepare("UPDATE Content SET rating = ? WHERE ID = '{$contentRequest}'");
-                $rating = $content["rating"] - 1;
-                $query->bind_param("i", $rating);
-                $query->execute();
-                $query->close();
+                    $query = $conn->prepare("UPDATE Content SET rating = ? WHERE ID = '{$contentRequest}'");
+                    $rating = $content["rating"] - 1;
+                    $query->bind_param("i", $rating);
+                    $query->execute();
+                    $query->close();
 
-                $query = $conn->prepare("SELECT rating FROM Content WHERE ID = '{$contentRequest}'");
-                $query->bind_result($rating);
-                $query->execute();
-                $query->fetch();
+                    $query = $conn->prepare("SELECT rating FROM Content WHERE ID = '{$contentRequest}'");
+                    $query->bind_result($rating);
+                    $query->execute();
+                    $query->fetch();
 
-                $content["rating"] = $rating;
-                $GLOBALS["updatedRating"] = true;
+                    $content["rating"] = $rating;
+                    $_SESSION["updatedRating"] = $content["ID"];
+                }
             }
         }
     }

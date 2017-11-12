@@ -211,7 +211,8 @@
                     //};
                     }
 
-                    $GLOBALS["updatedRating"] = false; //Using a global variable to make it apply to the functions above correctly.
+                    if (!isset($_SESSION["updatedRating"])) $_SESSION["updatedRating"] = -1;
+
                     loadContent("Latest");
                     loadContent("Top Rated"); //This does not work currently, can be good if you can actually rate content first
                     loadContent("Editor's Choice");
