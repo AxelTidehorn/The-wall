@@ -1,3 +1,11 @@
+<?php
+    @ session_start();
+
+    if (isset($_SESSION["user_id"])) {
+        header("location:user.php?user_ID=".$_SESSION["user_id"]."");
+    }
+?>
+
 <?php include "config.php" //Fix the question marks for § for example when choosing user name if possible, AND REMOVE BOMs FROM ALL FILES ?>
 
 <!DOCTYPE html>

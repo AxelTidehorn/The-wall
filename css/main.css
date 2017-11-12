@@ -791,8 +791,15 @@ footer{
   padding-bottom: 5px;*/
 }
 #footerContainer{
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-top: 28px;
+}
+footer a{
+    color: #b0b0b0;
+    text-decoration: none;
+    margin: 0px 24px;
+}
+footer p{
+    margin-top: 12px;
 }
 .fb{
   display: inline-block;
@@ -908,5 +915,13 @@ footer{
     }
     .actioncont{
         bottom: 16px;
+    }
+}
+
+@media (min-width: 960px){
+    main{
+        width: 960px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

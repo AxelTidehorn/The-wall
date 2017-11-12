@@ -36,10 +36,9 @@
                     //This will be used both to show ALL posts, and to show an induvidual posts!
                     //You will get the user id by a form input in the url. something like www.thewall.com/post?postID=2
                     //This will then be used so get the correct content.
-                    if (isset($_GET['post'])) {
-
-                        $userID = $_GET['post'];
-                        $query = $conn->prepare("SELECT * FROM `Content` WHERE `ID` = " . $userID . "");
+                    /*if (isset($_GET['post'])) {
+                        $contentID = $_GET['post'];
+                        $query = $conn->prepare("SELECT * FROM `Content` WHERE `ID` = " . $contentID . "");
                         $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                         $query->store_result();
                         $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags);
@@ -74,7 +73,19 @@
                             print'There were no content matching the URL. It might have been moved or Deleted.';
                         }
 
-                    } else {
+                    } else {*/
+                        include("config.php"); //Because apparently it did not know what the $currentURI variable was even if we included it before.
+
+                        if (isset($_GET["like"]) && !isset($_GET["redirected"])) {
+                            header("location:" . $currentURI . "&redirected=true#" . $_GET["like"]);
+                            exit();
+                        }
+
+                        if (isset($_GET["unlike"]) && !isset($_GET["redirected"])) {
+                            header("location:" . $currentURI . "&redirected=true#" . $_GET["unlike"]);
+                            exit();
+                        }
+
                         if (isset($_SESSION["user_id"])) {
                             $query = $conn->prepare("SELECT likedContent FROM Users WHERE id = " . $_SESSION["user_id"]);
                             $query->bind_result($likedContent);
@@ -131,7 +142,11 @@
                                 $order = " ORDER BY rating, date";
                             }
 
-                            $query = $conn->prepare("SELECT * FROM `Content`" . $where . $order);
+                            if ($type == "Latest") { //Using a sub query which within the parenthesis selects the rows and orders it by id from highest to lowest and limits it there. That way you can get the "last five rows", but from oldest to newest, so then reverse it with a subQuery. (Seems like it is ASC/ascending/starting from 0 going up, as default)
+                                $query = $conn->prepare("SELECT * FROM (SELECT * FROM `Content` ORDER BY id DESC LIMIT 8) subQuery ORDER BY id");
+                            } else {
+                                $query = $conn->prepare("SELECT * FROM `Content`" . $where . $order . " LIMIT 8");
+                            }
 
                             $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                             $query->store_result();
@@ -214,7 +229,7 @@
                                                 <form method='GET' class='buttoncont'>
                                                     <input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />";
                                                     if (isset($_SESSION["user_id"])) {
-                                                        echo "<input type='submit' class='" . $class . "' href='" . $link . "' value='" . $likeString . " (" . $content["rating"] . ")' />";
+                                                        echo "<input type='submit' class='" . $class . "' value='" . $likeString . " (" . $content["rating"] . ")' />";
                                                     } else {
                                                         echo "<a href='login.php' class='" . $class . "'/>" . $likeString . "</a>";
                                                     }
@@ -232,7 +247,7 @@
                         //Here is where we will display ALL the posts! We could use $_POST here to make you able to search among the users.
 
                     //};
-                    }
+                    //}
 
                     if (!isset($_SESSION["updatedRating"])) $_SESSION["updatedRating"] = -1;
 
