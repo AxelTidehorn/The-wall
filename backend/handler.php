@@ -35,7 +35,7 @@ switch ($uploadedForm['uploadType']) { //test
         $query->bind_param("ssssddsss", $uploadType, $_SESSION["user_id"] , $name, $imageToUpload, $nsfw, $publicDomain, $date, $description, $tags);
         $query->execute();
         $query->close();
-
+        imagedestroy($url);
         break;
 
     case 'text':
@@ -69,7 +69,7 @@ switch ($uploadedForm['uploadType']) { //test
 
         //        imageCompression($uploadedForm['uploadedImage']);
         $imageLocation = $_FILES['uploadedWebsite']['tmp_name'];
-        $url = "destination .jpg";
+        $url = "destination.jpg";
         $compressedImage = compress_image($imageLocation, $url);
         $fileContent = addslashes(file_get_contents($url));
 //        var_dump($compressedImage);

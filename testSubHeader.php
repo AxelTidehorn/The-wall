@@ -7,6 +7,7 @@ if (isset($_GET['user_ID'])) {
         <div class="subHeader">
             <div class="subHeadItem"><a href='.$baseURL.'>Profile</a></div>
             <div class="subHeadItem"><a href='.$baseURL."&friends".'>Friends</a></div>
+            <div class="subHeadItem"><a href="'.$baseURL."&posts".'">Posts</a></div>
             <div class="subHeadItem"><a href='.$baseURL."&liked".'>Liked</a></div>
             <div class="subHeadItem"><a href="logout.php">Log Out</a></div>
         </div>
@@ -17,6 +18,7 @@ if (isset($_GET['user_ID'])) {
         <div class="subHeader">
             <div class="subHeadItem"><a href='.$baseURL.'>Profile</a></div>
             <div class="subHeadItem"><a href='.$baseURL."&friends".'>Friends</a></div>
+            <div class="subHeadItem"><a href="'.$baseURL."&posts".'">Posts</a></div>
             <div class="subHeadItem"><a href='.$baseURL."&liked".'>Liked</a></div>
         </div>';
     }
