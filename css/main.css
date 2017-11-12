@@ -75,6 +75,7 @@ img{
         /*HEADER*/
 header{
     overflow: hidden;
+    display: none;
 }
 .navBar{
   display: flex;
@@ -241,7 +242,7 @@ p{
   position: relative;
   padding-bottom: 24px;
   cursor: pointer;
-  transition: 1s;
+  transition: 1s opacity;
   opacity: 0;
 }
 .contentcont.visible{
@@ -413,6 +414,9 @@ input.actionLink{
     color: #808080;
     background-color: transparent;
     border: none;
+}
+.comments form{
+    clear:both;
 }
 
 /* PROFILE */
@@ -899,5 +903,8 @@ footer p{
         width: 960px;
         margin-left: auto;
         margin-right: auto;
+    }
+    .contentPage header{
+        display: block;
     }
 }
