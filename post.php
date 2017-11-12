@@ -9,6 +9,7 @@
     <body>
         <div id="pageContainer" class="contentPage">
             <?php
+                include("testHead.php");
 
                 if (!isset($_SESSION)) {
                     session_start();
@@ -38,10 +39,18 @@
                             $query->execute();
                             $query->fetch();
 
-                            $image = base64_encode(stripslashes($contentArray[0]['image']));
+                            $image = base64_encode(stripslashes($contentArray[0]['image'])); //<img src='data:image/jpeg;base64," . $image . "' alt='an excellent picture'>
                             print"
                                 <div class='contentcont'>
-                                    <a href='index.php#" . $contentArray[0]["ID"] . "'><img src='data:image/jpeg;base64," . $image . "' alt='an excellent picture'></a>
+                                    <a href='index.php#" . $contentArray[0]["ID"] . "'>";
+                                    if ($contentArray[0]["type"] == "text") {
+                                        echo "<img class='linkImg' src='imgs/text.png'/>";
+                                    } else if ($contentArray[0]["type"] == "website") {
+                                        echo "<img class='linkImg' src='data:image/jpeg;base64," . $webbsite . "'/>";
+                                    } else {
+                                        echo "<img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>";
+                                    }
+                                    echo "</a>
                                     <div class='backButton'><a href='index.php#" . $contentArray[0]["ID"] . "'>Back</a></div> <!-- Realized we might not need this here, but could possibly use it elsewhere if needed. -->
                                     <div class='actioncont contentInfo'>
                                         <div class='contentName'>" . $contentArray[0]["name"] . "</div>
@@ -49,7 +58,7 @@
                                         <div class='contentBox'>
                                             <div class='profilecont'>
                                                 <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
-                                                <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
+                                                <a class='profilename' href='user.php?user_ID=" . $contentArray[0]["ID"] . "'>" . $publisherName . "</a>
                                             </div>
                                             <div class='buttoncont'>
                                                 <a class='likebtn' href='#'>LIKE (" . $contentArray[0]["rating"] . ")</a>
@@ -63,8 +72,16 @@
                             <section>
                                 <h2>Description</h2>
                                 <p>' . $contentArray[0]["description"] . '</p>
-                            </section>
-                            <section class="comments">
+                            </section>';
+                            if ($contentArray[0]["type"] == "text") {
+                                echo '
+                                    <section>
+                                        <h2>Text content</h2>
+                                        <p>' . $contentArray[0]["text"] . '</p>
+                                    </section>
+                                ';
+                            }
+                            echo '<section class="comments">
                                 <form method="POST">
                                     <label>Make a commment</label>
                                     <textarea class="commentBox" name="comment">';
