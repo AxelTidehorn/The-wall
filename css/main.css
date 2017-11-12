@@ -75,6 +75,8 @@ img{
         /*HEADER*/
 header{
     overflow: hidden;
+}
+.contentPage header{
     display: none;
 }
 .navBar{
@@ -965,7 +967,6 @@ footer p{
         margin-right: auto;
     }
     .contentPage header{
-    header{
         display: block;
     }
 }

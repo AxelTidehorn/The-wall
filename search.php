@@ -37,6 +37,8 @@
             include "config.php";
             include("backend/connect.php");
 
+            if (!isset($_SESSION["updatedRating"])) $_SESSION["updatedRating"] = -1;
+
             if ($sessionUser) {
                 $query = $conn->prepare("SELECT friends FROM Users WHERE username = '{$sessionUser}'"); //Fetching the logged in users friend list
                 $query->bind_result($friends);
@@ -145,25 +147,42 @@
                         print'<h2>Post results</h2>';
 
                         foreach ($contentArray as $content) {
+                            $query = $conn->prepare("SELECT username FROM Users WHERE id = '" . $content['publisherID'] . "'");
+                            $query->bind_result($publisherName);
+                            $query->execute();
+                            $query->fetch();
+
                             $image = base64_encode(stripslashes($content['image']));
+                            $webbsite = base64_encode(stripslashes($content['webbsite']));
                             $id = $content['ID'];
-                            print"
-                            <form action='post.php' method='get' class='form contentcont'>
-                                <input type='hidden' value='" . $id . "' name='post'/>
-                                <div onclick='this.parentNode.submit();'>
-                                    <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
-                                </div>
-                                <div class='actioncont'>
-                                    <div class='profilecont'>
-                                        <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
-                                        <a class='profilename' href='LINK-TO-PROFILE'>Chef Excellence</a>
-                                    </div>
-                                    <div class='buttoncont'>
-                                        <a class='likebtn' href='#'>LIKE</a>
-                                    </div>
-                                </div>
-                            </form>
-                        ";
+
+                            //Likes
+                            include("backend/connect.php");
+
+                            //@ session_start();
+
+                            if (isset($_SESSION["username"])) {
+                                $sessionUser = $_SESSION["username"];
+                            } else {
+                                $sessionUser = false;
+                            }
+
+                            if ($sessionUser) {
+                                $query = $conn->prepare("SELECT likedContent FROM Users WHERE username = '{$sessionUser}'");
+                                $query->bind_result($liked);
+                                $query->execute();
+                                $query->fetch();
+                            }
+
+                            if (isset($_SESSION["user_id"])) {
+                                include("includes/likeHandler.php");
+                            } else {
+                                $name = "like";
+                                $likeString = "Like";
+                                $class = "likebtn";
+                            }
+
+                            include("includes/contentRenderer.php");
                         }
                     }
                     if(!isset($contentArraye)){
@@ -303,25 +322,45 @@
                             print'<h2>Post results</h2>';
                         }
                         foreach ($contentArray as $content) {
+                            $query = $conn->prepare("SELECT username FROM Users WHERE id = '" . $content['publisherID'] . "'");
+                            $query->bind_result($publisherName);
+                            $query->execute();
+                            $query->fetch();
+
                             $image = base64_encode(stripslashes($content['image']));
+                            $webbsite = base64_encode(stripslashes($content['webbsite']));
                             $id = $content['ID'];
-                            print"
-                            <form action='post.php' method='get' class='form contentcont'>
-                                <input type='hidden' value='" . $id . "' name='post'/>
-                                <div onclick='this.parentNode.submit();'>
-                                    <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
-                                </div>
-                                <div class='actioncont'>
-                                    <div class='profilecont'>
-                                        <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
-                                        <a class='profilename' href='LINK-TO-PROFILE'>Chef Excellence</a>
-                                    </div>
-                                    <div class='buttoncont'>
-                                        <a class='likebtn' href='#'>LIKE</a>
-                                    </div>
-                                </div>
-                            </form>
-                        ";
+
+                            //Likes
+                            include("backend/connect.php");
+
+                            //@ session_start();
+
+                            if (isset($_SESSION["username"])) {
+                                $sessionUser = $_SESSION["username"];
+                            } else {
+                                $sessionUser = false;
+                            }
+
+                            //include "config.php";
+                            //include("backend/connect.php");
+
+                            if ($sessionUser) {
+                                $query = $conn->prepare("SELECT likedContent FROM Users WHERE username = '{$sessionUser}'");
+                                $query->bind_result($liked);
+                                $query->execute();
+                                $query->fetch();
+                            }
+
+                            if (isset($_SESSION["user_id"])) {
+                                include("includes/likeHandler.php");
+                            } else {
+                                $name = "like";
+                                $likeString = "Like";
+                                $class = "likebtn";
+                            }
+
+                            include("includes/contentRenderer.php");
                         }
                         echo "</div>";
                     }
