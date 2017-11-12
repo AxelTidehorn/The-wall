@@ -136,14 +136,14 @@
                             $where = "";
 
                             if ($type == "Top Rated") {
-                                $order = " ORDER BY rating, date";
+                                $order = " ORDER BY rating DESC";
                             } else if ($type == "Editor's Choice") {
                                 $where = " WHERE editorsChoice = true";
-                                $order = " ORDER BY rating, date";
+                                $order = " ORDER BY rating DESC";
                             }
 
-                            if ($type == "Latest") { //Using a sub query which within the parenthesis selects the rows and orders it by id from highest to lowest and limits it there. That way you can get the "last five rows", but from oldest to newest, so then reverse it with a subQuery. (Seems like it is ASC/ascending/starting from 0 going up, as default)
-                                $query = $conn->prepare("SELECT * FROM (SELECT * FROM `Content` ORDER BY id DESC LIMIT 8) subQuery ORDER BY id");
+                            if ($type == "Latest") { //Using a sub query which within the parenthesis selects the rows and orders it by id from highest to lowest and limits it there. That way you can get the "last five rows", but from oldest to newest, so then reverse it with a subQuery. (Seems like it is ASC/ascending/starting from 0 going up, as default, although, maybe it's not since we seem to reverse the array further down)
+                                $query = $conn->prepare("SELECT * FROM (SELECT * FROM `Content` ORDER BY id DESC LIMIT 8) subQuery ORDER BY id DESC");
                             } else {
                                 $query = $conn->prepare("SELECT * FROM `Content`" . $where . $order . " LIMIT 8");
                             }
@@ -162,7 +162,7 @@
                             $query->close();
 
                             //Funnily enough, it seems like we want to reverse it no matter the type. Either newest to oldest, or highest rating to lowest.
-                            $contentArray = array_reverse($contentArray, true); //true to keep the keys of the array, seems to work without it though.
+                            //$contentArray = array_reverse($contentArray, true); //true to keep the keys of the array, seems to work without it though.
                             //Simply reversing the array assuming they are added in chronological order to get the latest instead of making lots of sql queries to check different time frames.
 
                             foreach ($contentArray as $content) {
@@ -219,12 +219,12 @@
                                             echo "</div>
                                         </form>
                                         <div class='actioncont'>
-                                            <div class='contentName'>" . $content["name"] . "</div>
+                                            <div class='contentName'><a href='post.php?post=" . $id . "'>" . $content["name"] . "</a></div>
 
                                             <div class='contentBox'>
                                                 <div class='profilecont'>
                                                     <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
-                                                    <a class='profilename' href='LINK-TO-PROFILE'>" . $publisherName . "</a>
+                                                    <a class='profilename' href='user.php?user_ID=" . $content['publisherID'] . "'>" . $publisherName . "</a>
                                                 </div>
                                                 <form method='GET' class='buttoncont'>
                                                     <input type='hidden' name='" . $name . "' value='" . $content["ID"] . "' />";
@@ -237,6 +237,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <script src='js/animate.js'></script>
                                 ";
 
                                 //$query->close(); //This seems to fix it, not sure why. Maybe it doesn't like leftover stored information or something?

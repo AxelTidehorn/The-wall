@@ -240,6 +240,18 @@ p{
   width: 100%;
   position: relative;
   padding-bottom: 24px;
+  cursor: pointer;
+  transition: 1s;
+  opacity: 0;
+}
+.contentcont.visible{
+    opacity: 1;
+}
+.contentcont.visible:hover{
+    opacity: 0.8;
+}
+.contentPage .contentcont{
+    opacity: 1;
 }
 .searchImage{
     height: 150px;
@@ -383,6 +395,10 @@ a.img{
     font-size: 32px;
     font-style: italic;
     text-align: center;
+}
+.contentName a{
+    color: black;
+    text-decoration: none;
 }
 .contentBox{
     overflow: hidden;
