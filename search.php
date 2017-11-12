@@ -20,22 +20,29 @@
                       <input type="text" name="advancedSearch" >
                       <input id="advancedBtn" type="submit" value="Search" name="searchRight">
                   </div>
-                  <div>
-                      <input type="checkbox" name="imageSearch" checked>
-                      <label>Images</label>
+                  <div class="checkCont">
+                    <label class="checkboxCont">Images
+                      <input class="checkInput" type="checkbox" name="imageSearch" checked>
+                      <span class="checkmarkBox"></span>
+                    </label>
+
+
+                    <label class="checkboxCont">Websites
+                      <input class="checkInput" type="checkbox" name="WebbsiteSearch" checked>
+                      <span class="checkmarkBox"></span>
+                    </label>
+
+                    <label class="checkboxCont">Text
+                      <input class="checkInput" type="checkbox" name="TextSearch" checked>
+                      <span class="checkmarkBox"></span>
+                      </label>
+
+                    <label class="checkboxCont">User
+                      <input class="checkInput" type="checkbox" name="userSearch" checked>
+                      <span class="checkmarkBox"></span>
+                    </label>
                   </div>
-                  <div>
-                      <input type="checkbox" name="WebbsiteSearch" checked>
-                      <label>Websites</label>
-                  </div>
-                  <div>
-                      <input type="checkbox" name="TextSearch" checked>
-                      <label>Text</label>
-                  </div>
-                  <div>
-                      <input type="checkbox" name="userSearch" checked>
-                      <label>User</label>
-                  </div>
+
 
                 <!--Users
                 <input type="checkbox" name="UserSearch" checked>

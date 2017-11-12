@@ -442,6 +442,7 @@ input.actionLink{
 }
 input[name="advancedSearch"] {
     margin: 0px auto;
+    text-align: center;
     padding: 4px;
     width: 100%;
     display: block;
@@ -467,19 +468,92 @@ input[name="searchRight"] {
     margin: 0px;
 }
 .advancedSearch{
-    overflow: hidden;
+
 }
 .advancedSearch label{
     margin: 4px 8px;
-    float: left;
+    color: white;
+    text-align: right;
 }
 .advancedSearch input{
     float: left;
 }
 .advancedSearch div{
-    overflow: hidden;
+
     display: block;
-    width: 100%;
+}
+.checkCont{
+  text-align: center;
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+}
+
+/* The container */
+.checkboxCont {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkboxCont .checkInput {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Create a custom checkbox */
+.checkmarkBox {
+  background-color: white;
+  position: absolute;
+  margin-left: 16px;
+  top: 1%;
+  left: 1%;
+  height: 26px;
+  width: 26px;
+  transition: linear .2s;
+}
+
+/* On mouse-over, add a grey background color */
+.checkboxCont:hover .checkInput ~ .checkmarkBox {
+    background-color: white;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkmarkBox .checkInput:checked ~ .checkmarkBox {
+    background-color: rgb(80, 150, 80);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmarkBox:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkboxCont .checkInput:checked ~ .checkmarkBox:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkboxCont .checkmarkBox:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid rgb(80, 150, 80);
+    border-width: 0 4px 4px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 /* PROFILE */
