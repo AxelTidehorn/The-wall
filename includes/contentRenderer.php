@@ -22,18 +22,17 @@
                         <a class='profilename' href='user.php?user_ID=" . $content['publisherID'] . "'>" . $publisherName . "</a>
                     </div>
                     <form method='GET' class='buttoncont'>";
-                        if ($currentPage == "post.php") {
-                            echo "<input type='hidden' name='post' value='" . $_GET["post"] . "' />";
-                        }
                         if ($currentPage == "user.php") {
                             echo "<input type='hidden' name='user_ID' value='" . $_GET["user_ID"] . "' />";
                             echo "<input type='hidden' name='liked' />";
                         }
                         if ($currentPage == "search.php" && isset($_GET["generalSearch"])) {
                             echo "<input type='hidden' name='generalSearch' value='" . $_GET["generalSearch"] . "' />";
+                            echo "<input type='hidden' name='liked' />";
                         }
                         if ($currentPage == "search.php" && isset($_GET["advancedSearch"])) {
                             echo "<input type='hidden' name='advancedSearch' value='" . $_GET["advancedSearch"] . "' />";
+                            echo "<input type='hidden' name='liked' />";
 
                             if (isset($_GET["imageSearch"])) {
                                 echo "<input type='hidden' name='imageSearch' value='" . $_GET["imageSearch"] . "' />";
