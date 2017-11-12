@@ -392,6 +392,18 @@ a.img{
 .contentPage .comment .profilename{
     color: #000000;
 }
+.tag{
+    padding: 8px;
+    margin: 8px;
+    border-radius: 4px;
+    background-color: #70c080;
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-block;
+}
+.description p{
+    margin-bottom: 24px;
+}
 .comment .likebtn, .comment .unlikebtn{
     float: right;
 }
@@ -1019,6 +1031,19 @@ footer p{
     }
     section{
         width: 400px;
+        padding: 0px;
+    }
+    section.comments{
+        width: calc(100% - 64px);
+    }
+    .backButton{
+        display: none;
+    }
+    .contentPage .contentInfo{
+        background-color: transparent;
+    }
+    .contentPage .profilename, .contentPage .contentName{
+        color: black;
     }
 }
 .postboxen{

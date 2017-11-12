@@ -34,6 +34,12 @@
                                 $contentArray[] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags, 'editorsChoice' => $editorsChoice);
                             }
 
+                            $query = $conn->prepare("UPDATE Content SET views = ? WHERE `ID` = " . $contentArray[0]["ID"] . "");
+                            $views = $contentArray[0]["views"] + 1;
+                            $query->bind_param("i", $views);
+                            $query->execute();
+                            $query->close();
+
                             //Checking if there is an entry in the DB with that ID and that the query didn't return empty
                             if (isset($contentArray)) {
                                 $query = $conn->prepare("SELECT username FROM Users WHERE id = '" . $contentArray[0]['publisherID'] . "'");
@@ -65,6 +71,7 @@
                                                 </div>
                                                 <div class='buttoncont'>
                                                     <a class='likebtn' href='#'>LIKE (" . $contentArray[0]["rating"] . ")</a>
+                                                    <span class='insignificant'>(" . $contentArray[0]["views"] . " views)</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,7 +82,23 @@
                                 <section class="description">
                                     <h2 id="getdown">Description</h2>
                                     <p>' . $contentArray[0]["description"] . '</p>
-                                </section>';
+                                    <p class="insignificant">' . $contentArray[0]["date"] . '</p>';
+                                    if ($contentArray[0]["editorsChoice"]) {
+                                        echo '<span class="tag special">editorsChoice</span>';
+                                    }
+                                    if ($contentArray[0]["nsfw"]) {
+                                        echo '<span class="tag special">NSFW</span>';
+                                    }
+                                    if ($contentArray[0]["publicDomain"]) {
+                                        echo '<span class="tag special">Public domain</span>';
+                                    }
+                                    if ($contentArray[0]["tags"]) {
+                                        $tags = explode("?", $contentArray[0]["tags"]);
+                                        foreach($tags as $tag) {
+                                            echo '<a class="tag" href="search.php?generalSearch=' . $tag . '">' . $tag . '</a>';
+                                        }
+                                    }
+                                echo '</section>';
                                 if ($contentArray[0]["type"] == "text") {
                                     echo '
                                         <section>
@@ -87,36 +110,43 @@
                                 }
                                 echo '<section class="comments">
                                     <form method="POST">
-                                        <label>Make a commment</label>
+                                        <h2>Comments</h2>
+
+                                        <label>Post a comment</label>
                                         <textarea class="commentBox" name="comment">';
-                                                include("backend/connect.php");
+                                            include("backend/connect.php");
 
-                                                @ session_start();
+                                            @ session_start();
 
-                                                //If you are trying to post a comment and if you are logged in, post a comment to the database basically. (unfinished)
-                                                if (isset($_SESSION["username"]) && isset($_POST["comment"]) && !empty($_POST["comment"] && !isset($_POST["save"]))) {
-                                                    $query = $conn->prepare("SELECT comment FROM Comments WHERE content = '" . $contentArray[0]["ID"] . "' AND publisher = '" . $_SESSION["user_id"] . "' AND comment = '" . $_POST["comment"] . "'");
+                                            //If you are trying to post a comment and if you are logged in, post a comment to the database basically. (unfinished)
+                                            if (isset($_SESSION["username"]) && isset($_POST["comment"]) && !empty($_POST["comment"] && !isset($_POST["save"]))) {
+                                                $comment = $_POST["comment"];
+                                                $comment = mysqli_real_escape_string($conn, $comment);
+                                                $comment = htmlentities($comment);
+
+                                                $query = $conn->prepare("SELECT comment FROM Comments WHERE content = '" . $contentArray[0]["ID"] . "' AND publisher = '" . $_SESSION["user_id"] . "' AND comment = '" . $comment . "'");
+                                                $query->execute();
+                                                $query->store_result();
+
+                                                if (!$query->num_rows()) { //Basically a test so when the user refreshes the page and resends forms, it doesn't send the same message over and over. It kind of takes care of spam as well so you can't send the same exact message multiple times.
+                                                    $username = $_SESSION["username"];
+                                                    $query = $conn->prepare("INSERT INTO Comments (publisher, content, date, comment) VALUES(?, ?, ?, ?)"); //Lack of content foreign key might be the cause of it not working currently.
+                                                    $date = date("Y-m-d");
+                                                    $query->bind_param("ssss", $_SESSION["user_id"], $contentArray[0]["ID"], $date, $comment);
                                                     $query->execute();
-                                                    $query->store_result();
-
-                                                    if (!$query->num_rows()) { //Basically a test so when the user refreshes the page and resends forms, it doesn't send the same message over and over. It kind of takes care of spam as well so you can't send the same exact message multiple times.
-                                                        $username = $_SESSION["username"];
-                                                        $query = $conn->prepare("INSERT INTO Comments (publisher, content, date, comment) VALUES(?, ?, ?, ?)"); //Lack of content foreign key might be the cause of it not working currently.
-                                                        $date = date("Y-m-d");
-                                                        $query->bind_param("ssss", $_SESSION["user_id"], $contentArray[0]["ID"], $date, $_POST["comment"]);
-                                                        $query->execute();
-                                                    }
-                                                } else if (!isset($_SESSION["username"])) {
-                                                    echo 'Log in to comment on content.';
                                                 }
+                                            } else if (!isset($_SESSION["username"])) {
+                                                echo 'Log in to comment on content.';
+                                            }
                                          echo '</textarea>
                                             <input type="submit" value="Publish comment"></input>
-                                        </form>
-                                        <h2>Comments</h2>';
+                                        </form>';
 
                                         if (isset($_POST["save"])){
                                             $query = $conn->prepare("UPDATE Comments SET comment = ? WHERE id = '" . $_POST["commentId"] . "'");
                                             $comment = $_POST["comment"];
+                                            $comment = mysqli_real_escape_string($conn, $comment);
+                                            $comment = htmlentities($comment);
                                             $query->bind_param("s", $comment);
                                             $query->execute();
                                             $query->close();
@@ -137,7 +167,7 @@
                                         $commentsArray = array();
 
                                         while ($query->fetch()) {
-                                            $commentsArray[] = array("id" => $id, "publisher" => $publisher, "date" => $date, "comment" => $comment);
+                                            $commentsArray[] = array("id" => $id, "publisher" => $publisher, "date" => $date, "comment" => $description = stripslashes($comment));
                                         }
 
                                         $query->close();
