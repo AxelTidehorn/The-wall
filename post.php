@@ -8,57 +8,8 @@
 
     <body>
         <div id="pageContainer" class="contentPage">
-<<<<<<< HEAD
-            <?php
-
-
-                if (!isset($_SESSION)) {
-                    session_start();
-                }
-
-                    //This will be used both to show ALL posts, and to show an induvidual posts!
-                    //You will get the user id by a form input in the url. something like www.thewall.com/post?postID=2
-                    //This will then be used so get the correct content.
-                    if (isset($_GET['post'])) {
-
-                        $userID = $_GET['post'];
-                        $query = $conn->prepare("SELECT * FROM `Content` WHERE `ID` = " . $userID . "");
-                        $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
-                        $query->store_result();
-                        $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags, $editorsChoice);
-
-
-                        //    trying to create a associative array with all the content. This is how im used to working.
-                        while ($query->fetch()) {
-                            $contentArray[] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags, 'editorsChoice' => $editorsChoice);
-                        }
-
-                        //Checking if there is an entry in the DB with that ID and that the query didn't return empty
-                        if (isset($contentArray)) {
-                            $query = $conn->prepare("SELECT username FROM Users WHERE id = '" . $contentArray[0]['publisherID'] . "'");
-                            $query->bind_result($publisherName);
-                            $query->execute();
-                            $query->fetch();
-
-                            $image = base64_encode(stripslashes($contentArray[0]['image'])); //<img src='data:image/jpeg;base64," . $image . "' alt='an excellent picture'>
-                            print"
-                                <div class='co postboxen'>
-                                    <a href='index.php#" . $contentArray[0]["ID"] . "'>";
-                                    if ($contentArray[0]["type"] == "text") {
-                                        echo "<img class='thepost' src='imgs/text.png'/>";
-                                    } else if ($contentArray[0]["type"] == "website") {
-                                        echo "<img class='thepost' src='data:image/jpeg;base64," . $webbsite . "'/>";
-                                    } else {
-                                        echo "<img class='thepost' src='data:image/jpeg;base64," . $image . "'/>";
-                                    }
-                                    echo "</a>
-                                    <div class='backButton'><a href='index.php#" . $contentArray[0]["ID"] . "'>Back</a></div> <!-- Realized we might not need this here, but could possibly use it elsewhere if needed. -->
-                                    <div class='actioncont contentInfo'>
-                                        <div class='contentName'>" . $contentArray[0]["name"] . "</div>
-=======
                 <?php
                     include("testHead.php");
->>>>>>> Samuels-Branch
 
                     echo '<main>';
 
@@ -160,18 +111,6 @@
                                 ";
 
                                 echo '
-<<<<<<< HEAD
-                                    <section>
-                                        <h2>Text content</h2>
-                                        <p>' . $contentArray[0]["text"] . '</p>
-                                    </section>
-                                ';
-                            }
-                            echo '<section class="comments">
-                                <form method="POST">
-                                    <label>Make a commment</label>
-                                    <textarea id="textArea" class="commentBox" name="comment">';
-=======
                                 <section class="description">
                                     <h2 id="getdown">Description</h2>
                                     <p>' . $contentArray[0]["description"] . '</p>
@@ -207,7 +146,6 @@
 
                                         <label>Post a comment</label>
                                         <textarea class="commentBox" name="comment">';
->>>>>>> Samuels-Branch
                                             include("backend/connect.php");
 
                                             @ session_start();
