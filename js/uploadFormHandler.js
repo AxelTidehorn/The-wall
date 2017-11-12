@@ -56,7 +56,7 @@ function createTag() {
     if (tagInput.value != '') {
         // alert('hey?');
         // console.log(tagData.value);
-        shownTags.innerHTML += (tagField.value + '</br>');
+        shownTags.innerHTML += (tagField.value + ', ');
         if (tagData.value == '') {
             console.log('first');
             tagData.value = tagField.value;
