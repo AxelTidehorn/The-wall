@@ -13,6 +13,14 @@ include_once "backend/connect.php";
         <?php
         if (!isset($_SESSION)) {
             session_start();
+
+        }
+        if(isset($_FILES['profilePic']['tmp_name'])){
+            $profileImg = addslashes(file_get_contents($_FILES['profilePic']['tmp_name']));
+            require_once'backend/connect.php';
+            $query = $conn->prepare("UPDATE `Users` SET `ProfileImage`='".$profileImg."' WHERE `id` = '".$_SESSION['user_id']."'");
+
+            $query->execute();
         }
 
         //This will be used both to show ALL posts, and to show an induvidual posts!
@@ -76,15 +84,35 @@ include_once "backend/connect.php";
 
                         }
                     }*/
-
                     $image = base64_encode(stripslashes($contentArray[0]['profileImage']));
                     $username = $contentArray[0]['userName'];
                     $joinDate = $contentArray[0]['joinDate'];
                     $description = $contentArray[0]['description'];
+
                     print"
                     <div class='profPicCont'>
-                        <img src='imgs/axel.jpg' alt='profilepic'>
+                    ";
+
+                    if($contentArray[0]['profileImage'] !== null){
+                        print "<img src='data:image/jpeg;base64," . $image . "' alt='imgs/axel.jpg'>";
+                    }else{
+                        print"<img src='imgs/axel.jpg' alt='imgs/axel.jpg'>";
+                    }
+                        print"
                     </div>
+                    ";
+                    if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['user_ID']){
+                        print'
+                        <div>
+                        <form action="" name="profilePic" enctype="multipart/form-data" method="post" >
+                            <input type="file" name="profilePic">
+                            <input type="hidden" value="test">
+                            <input type="submit">
+                        </form>
+                        </div>
+                        ';
+                    }
+                    print"
                     <h1 class='center-text profile'>" . $username . "</h1>
                     <span class='joined'>Joined " . $joinDate . "</span>
                     <h3 class='center-text'>Description</h3>
