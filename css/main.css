@@ -453,6 +453,8 @@ input.actionLink{
   text-decoration: none;
   font-weight: bold;
   padding: 8px 15px;
+  border: none;
+  cursor: pointer;
   border-radius: 5px;
   transition: ease-in .15s;
   display: block;
@@ -765,10 +767,13 @@ h1.profile{
 }
 .descriptionCont{
   text-align: center;
-  margin: 8px 0
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #f7f7f7;
 }
-.descriptionCont > h3{
-  margin: 0 0 8px 0
+.descriptionCont > p{
+  margin: 0;
 }
         /*FOOTER*/
 main:after{
@@ -880,6 +885,10 @@ footer{
           #tagInput{
             width: 30%;
             text-align: center;
+          }
+          .descriptionCont{
+            width: 60%;
+            margin: 0 auto;
           }
 
         }

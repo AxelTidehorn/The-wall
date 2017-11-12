@@ -90,8 +90,8 @@ include_once "backend/connect.php";
                     </div>
                     <h1 class='center-text profile'>" . $username . "</h1>
                     <span class='joined'>Joined " . $joinDate . "</span>
+                    <h3 class='center-text'>Description</h3>
                     <div class='descriptionCont'>
-                      <h3>Description</h3>
                       <p>
                       " . $description . "
                       </p>
