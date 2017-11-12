@@ -11,6 +11,7 @@
     <?php include "testHead.php" ?>
     <main>
         <section>
+            <h2 class="insignificant">Advanced search</h2>
             <form action="">
                 <input type="text" name="advancedSearch">
                 What type of content do you wish to search for?
@@ -250,6 +251,9 @@
                         $query->execute();
                         $query->store_result();
 
+                        if (!$query->num_rows()) {
+                            echo "<p>No resuts</p>";
+                        }
 
                         while ($query->fetch()) {
                             if ($sessionUser !== false && $username != $sessionUser) { //Basically if the session user exists (that someone is logged in) and if the user we are looking at is not the user that is currently logged in. (why would he want to add himself?)
@@ -307,69 +311,75 @@
                             echo '</div></a>';
                         }
 
-
                         print'<div id="searchPage">';
                         $count = 0;
-                        $query = $conn->prepare("SELECT * FROM `Content` LIMIT 5");
+                        //$query = $conn->prepare("SELECT * FROM `Content` LIMIT 5");
+                        $query = $conn->prepare("SELECT * FROM `Content` WHERE `Name` LIKE '%" . $_GET["generalSearch"] . "%' OR tags LIKE '%" . $_GET["generalSearch"] . "%'");
                         $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                         $query->store_result();
                         $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags, $editorsChoise);
 
+                        print'<h2>Post results</h2>';
+
+                        if (!$query->num_rows()) {
+                            echo "<p>No resuts</p>";
+                        }
 
                         //    trying to create a associative array with all the content. This is how im used to working.
                         while ($query->fetch()) {
                             $count++;
                             $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags);
                         }
-                        if ($contentArray != null) {
-                            print'<h2>Post results</h2>';
-                        }
-                        foreach ($contentArray as $content) {
-                            $query = $conn->prepare("SELECT username FROM Users WHERE id = '" . $content['publisherID'] . "'");
-                            $query->bind_result($publisherName);
-                            $query->execute();
-                            $query->fetch();
 
-                            $image = base64_encode(stripslashes($content['image']));
-                            $webbsite = base64_encode(stripslashes($content['webbsite']));
-                            $id = $content['ID'];
-
-                            //Likes
-                            include("backend/connect.php");
-
-                            //@ session_start();
-
-                            if (isset($_SESSION["username"])) {
-                                $sessionUser = $_SESSION["username"];
-                            } else {
-                                $sessionUser = false;
-                            }
-
-                            //include "config.php";
-                            //include("backend/connect.php");
-
-                            if ($sessionUser) {
-                                $query = $conn->prepare("SELECT likedContent FROM Users WHERE username = '{$sessionUser}'");
-                                $query->bind_result($liked);
+                        if (isset($contentArray)) {
+                            if ($contentArray != null) {
+                            //}
+                        //}
+                            foreach ($contentArray as $content) {
+                                $query = $conn->prepare("SELECT username FROM Users WHERE id = '" . $content['publisherID'] . "'");
+                                $query->bind_result($publisherName);
                                 $query->execute();
                                 $query->fetch();
-                            }
 
-                            if (isset($_SESSION["user_id"])) {
-                                include("includes/likeHandler.php");
-                            } else {
-                                $name = "like";
-                                $likeString = "Like";
-                                $class = "likebtn";
-                            }
+                                $image = base64_encode(stripslashes($content['image']));
+                                $webbsite = base64_encode(stripslashes($content['webbsite']));
+                                $id = $content['ID'];
 
-                            include("includes/contentRenderer.php");
+                                //Likes
+                                include("backend/connect.php");
+
+                                //@ session_start();
+
+                                if (isset($_SESSION["username"])) {
+                                    $sessionUser = $_SESSION["username"];
+                                } else {
+                                    $sessionUser = false;
+                                }
+
+                                //include "config.php";
+                                //include("backend/connect.php");
+
+                                if ($sessionUser) {
+                                    $query = $conn->prepare("SELECT likedContent FROM Users WHERE username = '{$sessionUser}'");
+                                    $query->bind_result($liked);
+                                    $query->execute();
+                                    $query->fetch();
+                                }
+
+                                if (isset($_SESSION["user_id"])) {
+                                    include("includes/likeHandler.php");
+                                } else {
+                                    $name = "like";
+                                    $likeString = "Like";
+                                    $class = "likebtn";
+                                }
+
+                                include("includes/contentRenderer.php");
+                            }
+                            echo "</div>";
                         }
-                        echo "</div>";
                     }
-                //}
-
-            //}
+                }
             ?>
         </section>
     </main>
