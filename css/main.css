@@ -12,7 +12,7 @@ html{
 }
 body{
   box-sizing: border-box;
-  min-width: 414px;
+  //min-width: 414px;
   margin: 0 auto;
   padding: 0;
   font-family: 'Roboto', sans-serif;
@@ -26,7 +26,7 @@ body{
   margin-bottom: -96px;
 }
 main{
-    margin-top: 70px;
+    margin-top: 0px;
 }
 section{
     padding: 16px 32px;
@@ -256,6 +256,7 @@ p{
 .contentPage .contentcont{
     opacity: 1;
 }
+
 .searchImage{
     height: 150px;
     width: auto;
@@ -391,6 +392,21 @@ a.img{
 .contentPage .comment .profilename{
     color: #000000;
 }
+.tag{
+    padding: 8px;
+    margin: 8px;
+    border-radius: 4px;
+    background-color: #70c080;
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-block;
+}
+.description p{
+    margin-bottom: 24px;
+}
+.buttoncont span{
+    margin: 16px;
+}
 .comment .likebtn, .comment .unlikebtn{
     float: right;
 }
@@ -466,6 +482,10 @@ input[name="advancedSearch"] {
 input[name="searchRight"] {
     float: left;
     margin: 0px;
+}
+#searchPage{
+    width: 100%;
+    overflow: hidden;
 }
 .advancedSearch{
 
@@ -962,7 +982,7 @@ h1.profile{
   font-size: 14px;
   color: darkgrey;
 }
-.descriptionCont{
+.descriptionCont, .descriptionCont input{
   text-align: center;
   margin: 8px 0;
   padding: 8px;
@@ -1041,9 +1061,9 @@ footer p{
           body{
 
           }
-          main{
+          /*main{
             margin-top: 57px;
-          }
+          }*/
           .navBar{
             padding: 2px;
           }
@@ -1115,8 +1135,17 @@ footer p{
         margin: 24px;
         margin-bottom: 8px;
     }
+    .contentPage .contentcont{
+        margin: 0px;
+    }
     .actioncont{
         bottom: 16px;
+    }
+    main{
+        margin-top: 57.6px;
+    }
+    .contentPage header{
+        display: block;
     }
 }
 
@@ -1125,9 +1154,36 @@ footer p{
         width: 960px;
         margin-left: auto;
         margin-right: auto;
+        margin-top: 73.6px;
     }
     .contentPage header{
         display: block;
+    }
+    .contentPage .contentcont{
+        width: 400px;
+        float: left;
+    }
+    .contentPage .description{
+        float: right;
+    }
+    section{
+        padding: 0px;
+    }
+    .contentPage section{
+        width: 400px;
+        padding: 0px;
+    }
+    section.comments{
+        width: calc(100% - 64px);
+    }
+    .backButton{
+        display: none;
+    }
+    .contentPage .contentInfo{
+        background-color: transparent;
+    }
+    .contentPage .profilename, .contentPage .contentName{
+        color: black;
     }
 }
 .postboxen{
@@ -1145,6 +1201,6 @@ footer p{
   display: block;
 
 }
-section > #getdown {
+/*section > #getdown {
   clear: both;
-}
+}*/
