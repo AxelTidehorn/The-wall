@@ -13,13 +13,13 @@
                     <input type="text" name="advancedSearch">
                     What type of content do you wish to search for?
                     Images
-                    <input type="checkbox" name="imageSearch">
+                    <input type="checkbox" name="imageSearch" checked>
                     Webbsites
-                    <input type="checkbox" name="WebbsiteSearch">
+                    <input type="checkbox" name="WebbsiteSearch" checked>
                     Text
-                    <input type="checkbox" name="TextSearch">
+                    <input type="checkbox" name="TextSearch" checked>
                     Users
-                    <input type="checkbox" name="UserSearch">
+                    <input type="checkbox" name="UserSearch" checked>
                     <input type="submit">
                 </form>
                 <?php //Some kind of search functionality based on the comment structure currently.
@@ -42,7 +42,7 @@
                             $query->execute();
                             $query->fetch();
                         }
-
+ 
                         if (isset($_GET["addContact"])) { //Adds a contact to the logged in user's friend list.
                             $contact = $_GET["addContact"];
 
@@ -94,6 +94,18 @@
                         }
 
                         //Seeing if this is a general search from the searchfield, or a more andvanced search! (will be added later)
+                if (isset($_GET['advancedSearch'])){
+                    $sqlQuery="";
+                    $searchTag = $_GET['advancedSearch'];
+
+                    //Creating the apropiate search string, depending on what the user searched for.
+
+                    if($_GET['imageSearch']=="yes" && $_GET['WebbsiteSearch']=="yes" && $_GET['TextSearch']=="yes"){
+                        $sqlQuery = "SELECT * FROM `Content` LIMIT  WHERE `Name` LIKE '%" . $search . "%' OR tags LIKE '%" . $search . "%'";
+                    }
+
+
+                }
                         if (isset($_GET['generalSearch'])) {
                             print'<h2>User results</h2>';
                             include("backend/connect.php"); //I'm not sure why it seems like we have to reconnect to the db here...
