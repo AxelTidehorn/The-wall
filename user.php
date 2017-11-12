@@ -36,16 +36,6 @@ include_once "backend/connect.php";
 
             //If there is no _GET at all, simply list all users.
             else {
-                if (isset($_POST["description"]) && !empty($_POST["description"])) { //If they sent a "post request" by the description area and it's not empty, change the description to the input.
-                    $description = $_POST["description"];
-                    $description = mysqli_real_escape_string($conn, $description);
-                    $description = htmlentities($description);
-
-                    $query = $conn->prepare("UPDATE Users SET description = ? WHERE id = '{$_GET["user_ID"]}'");
-                    $query->bind_param("s", $description);
-                    $query->execute();
-                    $query->close();
-                }
 
                 $userID = $_GET['user_ID'];
                 $query = $conn->prepare("SELECT `id`,`username`,`Friends`,`JoinDate`,`LastActive`,`Views`,`Description`,`ProfileImage` FROM `Users` WHERE `id` = $userID");
@@ -110,26 +100,7 @@ include_once "backend/connect.php";
                     <span>
                         Here can we list some of the users conent
                     </span>
-<<<<<<< HEAD
     ";
-=======
-                    <h3>Description</h3>";
-                    if ($_SESSION["user_id"] == $userID) {
-                        echo '
-                            <form method="POST">
-                                <textarea name="description">' . $description . '</textarea>
-                                <input class="insignificant" type="submit" value="Update description" />
-                            </form>
-                        ';
-                    } else {
-                        echo '
-                            <span>
-                            ' . $description . '
-                            </span>
-                        ';
-                    }
-
->>>>>>> Samuels-Branch
                     //If the query was empty:
                 } else {
                     print'There were no content matching the URL. It might have been moved or Deleted.';
