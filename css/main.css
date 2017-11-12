@@ -240,6 +240,15 @@ p{
   width: 100%;
   position: relative;
   padding-bottom: 24px;
+  cursor: pointer;
+  transition: 1s;
+  opacity: 0;
+}
+.contentcont.visible{
+    opacity: 1;
+}
+.contentcont.visible:hover{
+    opacity: 0.8;
 }
 .searchImage{
     height: 150px;

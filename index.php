@@ -237,6 +237,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <script src='js/animate.js'></script>
                                 ";
 
                                 //$query->close(); //This seems to fix it, not sure why. Maybe it doesn't like leftover stored information or something?
