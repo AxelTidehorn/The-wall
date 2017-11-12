@@ -1,4 +1,4 @@
-﻿<?php //Some kind of search functionality based on the comment structure currently.
+<?php //Some kind of search functionality based on the comment structure currently.
     include("backend/connect.php");
 
     @ session_start();
