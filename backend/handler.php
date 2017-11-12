@@ -41,9 +41,7 @@ switch ($uploadedForm['uploadType']) { //test
     case 'text':
 
         //uploading everything to the database)
-        $imageLocation = parse_url("../imgs/text.png");
-        $url = "destination .jpg";
-
+        $imageLocation = parse_url("/text.png");
         $name = $uploadedForm['contentName'];
         $description = $uploadedForm['contentDescription'];
         $publicDomain = $uploadedForm['publicDomain'];
@@ -55,14 +53,12 @@ switch ($uploadedForm['uploadType']) { //test
         /*$imageToUpload = addslashes((file_get_contents($url)));*/
         //$created_image = imagecreatefrompng("../imgs/text.png");
         //$imageToUpload = imagejpeg($created_image, "destination .jpg", 85);
-        $imageToUpload = addslashes(file_get_contents("./test.png"));
+        $imageToUpload = addslashes(file_get_contents("text.png"));
         unset($query);
-        $query = $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name` , `ContentImage`, `ContentText`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?)");
-
+        $query = $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name` , `ContentImage`, `ContentText`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?,?)");
         $query->bind_param("sssssddsss", $uploadType, $_SESSION["user_id"] , $name, $imageToUpload ,$contentText, $nsfw, $publicDomain, $date, $description, $tags);
         $query->execute();
         $query->close();
-        imagedestroy($url);
 
         break;
 
@@ -126,7 +122,7 @@ function compress_image($source_url, $return) {
 
     return $return;
 };
-
+header("location:../user?user_ID=".$_SESSION['user_id']);
 
 /**
  * Created by PhpStorm.
