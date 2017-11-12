@@ -17,10 +17,11 @@
                 Websites
                 <input type="checkbox" name="WebbsiteSearch" checked>
                 Text
+
                 <input type="checkbox" name="TextSearch" checked>
-                Users
+                <!--Users
                 <input type="checkbox" name="UserSearch" checked>
-                <input type="submit">
+                <input type="submit">-->
             </form>
             <?php //Some kind of search functionality based on the comment structure currently.
             include("backend/connect.php");
