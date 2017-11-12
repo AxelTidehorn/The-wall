@@ -170,7 +170,41 @@ p{
     margin-bottom: 64px;
     overflow: hidden;
 }
-#newest .center-text h2:before, #newest .center-text h2:after, #newest .contentcont:after{
+@media(max-width: 600px) {
+    #newest .contentcont:after{
+        display: block;
+        content: "";
+        height: 8px;
+        width: 100%;
+        background-color: #ccccff;
+        margin: 0px;
+    }
+    #topRated .contentcont:after{
+        display: block;
+        content: "";
+        height: 8px;
+        width: 100%;
+        background-color: #ffcccc;
+        margin: 0px;
+    }
+    #editorsChoice .contentcont:after{
+        display: block;
+        content: "";
+        height: 8px;
+        width: 100%;
+        background-color: #ccffcc;
+        margin: 0px;
+    }
+    #searchPage .contentcont:after{
+        display: block;
+        content: "";
+        height: 8px;
+        width: 100%;
+        background-color: #707070;
+        margin: 0px;
+    }
+}
+#newest .center-text h2:before, #newest .center-text h2:after{
     display: block;
     content: "";
     height: 8px;
@@ -178,7 +212,7 @@ p{
     background-color: #ccccff;
     margin: 0px;
 }
-#topRated .center-text h2:before, #topRated .center-text h2:after, #topRated .contentcont:after{
+#topRated .center-text h2:before, #topRated .center-text h2:after{
     display: block;
     content: "";
     height: 8px;
@@ -186,7 +220,7 @@ p{
     background-color: #ffcccc;
     margin: 0px;
 }
-#editorsChoice .center-text h2:before, #editorsChoice .center-text h2:after, #editorsChoice .contentcont:after{
+#editorsChoice .center-text h2:before, #editorsChoice .center-text h2:after{
     display: block;
     content: "";
     height: 8px;
@@ -194,7 +228,7 @@ p{
     background-color: #ccffcc;
     margin: 0px;
 }
-#searchPage .center-text h2:before, #searchPage .center-text h2:after, #searchPage .contentcont:after{
+#searchPage .center-text h2:before, #searchPage .center-text h2:after{
     display: block;
     content: "";
     height: 8px;
@@ -821,8 +855,18 @@ footer{
 
 
 @media (min-width: 600px){
+    .contentcont img.linkImg{
+        height: 256px;
+        width: initial;
+    }
     .contentcont{
-        width: 256px;
+        width: initial;
         float: left;
+        padding-bottom: 16px;
+        margin: 24px;
+        margin-bottom: 8px;
+    }
+    .actioncont{
+        bottom: 16px;
     }
 }
