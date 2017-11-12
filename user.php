@@ -172,7 +172,7 @@ include_once "backend/connect.php";
                                     </form>
                                     <div id='banner'>
                                     <span>".$content['name']."$</span>
-                                    
+
 </div>
                             </div>";
 

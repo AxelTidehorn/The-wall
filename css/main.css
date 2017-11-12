@@ -404,6 +404,9 @@ a.img{
 .description p{
     margin-bottom: 24px;
 }
+.buttoncont span{
+    margin: 16px;
+}
 .comment .likebtn, .comment .unlikebtn{
     float: right;
 }
@@ -445,6 +448,10 @@ input[name="advancedSearch"] {
 input[name="searchRight"] {
     float: left;
     margin: 0px;
+}
+#searchPage{
+    width: 100%;
+    overflow: hidden;
 }
 .advancedSearch{
     overflow: hidden;
@@ -845,7 +852,7 @@ h1.profile{
   font-size: 14px;
   color: darkgrey;
 }
-.descriptionCont{
+.descriptionCont, .descriptionCont input{
   text-align: center;
   margin: 8px 0;
   padding: 8px;
@@ -1030,6 +1037,9 @@ footer p{
         float: right;
     }
     section{
+        padding: 0px;
+    }
+    .contentPage section{
         width: 400px;
         padding: 0px;
     }

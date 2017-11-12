@@ -17,6 +17,8 @@
                         session_start();
                     }
 
+                    if (!isset($_SESSION["updatedRating"])) $_SESSION["updatedRating"] = -1;
+
                         //This will be used both to show ALL posts, and to show an induvidual posts!
                         //You will get the user id by a form input in the url. something like www.thewall.com/post?postID=2
                         //This will then be used so get the correct content.
@@ -46,8 +48,34 @@
                                 $query->bind_result($publisherName);
                                 $query->execute();
                                 $query->fetch();
+                                $query->close();
 
                                 $image = base64_encode(stripslashes($contentArray[0]['image'])); //<img src='data:image/jpeg;base64," . $image . "' alt='an excellent picture'>
+
+                                if (isset($_SESSION["username"])) {
+                                    $sessionUser = $_SESSION["username"];
+                                } else {
+                                    $sessionUser = false;
+                                }
+
+                                //include "config.php";
+                                //include("backend/connect.php");
+
+                                if ($sessionUser) {
+                                    $query = $conn->prepare("SELECT likedContent FROM Users WHERE username = '{$sessionUser}'");
+                                    $query->bind_result($liked);
+                                    $query->execute();
+                                    $query->fetch();
+                                }
+
+                                if (isset($_SESSION["user_id"])) {
+                                    include("includes/likeHandler.php");
+                                } else {
+                                    $name = "like";
+                                    $likeString = "Like";
+                                    $class = "likebtn";
+                                }
+
                                 print"
                                 <div>
                                     <div class='contentcont'>
@@ -69,10 +97,14 @@
                                                     <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
                                                     <a class='profilename' href='user.php?user_ID=" . $contentArray[0]["ID"] . "'>" . $publisherName . "</a>
                                                 </div>
-                                                <div class='buttoncont'>
-                                                    <a class='likebtn' href='#'>LIKE (" . $contentArray[0]["rating"] . ")</a>
-                                                    <span class='insignificant'>(" . $contentArray[0]["views"] . " views)</span>
-                                                </div>
+                                                <form method='GET' class='buttoncont'>";
+                                                    if (isset($_SESSION["user_id"])) {
+                                                        echo "<input type='submit' class='" . $class . "' value='" . $likeString . " (" . $contentArray[0]["rating"] . ")' />";
+                                                    } else {
+                                                        echo "<a href='login.php' class='" . $class . "'/>" . $likeString . "</a>";
+                                                    }
+                                                    echo "<span class='insignificant'>(" . $contentArray[0]["views"] . " views)</span>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -217,13 +249,13 @@
                             $query = $conn->prepare("SELECT * FROM `Content`");
                             $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                             $query->store_result();
-                            $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags);
+                            $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags, $editorsChoice);
 
 
                             //    trying to create a associative array with all the content. This is how im used to working.
                             while ($query->fetch()) {
                                 $count++;
-                                $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags);
+                                $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags, $editorsChoice => 'editorsChoice');
                             }
 
 
