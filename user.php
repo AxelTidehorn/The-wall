@@ -95,8 +95,9 @@ include_once "backend/connect.php";
                     </div>
                     <h2>Profile</h2>
                     ";
-                    if ($_GET['user_ID'] = $_SESSION['user_id']) {
+                    if ($_GET['user_ID'] == $_SESSION['user_id']) {
                         unset($contentArray);
+                        unset($query);
                         $query = $conn->prepare("SELECT * FROM `Content` WHERE `Publisher`='" . $_GET['user_ID'] . "'");
                         $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
                         $query->store_result();
@@ -108,6 +109,7 @@ include_once "backend/connect.php";
                             $count++;
                             $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags, 'editorsChoice' => $editorsChoice);
                         }
+
                         $query->close();
                         //Funnily enough, it seems like we want to reverse it no matter the type. Either newest to oldest, or highest rating to lowest.
                         //$contentArray = array_reverse($contentArray, true); //true to keep the keys of the array, seems to work without it though.
@@ -138,8 +140,45 @@ include_once "backend/connect.php";
                         include_once 'config.php';
                         print '<a href="'.$baseURL."&posts".'">Klick here to see all post</a>';
                         //If the query was empty:
-                    } else {
-                        print'There were no content matching the URL. It might have been moved or Deleted.';
+                    } else if($_GET['user_ID'] != $_SESSION['user_id']){
+                        unset($contentArray);
+                        unset($query);
+                        $query = $conn->prepare("SELECT * FROM `Content` WHERE `Publisher`='" . $_GET['user_ID'] . "'");
+                        $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
+                        $query->store_result();
+                        $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags, $editorsChoice);
+                        $count = 0;
+
+                        //    trying to create a associative array with all the content. This is how im used to working.
+                        while ($query->fetch()) {
+                            $count++;
+                            $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags, 'editorsChoice' => $editorsChoice);
+                        }
+                        $query->close();
+                        //Funnily enough, it seems like we want to reverse it no matter the type. Either newest to oldest, or highest rating to lowest.
+                        //$contentArray = array_reverse($contentArray, true); //true to keep the keys of the array, seems to work without it though.
+                        //Simply reversing the array assuming they are added in chronological order to get the latest instead of making lots of sql queries to check different time frames.
+
+                        foreach ($contentArray as $content) {
+                            $image = base64_encode(stripslashes($content['image']));
+                            $webbsite = base64_encode(stripslashes($content['webbsite']));
+                            $id = $content['ID'];
+                            print"<div id='profilecont'>
+                                <form action='post.php' method='get' class='form' id='" . $content["ID"] . "'>
+                                    <input type='hidden' value='" . $id . "' name='post'>
+                                    <div onclick='this.parentNode.submit();'>
+                                    <img src='data:image/jpeg;base64," . $image . "' alt='error'>
+                                    </div>
+                                    </form>
+                                    <div id='banner'>
+                                    <span>".$content['name']."$</span>
+                                    
+</div>
+                            </div>";
+
+                        }
+                        include_once 'config.php';
+                        print '<a href="'.$baseURL."&posts".'">Klick here to see all post</a>';
                     }
                 }
             }
