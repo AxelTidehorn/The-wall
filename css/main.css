@@ -755,13 +755,20 @@ margin: 16px 0;
   overflow: hidden;
 }
 h1.profile{
-    margin: 0px 0px 8px 0px;
+    margin: 0px 0px 4px 0px;
 }
 .joined{
   display: block;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   color: darkgrey;
+}
+.descriptionCont{
+  text-align: center;
+  margin: 8px 0
+}
+.descriptionCont > h3{
+  margin: 0 0 8px 0
 }
         /*FOOTER*/
 main:after{
