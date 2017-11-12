@@ -158,7 +158,7 @@
                               //Store the username as a session cookie and redirect to profile page (currently)
                               $_SESSION["username"] = $username;
                               $_SESSION["user_id"] = $id;
-                              header("location:userProfile.php");
+                              header("location:user.php?user_ID=".$id."");
                           }
                       ?>
                     </div>

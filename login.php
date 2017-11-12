@@ -66,7 +66,7 @@
 
                                 $_SESSION["username"] = $usernameInput;
                                 $_SESSION["user_id"] = $id;
-                                header("location:userProfile.php");
+                                header("location:user.php?user_ID=".$id."");
                             } else {
                                 echo "<p>The entered username and password does not match a user in the database.";
                             }
