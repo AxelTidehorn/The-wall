@@ -62,6 +62,7 @@ switch ($uploadedForm['uploadType']) { //test
         $query->bind_param("sssssddsss", $uploadType, $_SESSION["user_id"] , $name, $imageToUpload ,$contentText, $nsfw, $publicDomain, $date, $description, $tags);
         $query->execute();
         $query->close();
+        imagedestroy($url);
 
         break;
 
@@ -94,6 +95,7 @@ switch ($uploadedForm['uploadType']) { //test
         $query->bind_param("sssssddsss", $uploadType, $_SESSION["user_id"] , $name , $url ,$fileContent, $nsfw, $publicDomain, $date, $description, $tags);*/
         $query->execute();
         $query->close();
+        imagedestroy($url);
 
         break;
 }
