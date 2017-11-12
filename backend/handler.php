@@ -82,7 +82,7 @@ switch ($uploadedForm['uploadType']) { //test
         $tags = $uploadedForm['tagData'];
         $url = $uploadedForm['URL'];
 
-        $query = $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name`, `URL` ,`ContentWebbsite`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $query = $conn->prepare("INSERT INTO `Content`( `content_type`, `Publisher`, `Name`, `URL` ,`ContentImage`, `NSFW`, `PublicDomain`, `Date`, `Description`, `tags`) VALUES (?,?,?,?,?,?,?,?,?,?)");
 
         $query->bind_param("sssssddsss", $uploadType, $_SESSION["user_id"] , $name , $url ,$fileContent, $nsfw, $publicDomain, $date, $description, $tags);
 
@@ -122,7 +122,7 @@ function compress_image($source_url, $return) {
 
     return $return;
 };
-header("location:../user?user_ID=".$_SESSION['user_id']);
+header("location:../user.php?user_ID=".$_SESSION['user_id']);
 
 /**
  * Created by PhpStorm.
