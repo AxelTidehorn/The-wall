@@ -101,19 +101,18 @@
 
                 //Creating the apropiate search string, depending on what the user searched for.
 
-                if ($_GET['imageSearch'] == "yes" && $_GET['WebbsiteSearch'] == "yes" && $_GET['TextSearch'] == "yes") {
+                if (isset($_GET['WebbsiteSearch'],$_GET['imageSearch'],$_GET['TextSearch'])&&$_GET['imageSearch'] == "on" && $_GET['WebbsiteSearch'] == "on" && $_GET['TextSearch'] == "on") {
                     $sqlQuery = "SELECT * FROM `Content`  WHERE `Name` LIKE '%" . $searchTag . "%' OR tags LIKE '%" . $searchTag . "%'";
-                } else if ($_GET['imageSearch'] == "no" && $_GET['WebbsiteSearch'] == "no" && $_GET['TextSearch'] == "no") {
+                } else if (!isset($_GET['WebbsiteSearch'],$_GET['imageSearch'],$_GET['TextSearch'])) {
                     $sqlQuery = "SELECT * FROM `Content` WHERE `Name` LIKE '%" . $searchTag . "%' OR tags LIKE '%" . $searchTag . "%'";
                 } else {
 
+                }
                     //Seeing what is needed in the sql and generating the string
                     if (isset($_GET['imageSearch']) && $_GET['imageSearch'] == "on") {
-                        print "image";
                         $sqlParams = "`content_type`='image' AND (`Name` LIKE '%".$searchTag."%' OR `tags` LIKE '%".$searchTag."%')";
                     }
                     if (isset($_GET['WebbsiteSearch']) && $_GET['WebbsiteSearch'] == "on") {
-                        print "webb";
                         if ($sqlParams != "") {
                             $sqlParams = $sqlParams .  " OR `content_type`='website' AND (`Name` LIKE '%".$searchTag."%' OR `tags` LIKE '%".$searchTag."%')";
                         } else {
@@ -121,15 +120,54 @@
                         }
                     }
                     if (isset($_GET['textSearch']) && $_GET['textSearch'] == "on") {
-                        print "text";
                         if ($sqlParams != "") {
                             $sqlParams = $sqlParams . " OR `content_type`='text' AND (`Name` LIKE '%".$searchTag."%' OR `tags` LIKE '%".$searchTag."%')";
                         } else {
                             $sqlParams = "`content_type`='text' AND (`Name` LIKE '%".$searchTag."%' OR `tags` LIKE '%".$searchTag."%')";
                         }
                     }
+                    print'<div id="searchPage">';
+                    $count = 0;
+                    unset($query);
+                    $query = $conn->prepare("SELECT * FROM `Content` WHERE ".$sqlParams);
+                    $query->bind_result($id, $contentType, $publisher, $name, $url, $image, $webbsite, $text, $nsfw, $publicDomain, $rating, $date, $views, $description, $tags, $editorsChoise);
+                    $query->execute(); //Selecting both username and password may be redundant here as we are not really using that information apart from checking if there is some information.
+                    $query->store_result();
 
-                }
+
+                    //    trying to create a associative array with all the content. This is how im used to working.
+                    while ($query->fetch()) {
+                        $count++;
+                        $contentArray[$count] = array('ID' => $id, 'type' => $contentType, 'publisherID' => $publisher, 'name' => $name, 'url' => $url, 'image' => $image, 'webbsite' => $webbsite, 'text' => $text, 'nsfw' => $nsfw, 'publicDomain' => $publicDomain, 'rating' => $rating, 'date' => $date, 'views' => $views, 'description' => $description, 'tags' => $tags);
+                    }
+                    if (isset($contentArray)) {
+                        print'<h2>Post results</h2>';
+
+                        foreach ($contentArray as $content) {
+                            $image = base64_encode(stripslashes($content['image']));
+                            $id = $content['ID'];
+                            print"
+                            <form action='post.php' method='get' class='form contentcont'>
+                                <input type='hidden' value='" . $id . "' name='post'/>
+                                <div onclick='this.parentNode.submit();'>
+                                    <img class='linkImg' src='data:image/jpeg;base64," . $image . "'/>
+                                </div>
+                                <div class='actioncont'>
+                                    <div class='profilecont'>
+                                        <a href='#' class='profilethumb'><img src='imgs/axel.jpg' alt='profilethumb'></a>
+                                        <a class='profilename' href='LINK-TO-PROFILE'>Chef Excellence</a>
+                                    </div>
+                                    <div class='buttoncont'>
+                                        <a class='likebtn' href='#'>LIKE</a>
+                                    </div>
+                                </div>
+                            </form>
+                        ";
+                        }
+                    }
+                    if(!isset($contentArraye)){
+                        print'<h2>Your search matched no content</h2>';
+                    }
             }
             if(isset($_GET['advancedSearch'])&& $_GET['advancedSearch'] == ""){
                 print "<h1>Please actually search for something!</h1> ... <sup>smartass</sup>";
