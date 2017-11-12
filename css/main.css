@@ -974,7 +974,8 @@ footer p{
 }
 .postboxen{
   display: block;
-  width: 99%;
+  
+
   
 
 }
@@ -984,6 +985,7 @@ footer p{
   margin: 0 auto;
   height: auto;
   display: block;
+
 }
 section > #getdown {
   clear: both;

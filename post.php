@@ -41,7 +41,7 @@
 
                             $image = base64_encode(stripslashes($contentArray[0]['image'])); //<img src='data:image/jpeg;base64," . $image . "' alt='an excellent picture'>
                             print"
-                                <div class='contentcont postboxen'>
+                                <div class='co postboxen'>
                                     <a href='index.php#" . $contentArray[0]["ID"] . "'>";
                                     if ($contentArray[0]["type"] == "text") {
                                         echo "<img class='thepost' src='imgs/text.png'/>";
