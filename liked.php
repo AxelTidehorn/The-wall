@@ -11,7 +11,7 @@
 
     if (!isset($_SESSION["updatedRating"])) $_SESSION["updatedRating"] = -1;
 
-    include "config.php";
+    include ("config.php");
     include("backend/connect.php");
 
     //Seeing if this is a general search from the searchfield, or a more andvanced search! (will be added later)
